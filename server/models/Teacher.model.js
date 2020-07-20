@@ -5,10 +5,25 @@ const teacherSchema = new Schema(
   {
     name: {
       type: String,
+      required: true
     },
 
     lastname: {
       type: String,
+    },
+
+    email: {
+      type: String,
+    },
+
+    password: {
+      type: String,
+    },
+
+    profileImg: {
+      type: String,
+      default:
+        "https://res.cloudinary.com/dz0aow7wm/image/upload/v1595237957/School%20Hack/perfil_yjma5d.jpg",
     },
 
     type: {
@@ -21,22 +36,9 @@ const teacherSchema = new Schema(
       ref: "Subject",
     },
 
-    email: {
-      type: String,
-    },
-
-    password: {
-      type: String,
-    },
-
     users: {
       type: mongoose.ObjectId,
       ref: "User",
-    },
-    profileImg: {
-      type: String,
-      default:
-        "https://res.cloudinary.com/dz0aow7wm/image/upload/v1595237957/School%20Hack/perfil_yjma5d.jpg",
     },
 
     courses: {
