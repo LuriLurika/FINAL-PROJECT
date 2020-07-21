@@ -5,7 +5,7 @@ const parentsStudentsSchema = new Schema(
   {
     user: {
       type: mongoose.ObjectId,
-      ref: "User",
+      ref: "User", //front filter if user type parent-student
     },
   },
   {

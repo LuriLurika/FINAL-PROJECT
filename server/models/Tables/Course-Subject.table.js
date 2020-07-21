@@ -5,11 +5,11 @@ const courseSubjectSchema = new Schema(
   {
     user: {
       type: mongoose.ObjectId,
-      ref: "User",
+      ref: "User", //user type student
     },
     teacher: {
       type: mongoose.ObjectId,
-      ref: "Teacher",
+      ref: "User", //user type teacher
     },
     course: {
       type: mongoose.ObjectId,

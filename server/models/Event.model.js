@@ -1,28 +1,31 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
-const messageSchema = new Schema(
+const eventSchema = new Schema(
     {
         title: {
             type: String,
             required: true
         },
 
-        body: {
-            type: String,
-            required: true
+        description: {
+            type:String
         },
 
-        sendedBy: {
+        creator: {
             type: mongoose.ObjectId,
-            ref: "User"
+            ref: "User" //user type teacher-director
         },
 
-        receivedBy: [{ //array
+        participants: [{ //array
             type: mongoose.ObjectId,
             ref: "User"
         }],
+
+        eventDate: {
+            type: Date,
+            default: Date.now
+        },
     },
 
     {
@@ -32,6 +35,6 @@ const messageSchema = new Schema(
 
 
 
-const Message = mongoose.model("Message", messageSchema)
+const Event = mongoose.model("Event", eventSchema)
 
-module.exports = Message
+module.exports = Event

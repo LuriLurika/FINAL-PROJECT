@@ -5,11 +5,11 @@ const contactSchema = new Schema(
   {
     user: {
       type: mongoose.ObjectId,
-      ref: "User",
+      ref: "User", //user type student o parent
     },
     teacher: {
       type: mongoose.ObjectId,
-      ref: "Teacher",
+      ref: "User", //user type teacher o director
     },
   },
   {

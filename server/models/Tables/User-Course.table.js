@@ -5,7 +5,7 @@ const userCourseSchema = new Schema(
   {
     user: {
       type: mongoose.ObjectId,
-      ref: "User",
+      ref: "User", //user type student
     },
 
     course: {

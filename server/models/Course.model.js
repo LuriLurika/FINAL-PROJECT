@@ -9,15 +9,15 @@ const coursesSchema = new Schema({
         required: true
     },
 
-    subjects: {
+    subjects: [{ 
         type: mongoose.ObjectId,
         ref: "Subject"
-    },
+    }],
 
-    users: {
+    users: [{ 
         type: mongoose.ObjectId,
         ref: "User"
-    }
+    }]
     
 }, {
     timestamps: true

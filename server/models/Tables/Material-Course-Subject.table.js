@@ -3,14 +3,9 @@ const Schema = mongoose.Schema;
 
 const materialCourseSubjectSchema = new Schema(
   {
-    user: {
-      type: mongoose.ObjectId,
-      ref: "User",
-    },
-
     teacher: {
       type: mongoose.ObjectId,
-      ref: "Teacher",
+      ref: "User", //user type teacher
     },
 
     course: {

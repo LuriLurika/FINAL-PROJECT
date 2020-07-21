@@ -28,27 +28,13 @@ const userSchema = new Schema(
 
     type: {
       type: String,
-      enum: ["PARENT ", "STUDENT"],
+      enum: ["PARENT ", "STUDENT", "DIRECTOR", "TEACHER"],
       default: "STUDENT",
     },
 
-    parents: {
-      type: {
+    parent: {
         type: mongoose.ObjectId,
-        ref: "ParentStudents",
-      },
-    },
-
-    course: {
-      type: mongoose.ObjectId,
-      ref: "Course",
-    },
-
-    subjects: {
-      type: {
-        type: mongoose.ObjectId,
-            ref: "Subject",
-      },
+        ref: "User", //user type Parent
     },
   },
   {

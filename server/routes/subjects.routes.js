@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const Subject = require("../models/Subject.model");
+const MaterialCourseSubjects = require("../models/Tables/Material-Course-Subject.table");
+
 
 //  /Subjectss --> Devuelve un listado con los datos de todos las asignaturas
 router.get("/", (req, res, next) => {
@@ -23,7 +25,7 @@ router.put("/:id", (req, res, next) => {
 router.delete("/:id", (req, res, next) => {
   Promise.all([
     Subject.findByIdAndRemove(req.params.id),
-    subjectsMaterials.findOneAndRemove({
+    MaterialCourseSubjects.findOneAndRemove({
       Subjects: req.params.id,
     }),
   ])

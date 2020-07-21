@@ -8,6 +8,11 @@ const subjectsSchema = new Schema(
       required: true
     },
 
+    teacher: {
+      type: mongoose.ObjectId,
+      ref: 'User' //user type teacher
+    },
+
     subjectsMaterials: {
       type: mongoose.ObjectId,
       ref: "MaterialCourseSubjects",

@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const Course = require("../models/Course.model");
+const User = require("../models/User.model");
+const Subject = require("../models/Subject.model");
+
+
 
 //  /courses --> Devuelve todas las cursos
 router.get("/", (req, res, next) => {
@@ -14,7 +18,7 @@ router.get("/", (req, res, next) => {
 
 router.get("/:id/subjects", (req, res, next) => {
   Course.findById()
-   // .populate("Subject")
+    .populate(Subject)
     .then((response) => res.json(response))
     .catch((err) => next(err));
 });
@@ -23,7 +27,7 @@ router.get("/:id/subjects", (req, res, next) => {
 
 router.get("/:id/users", (req, res, next) => {
   Course.findById()
-   // .populate("User")
+    .populate(User)
     .then((response) => res.json(response))
     .catch((err) => next(err));
 });
@@ -32,8 +36,8 @@ router.get("/:id/users", (req, res, next) => {
 
 router.post("/", (req, res, next) => {
   Course.create(req.body)
-    //.populate("Subject")
-    //.populate("User")
+    .populate(Subject)
+    .populate(User)
     .then((response) => res.json(response), req.body)
     .catch((err) => next(err));
 });
@@ -48,8 +52,7 @@ router.put("/:id", (req, res, next) => {
     { title, subjects, users },
     { new: true }
   )
-
-    //.populate("Subject")
+    .populate(Subject)
     .then((response) => res.json(response))
     .catch((err) => next(err));
 });
@@ -57,16 +60,9 @@ router.put("/:id", (req, res, next) => {
 //  /courses/:id --> Eliminar un curso ( primero se eliminan las relaciones y después el curso)
 
 router.delete("/:id", (req, res, next) => {
-  Promise.all([
-    Subject.findByIdAndRemove(req.params.id),
-    Course.findOneAndRemove({
-      Subject: req.params.id,
-    }),
-    User.findOneAndRemove({
-      Subject: req.params.id,
-    }),
-  ])
-    .then(() => res.redirect("/"))
+
+  Course.findByIdAndRemove(req.params.id)
+    .then((response) => res.json(response)) //status
     .catch((err) => console.log("BBDD error", err));
 });
 
