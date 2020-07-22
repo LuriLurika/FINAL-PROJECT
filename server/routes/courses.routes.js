@@ -52,7 +52,6 @@ router.put("/:id", (req, res, next) => {
     { title, subjects, users },
     { new: true }
   )
-    .populate(Subject)
     .then((response) => res.json(response))
     .catch((err) => next(err));
 });
