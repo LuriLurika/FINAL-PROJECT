@@ -11,17 +11,28 @@ const ParentStudents = require("../models/Tables/Parents-Students.table");
 const CourseSubjects = require("../models/Tables/Course-Subject.table");
 const UserCourse = require("../models/Tables/User-Course.table");
 
-//Devuelve un listado con los datos de todos los alumnos
+//Devuelve un listado con los datos de todos los alumnos ***ok***
 router.get("/", (req, res, next) => {
   User.find({ type: "STUDENT" })
     .then((response) => res.json(response))
     .catch((err) => next(err));
 });
 
-//Devuelve listado de los profesores de cada alumno (Tienen acceso los Parents y Director )checkRole(['DIRECTOR', 'PARENTS']),
-router.get("/:id/teachers",  (req, res, next) => {
-  User.findById(req.params.id)
-    //.populate('Teacher')
+//Devuelve listado de los profesores de cada alumno
+router.get("/:id/teachers", (req, res, next) => {
+  Course.find({ users: req.params.id })
+    .then(courses => {
+      if (courses.length === 0) {
+        return new Promise((resolve, reject) => resolve([])) //en caso de no tener courses asignado devuelve array vacío
+      } else {
+        console.log(courses)
+        let acum = []
+        courses.map(elm => acum = [...acum, ...elm.subjects])
+        return acum
+      }
+    })
+    .then((subject) => subject.map(elm => Subject.find({ id: elm })))
+    //.populate('Teacher') ({ subjects: elm.id })
     .then((response) => res.json(response))
     .catch((err) => next(err));
 });
@@ -35,87 +46,36 @@ router.get("/:id/subjects", (req, res, next) => {
     .catch((err) => next(err));
 });
 
-//5f16fcc0c8aa5819f40de310
-
-router.get("/pruebateachers/:id", (req, res, next) => {
-  Promise.all([
-    User.findById(req.params.id),
-    Subject.find({ teacher: req.params.id }),
-    console.log(Subject.find({ teacher: req.params.id }))
-  ])
-    .then((response) => {
-      console.log(response)
-      res.json(response)
-    })
-    .catch((err) => next(err));
-})
-
-function getSubjectssFromStudent(id) {
-  return new Promise(resolve => {
-    User.findById(id)
-      .then((data) => {
-        console.log(data._id)
-        return getSubjects(data._id)
-      })
-  })
-}
-
-function getSubjects(id) {
-  return new Promise(resolve => {
-    Course.find({ users: id })
-      .then((data) => {
-        console.log(data)
-        return resolve(data)
-      })
-  })
-}
-
-router.get("/pruebasubjects/:id", (req, res, next) => {
-  // User.findById(req.params.id)
-  async function asyncCall() {
-    const resultSubjects = await getSubjectssFromStudent(req.params.id)
-    console.log('llamada async', resultSubjects)
-    return resultSubjects
-  }
-
-  asyncCall().then(data => {
-    res.json(data)
-  })
 
 
-    .catch((err) => next(err));
-})
-
-
-
-//Crea un nuevo usuario (en front capamos para que solo pueda crearlo el director)
-router.post("/", (req, res, next) => {
+//Crea un nuevo usuario (en front capamos para que solo pueda crearlo el director) ***ok***
+router.post("/new", (req, res, next) => {
   User.create(req.body)
     .then((response) => res.json(response))
     .catch((err) => next(err));
 });
 
-//El usuario puede modificar su perfil ( todos tienen acceso)
+//El usuario puede modificar su perfil ***ok***
 router.put("/:id", (req, res, next) => {
   User.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((response) => res.json(response))
     .catch((err) => next(err));
 });
 
-//Eliminar un user(primero se eliminan las relaciones y después el usuario) ( solo tiene acceso el Director)checkRole(['DIRECTOR']), 
+//Eliminar un user(primero se eliminan las relaciones y después el usuario) ***ok***
 router.delete("/:id", (req, res, next) => {
   Promise.all([
     User.findByIdAndRemove(req.params.id),
-    MaterialCourseSubjects.findByIdAndRemove({
+    MaterialCourseSubjects.findOneAndRemove({
       user: req.params.id,
     }),
-    ParentStudents.findByIdAndRemove({
+    ParentStudents.findOneAndRemove({
       user: req.params.id,
     }),
-    CourseSubjects.findByIdAndRemove({
+    CourseSubjects.findOneAndRemove({
       user: req.params.id,
     }),
-    UserCourse.findByIdAndRemove({
+    UserCourse.findOneAndRemove({
       user: req.params.id,
     }),
   ])

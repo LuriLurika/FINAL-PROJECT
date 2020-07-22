@@ -1,8 +1,4 @@
 const mongoose = require("mongoose")
-<<<<<<< HEAD
-
-=======
->>>>>>> 22f5168887be9ce3379f416141364d00c1a52a5f
 require('dotenv').config()
 const Course = require('../models/Course.model')
 const Subject = require('../models/Subject.model')
@@ -20,11 +16,7 @@ const courses = [
     { title: 'Sexto', subjects: [] }
 ]
 const subjects = [
-<<<<<<< HEAD
-   { title: 'Matemáticas', teacher: 'users.type.teacher.id' },
-=======
     { title: 'Matemáticas', teacher: 'users.type.teacher.id' },
->>>>>>> 22f5168887be9ce3379f416141364d00c1a52a5f
     { title: 'Lengua Castellana y Literatura' },
     { title: 'Primera Lengua Extranjera' },
     { title: 'Ciencias Sociales' },
@@ -35,11 +27,7 @@ const subjects = [
     { title: 'Tecnología' },
     { title: 'Segunda Lengua Extranjera' },
     { title: 'Religión' },
-<<<<<<< HEAD
-]
-=======
 ]   
->>>>>>> 22f5168887be9ce3379f416141364d00c1a52a5f
 
 const users = [
     { name: "Stephi", lastname: "Bloxholm", email: "sbloxholm0@admin.ch", profileImg: "https://robohash.org/doloressitmaiores.jpg?size=50x50&set=set1", type: "DIRECTOR" },
@@ -64,22 +52,6 @@ const users = [
     { name: "Morgen", lastname: "Ince", email: "mincej@scientificamerican.com", profileImg: "https://robohash.org/siterrormaiores.bmp?size=50x50&set=set1", type: "TEACHER" }
 ]
 
-<<<<<<< HEAD
-User.create(users).then(users => { //creamos usuarios
-        console.log('se han creado los usuarios')
-        const teacher = users[users.length - 1]; //cogemos el último user que es profesor
-        return Subject.create(subjects.map(elm => ({ //mapeamos las asignaturas y le añadimos el id del profe
-            ...elm,
-            teacher: teacher.id
-        })))
-    }).then(subjects => {
-        console.log('se han creado las asignaturas')
-        return Course.create(courses.map(elm => ({ //creamos el curso
-            ...elm,
-            subjects: subjects.map(subject => subject.id) // mapeamos el curso y añadimos el id de las asignaturas
-        })))
-    })
-=======
 let usersCreadted = []
 User.create(users).then(users => { //creamos usuarios
     console.log('se han creado los usuarios')
@@ -98,25 +70,10 @@ User.create(users).then(users => { //creamos usuarios
         users: !index ? usersCreadted.filter(elm => elm.type === "STUDENT") : [] // mapeamos el curso y añadimos el id de las asignaturas
     })))
 })
->>>>>>> 22f5168887be9ce3379f416141364d00c1a52a5f
     .then(() => {
         console.log('se han creado los cursos')
         mongoose.connection.close()
     })
-<<<<<<< HEAD
-    .catch(err => console.log(err))
-
-
-
-// const coursePromise = Course.create(courses)
-// const subjectPromise = Subject.create(subjects)
-// const userPromise = User.create(users)
-// Promise
-//     .all([coursePromise, subjectPromise, userPromise])
-//     .then(results => console.log(`Created ${results.length} collections`))
-//     .then(() => mongoose.connection.close())
-//     .catch(err => console.log(err))
-=======
         .catch(err => console.log(err))
 
 /*Promise
@@ -124,4 +81,3 @@ User.create(users).then(users => { //creamos usuarios
     .then(results => console.log(`Created ${results.length} collections`))
     .then(() => mongoose.connection.close())
     .catch(err => console.log(err))*/
->>>>>>> 22f5168887be9ce3379f416141364d00c1a52a5f
