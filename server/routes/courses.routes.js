@@ -59,8 +59,11 @@ const {title, subjects,user} = req.body
 router.put("/:id", (req, res, next) => {
   const { title, subjects, users } = req.body;
 
-  Course.findByIdAndUpdate(req.params.id, { title, subjects, users }, { new: true } )
-    // .populate(Subject)
+  Course.findByIdAndUpdate(
+    req.params.id,
+    { title, subjects, users },
+    { new: true }
+  )
     .then((response) => res.json(response))
     .catch((err) => next(err));
 });

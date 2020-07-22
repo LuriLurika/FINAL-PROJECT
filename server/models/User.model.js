@@ -33,8 +33,8 @@ const userSchema = new Schema(
     },
 
     parent: {
-        type: mongoose.ObjectId,
-        ref: "User", //user type Parent
+      type: mongoose.ObjectId,
+      ref: "User", //user type Parent
     },
   },
   {
