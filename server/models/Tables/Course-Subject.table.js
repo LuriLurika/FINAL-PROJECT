@@ -16,10 +16,10 @@ const courseSubjectSchema = new Schema(
       ref: "Course",
     },
 
-    subject: {
+    subject: [{
       type: mongoose.ObjectId,
       ref: "Subject",
-    },
+    }],
   },
 
   {

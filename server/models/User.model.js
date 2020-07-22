@@ -28,13 +28,13 @@ const userSchema = new Schema(
 
     type: {
       type: String,
-      enum: ["PARENT ", "STUDENT", "DIRECTOR", "TEACHER"],
+      enum: ["PARENT", "STUDENT", "DIRECTOR", "TEACHER"],
       default: "STUDENT",
     },
 
     parent: {
-        type: mongoose.ObjectId,
-        ref: "User", //user type Parent
+      type: mongoose.ObjectId,
+      ref: "User", //user type Parent
     },
   },
   {
