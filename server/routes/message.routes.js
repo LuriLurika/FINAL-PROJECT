@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Message = require("../models/Messages.model");
+const Message = require("../models/messages.model");
 const User = require("../models/User.model");
 
 
