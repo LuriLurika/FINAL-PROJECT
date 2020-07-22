@@ -30,7 +30,7 @@ router.delete("/:id", (req, res, next) => {
       Subjects: req.params.id,
     }),
   ])
-    .then(() => res.redirect("/"))
+    .then((response) => res.json(response))
     .catch((err) => console.log("BBDD error", err));
 });
 

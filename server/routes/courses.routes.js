@@ -19,8 +19,9 @@ router.get("/", (req, res, next) => {
 //  /courses/:id/subjects --> Devuelve la lista de asignaturas pertenecientes al curso (todos pueden verlo)
 
 router.get("/:id/subjects", (req, res, next) => {
-  Course.findById()
-    .populate(Subject)
+  Course
+    .findById(req.params.id)
+    .populate('subjects')
     .then((response) => res.json(response))
     .catch((err) => next(err));
 });
@@ -31,8 +32,9 @@ router.get("/:id/subjects", (req, res, next) => {
 // checkRole(['DIRECTOR', 'TEACHER']),
 
 router.get("/:id/users", (req, res, next) => {
-  Course.findById()
-    .populate(User)
+  Course
+    .findById(req.params.id)
+    .populate('users')
     .then((response) => res.json(response))
     .catch((err) => next(err));
 });

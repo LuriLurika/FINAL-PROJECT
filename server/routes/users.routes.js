@@ -18,35 +18,49 @@ router.get("/", (req, res, next) => {
     .catch((err) => next(err));
 });
 
-//Devuelve listado de los profesores de cada alumno
+//Devuelve listado de los profesores de cada alumno ***ok***
 router.get("/:id/teachers", (req, res, next) => {
   Course.find({ users: req.params.id })
     .then(courses => {
       if (courses.length === 0) {
         return new Promise((resolve, reject) => resolve([])) //en caso de no tener courses asignado devuelve array vacío
       } else {
-        console.log(courses)
-        let acum = []
-        courses.map(elm => acum = [...acum, ...elm.subjects])
-        return acum
+        return new Promise((resolve, reject) => {
+          let acum = []
+          courses.map(elm => acum = [...acum, ...elm.subjects])
+          resolve( acum)
+        })
       }
     })
-    .then((subject) => subject.map(elm => Subject.find({ id: elm })))
-    //.populate('Teacher') ({ subjects: elm.id })
-    .then((response) => res.json(response))
+    .then((subject) => { 
+      console.log(subject)
+      return  Subject.find({ _id: {$in: subject} }).populate('teacher')
+    })    
+    .then((response) => {
+      const teachers = response.map(elm => elm.teacher)
+      res.json([...new Set(teachers)]) //eliminar teachers duplicados
+    })
     .catch((err) => next(err));
 });
 
-//Devuelve listado de asignaturas de cada alumno(Tienen acceso los Parents y Director )checkRole(['DIRECTOR', 'PARENTS']), 
+//Devuelve listado de asignaturas de cada alumno ***ok***
 router.get("/:id/subjects", (req, res, next) => {
-  User.findById(req.params.id)
-    .populate('Course') ///?
-    // userid > courseid > subjects[]
-    .then((response) => res.json(response))
-    .catch((err) => next(err));
+  Course.find({ users: req.params.id })
+    .then(courses => {
+        return new Promise((resolve, reject) => {
+          let acum = []
+          courses.map(elm => acum = [...acum, ...elm.subjects])
+          resolve(acum) 
+        })
+    })
+    .then((subject) => { 
+      return Subject.find({ _id: { $in: subject } }).populate('user')  
+    })
+    .then((response) => {
+      res.json(response)
+    })
+    .catch((err) => next(err))
 });
-
-
 
 //Crea un nuevo usuario (en front capamos para que solo pueda crearlo el director) ***ok***
 router.post("/new", (req, res, next) => {
