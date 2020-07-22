@@ -1,16 +1,32 @@
 const mongoose = require("mongoose")
+
+require('dotenv').config()
 const Course = require('../models/Course.model')
 const Subject = require('../models/Subject.model')
 const User = require('../models/User.model')
 mongoose.connect(`mongodb://localhost/${process.env.DB}`, { useUnifiedTopology: true, useNewUrlParser: true })
-Course.collection.drop()
-Subject.collection.drop()
-User.collection.drop()
+
+
 const courses = [
-    { title: 'Primero', }
+    { title: 'Primero', subjects: []  },
+    { title: 'Segundo', subjects: [] },
+    { title: 'Tercero', subjects: [] },
+    { title: 'Cuarto', subjects: [] },
+    { title: 'Quinto', subjects: [] },
+    { title: 'Sexto', subjects: [] }
 ]
 const subjects = [
-    { title: 'Matemática' }
+   { title: 'Matemáticas', teacher: 'users.type.teacher.id' },
+    { title: 'Lengua Castellana y Literatura' },
+    { title: 'Primera Lengua Extranjera' },
+    { title: 'Ciencias Sociales' },
+    { title: 'Ciencias de la Naturaleza' },
+    { title: 'Educación Física' },
+    { title: 'Valores Sociales y Cívicos' },
+    { title: 'Educación Artística' },
+    { title: 'Tecnología' },
+    { title: 'Segunda Lengua Extranjera' },
+    { title: 'Religión' },
 ]
 
 const users = [
@@ -36,11 +52,33 @@ const users = [
         { name: "Morgen", lastname: "Ince", email: "mincej@scientificamerican.com", profileImg: "https://robohash.org/siterrormaiores.bmp?size=50x50&set=set1", type: "TEACHER" }
 ]
 
-const coursePromise = Course.create(courses)
-const subjectPromise = Subject.create(subjects)
-const userPromise = User.create(users)
-Promise
-    .all([coursePromise, subjectPromise, userPromise])
-    .then(results => console.log(`Created ${results.length} collections`))
-    .then(() => mongoose.connection.close())
+User.create(users).then(users => { //creamos usuarios
+        console.log('se han creado los usuarios')
+        const teacher = users[users.length - 1]; //cogemos el último user que es profesor
+        return Subject.create(subjects.map(elm => ({ //mapeamos las asignaturas y le añadimos el id del profe
+            ...elm,
+            teacher: teacher.id
+        })))
+    }).then(subjects => {
+        console.log('se han creado las asignaturas')
+        return Course.create(courses.map(elm => ({ //creamos el curso
+            ...elm,
+            subjects: subjects.map(subject => subject.id) // mapeamos el curso y añadimos el id de las asignaturas
+        })))
+    })
+    .then(() => {
+        console.log('se han creado los cursos')
+        mongoose.connection.close()
+    })
     .catch(err => console.log(err))
+
+
+
+// const coursePromise = Course.create(courses)
+// const subjectPromise = Subject.create(subjects)
+// const userPromise = User.create(users)
+// Promise
+//     .all([coursePromise, subjectPromise, userPromise])
+//     .then(results => console.log(`Created ${results.length} collections`))
+//     .then(() => mongoose.connection.close())
+//     .catch(err => console.log(err))

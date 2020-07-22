@@ -5,6 +5,8 @@ const passport = require("passport");
 const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 
+
+
 router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -95,6 +97,8 @@ router.post("/login", (req, res, next) => {
     });
   })(req, res, next);
 });
+
+// User logout
 
 router.post("/logout", (req, res, next) => {
   // req.logout() is defined by passport
