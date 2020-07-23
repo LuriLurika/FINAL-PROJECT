@@ -15,18 +15,16 @@ const Side = props => {
             >
                 <div className="sidebar-sticky"></div>
                 <Nav.Item>
-                    <Nav.Link href="Mensajes">Active</Nav.Link>
+                    <Nav.Link href="Mensajes">Mensajes</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="Eventos">Link</Nav.Link>
+                    <Nav.Link eventKey="Eventos">Eventos</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="Tu perfil">Link</Nav.Link>
+                    <Nav.Link eventKey="link-2">Perfil</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="Cursos" disabled>
-                        Disabled
-                </Nav.Link>
+                    <Nav.Link eventKey="disabled" >Cursos</Nav.Link>
                 </Nav.Item>
             </Nav>
 

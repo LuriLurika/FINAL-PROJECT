@@ -15,6 +15,7 @@ import Courses from './pages/pruebarutas/courses'
 import Subjects from './pages/pruebarutas/subjects'
 import Teachers from './pages/pruebarutas/teachers'
 import Users from './pages/pruebarutas/users'
+import Sidebar from './ui/Sidebar'
 
 
 
@@ -47,6 +48,7 @@ class App extends Component {
     return (
       <>
         <Navigation />
+        <Sidebar />
         <Switch>
           <Route exact path="/" render={() => <Index />} />
           <Route path="/courses" render={() => <Courses />} />
