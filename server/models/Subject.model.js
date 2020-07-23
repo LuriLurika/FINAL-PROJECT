@@ -5,7 +5,8 @@ const subjectsSchema = new Schema(
   {
     title: {
       type: String,
-      required: true
+      required: true,
+      set: text => text.charAt(0).toUpperCase() + text.substring(1)
     },
 
     teacher: {

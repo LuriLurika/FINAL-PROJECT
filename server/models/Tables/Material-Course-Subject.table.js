@@ -20,6 +20,7 @@ const materialCourseSubjectSchema = new Schema(
 
     material: {
       type: String,
+      required: true
     },
     
   },{

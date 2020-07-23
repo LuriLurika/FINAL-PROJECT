@@ -7,7 +7,6 @@ const Message = require("../models/messages.model")
 //CREAR MENSAJE
 //checkRole(['DIRECTOR', 'TEACHER', 'PARENT']),
 router.post('/',(req, res) => {
-    //title, body, sendedBy, receivedBy
     Message
         .create(req.body)
         .then((response) => res.json(response))
@@ -40,7 +39,7 @@ router.get('/:id', (req, res) => {
 //checkRole(['DIRECTOR', 'TEACHER', 'PARENT']), 
 router.delete("/:id",(req, res, next) => {
     Message.findByIdAndRemove(req.params.id)
-        .then((response) => res.json(response)) //ver cómo sacar mensaje de status
+        .then((response) => res.json(response))
         .catch((err) => next(err))
 })
 

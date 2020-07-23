@@ -6,9 +6,9 @@ const MaterialCourseSubjects = require("../models/Tables/Material-Course-Subject
 const Course = require("../models/Course.model")
 const Subject = require("../models/Subject.model")
 
-const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.user.type) ? next() : res.json({
+/*const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.user.type) ? next() : res.json({
   message: "Area Restringida!"
-})
+})*/
 
 //LISTADO DE TODOS LOS PROFESORES Y/O DIRECTORES
 router.get("/", (req, res, next) => {
@@ -44,7 +44,6 @@ router.get("/:id/courses", (req, res, next) => {
       
     })
     .then(courses => {
-      
       res.json(courses)
     })
     .catch((err) => next(err))
@@ -79,7 +78,7 @@ router.delete("/:id", (req, res, next) => {
     }),
   ])
     .then((response) => res.json(response))
-    .catch((err) => console.log("BBDD error", err))
+    .catch((err) => next(err))
 })
 
 

@@ -5,11 +5,14 @@ const eventSchema = new Schema(
     {
         title: {
             type: String,
-            required: true
+            required: true,
+            set: text => text.charAt(0).toUpperCase() + text.substring(1)
         },
 
         description: {
-            type:String
+            type: String,
+            required: true,
+            maxlength: 100
         },
 
         creator: {
