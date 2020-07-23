@@ -4,11 +4,14 @@ const router = express.Router()
 const Message = require("../models/Messages.model")
 
 
-//CREAR MENSAJE
-//checkRole(['DIRECTOR', 'TEACHER', 'PARENT']),
-router.post('/',(req, res) => {
+
+//Crear mensaje ( todos menos el Student puede crear un msj) checkRole(['DIRECTOR', 'TEACHER', 'PARENT']),
+router.post('/', (req, res) => {
+    
+    const{title, body, receivedBy} = req.body
+    
     Message
-        .create(req.body)
+        .create({title, body, receivedBy, sendedBy: req.user.id})
         .then((response) => res.json(response))
         .catch((err) => next(err))
 })

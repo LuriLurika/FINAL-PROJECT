@@ -16,16 +16,15 @@ router.post("/signup", (req, res, next) => {
   }
 
   if (password.length < 2) {
-    res
-      .status(400)
-      .json({
-        message:
-          "Please make your password at least 8 characters long for security purposes.",
-      })
+
+    res.status(400).json({message:"Please make your password at least 8 characters long for security purposes."})
     return
+
   }
 
   User.findOne({ username }, (err, foundUser) => {
+
+    
     if (err) {
       res.status(500).json({ message: "Username check went bad." })
       return
@@ -52,8 +51,6 @@ router.post("/signup", (req, res, next) => {
         return
       }
 
-      // Automatically log in user after sign up
-      // .login() here is actually predefined passport method
       req.login(aNewUser, (err) => {
         if (err) {
           res.status(500).json({ message: "Login after signup went bad." })
@@ -84,7 +81,7 @@ router.post("/login", (req, res, next) => {
       return
     }
 
-    // save user in session
+    
     req.login(theUser, (err) => {
       if (err) {
         res.status(500).json({ message: "Session save went bad." })
@@ -97,7 +94,6 @@ router.post("/login", (req, res, next) => {
   })(req, res, next)
 })
 
-// User logout
 
 router.post("/logout", (req, res, next) => {
   // req.logout() is defined by passport

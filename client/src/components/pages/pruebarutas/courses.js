@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-import { Link, NavLink } from 'react-router-dom'
-
 import SchoolHackApi from '../../../service/SchoolHackApi'
 
 
@@ -11,16 +9,13 @@ class Courses extends Component {
         this.state = {
             courses: undefined,
         }
-        this.SchoolHackApi = new SchoolHackApi()
+        this.schoolHackApi = new SchoolHackApi()
     }
 
     componentDidMount = () => {
-        this.SchoolHackApi
+        this.schoolHackApi
             .getAllCourses()
-            .then(response => {
-                console.log(response)
-                //this.setState({ courses: response.data })
-            })
+            .then(response => { this.setState({ courses: response.data }) })
             .catch(err => console.log(err))
     }
 

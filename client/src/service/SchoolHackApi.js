@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default class SchoolHackApi {
+class SchoolHackApi {
 
     constructor() {
 
@@ -14,6 +14,6 @@ export default class SchoolHackApi {
     getAllSubjects = () => this.service.get('/subjects')
     getAllTeachers = () => this.service.get('/teachers')
     getAllUsers = () => this.service.get('/users')
-
-  
 }
+
+export default SchoolHackApi
