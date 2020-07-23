@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const userSchema = new Schema(
   {
@@ -40,11 +40,11 @@ const userSchema = new Schema(
       type: mongoose.ObjectId,
       ref: "User", //user type Parent
     },
-  },
-  {
+    
+  },{
     timestamps: true,
   }
-);
+)
 
 const User = mongoose.model("User", userSchema)
 

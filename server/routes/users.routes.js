@@ -34,7 +34,7 @@ router.get("/:id/teachers", (req, res, next) => {
     })
     .then((subject) => { 
       console.log(subject)
-      return  Subject.find({ _id: {$in: subject} }).populate('teacher')
+      return  Subject.find({ _id: {$in: subject} }).populate('teacher','name')
     })    
     .then((response) => {
       const teachers = response.map(elm => elm.teacher)
@@ -54,7 +54,7 @@ router.get("/:id/subjects", (req, res, next) => {
         })
     })
     .then((subject) => { 
-      return Subject.find({ _id: { $in: subject } }).populate('user')  
+      return Subject.find({ _id: { $in: subject } }).populate('user','name')  
     })
     .then((response) => {
       res.json(response)

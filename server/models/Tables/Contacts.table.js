@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const contactSchema = new Schema(
   {
@@ -7,25 +7,17 @@ const contactSchema = new Schema(
       type: mongoose.ObjectId,
       ref: "User", //user type student o parent
     },
+
     teacher: {
       type: mongoose.ObjectId,
       ref: "User", //user type teacher o director
     },
-  },
-  {
+    
+  },{
     timestamps: true,
   }
-);
+)
 
-/*Id
-Nombre
-Dirección
-Teléfono
-Foto
-Email
-Contraseña
- */
-
-const Contact = mongoose.model("Contact", contactSchema);
+const Contact = mongoose.model("Contact", contactSchema)
 
 module.exports = Contact;

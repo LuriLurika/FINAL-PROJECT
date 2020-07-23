@@ -1,12 +1,7 @@
 module.exports = app => {
 
     // Base URLS
-
-    // const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.user.type) ? next() : res.json({
-    //     message: "Area Restringida!"
-    // })
-
-    
+  
     app.use("/api", require("./auth.routes"))
     app.use("/api/courses", require("./courses.routes"))
     app.use("/api/users", require("./users.routes"))

@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const eventSchema = new Schema(
     {
@@ -17,7 +17,7 @@ const eventSchema = new Schema(
             ref: "User" //user type teacher-director
         },
 
-        participants: [{ //array
+        participants: [{ 
             type: mongoose.ObjectId,
             ref: "User"
         }],
@@ -26,14 +26,11 @@ const eventSchema = new Schema(
             type: Date,
             default: Date.now
         },
-    },
-
-    {
+        
+    },{
         timestamps: true,
     }
 )
-
-
 
 const Event = mongoose.model("Event", eventSchema)
 
