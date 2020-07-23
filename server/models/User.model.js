@@ -17,12 +17,17 @@ const userSchema = new Schema(
 
     email: {
       type: String,
-      match: /^[A-Z0-9.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/
+      validate: {
+        validator: function (v) {
+          return [/^[A-Z0-9.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/]
+        },
+        message: 'Please enter a valid email'
+        }
     },
      
     username: {
        type: String,
-       required: true, 
+       //required: true, 
        unique: true
     },
 
