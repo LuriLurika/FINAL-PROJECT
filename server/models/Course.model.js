@@ -7,6 +7,7 @@ const coursesSchema = new Schema({
         type: String,
         enum: ['Primero', 'Segundo', 'Tercero', 'Cuarto', 'Quinto', 'Sexto'],
         required: true,
+        unique: true
     },
 
     subjects: [{ 
