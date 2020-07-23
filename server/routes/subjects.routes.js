@@ -1,28 +1,27 @@
-const express = require("express");
-const router = express.Router();
+const express = require("express")
+const router = express.Router()
 
-const Subject = require("../models/Subject.model");
-const MaterialCourseSubjects = require("../models/Tables/Material-Course-Subject.table");
+const Subject = require("../models/Subject.model")
+const MaterialCourseSubjects = require("../models/Tables/Material-Course-Subject.table")
 
 
-
-//  /Subjects --> Devuelve un listado con los datos de todos las asignaturas
+//VER TODAS LAS ASIGNATURAS
 router.get("/", (req, res, next) => {
   Subject.find()
     .then((response) => res.json(response))
-    .catch((err) => next(err));
-});
+    .catch((err) => next(err))
+})
 
-//  /Subjectss/:id/ --> Modificar el nombre de la asignatura
+//MODIFICAR UNA ASIGNATURA
 router.put("/:id", (req, res, next) => {
-   const { title, teacher, subjectsMaterials } = req.body;
+   const { title, teacher, subjectsMaterials } = req.body
 
   Subject.findByIdAndUpdate(req.params.id, { title, teacher, subjectsMaterials }, { new: true })
     .then((response) => res.json(response))
-    .catch((err) => next(err));
-});
+    .catch((err) => next(err))
+})
 
-//  /Subjectss/:id --> Eliminar una asignatura ( con las relaciones )
+//ELIMINAR UNA ASIGNATURA
 router.delete("/:id", (req, res, next) => {
   Promise.all([
     Subject.findByIdAndDelete(req.params.id),
@@ -31,14 +30,14 @@ router.delete("/:id", (req, res, next) => {
     }),
   ])
     .then((response) => res.json(response))
-    .catch((err) => console.log("BBDD error", err));
-});
+    .catch((err) => console.log("BBDD error", err))
+})
 
-//  /Subjects --> Crea un nuevo subject
+//CREAR ASIGNATURA
 router.post("/", (req, res, next) => {
   Subject.create(req.body)
     .then((response) => res.json(response))
-    .catch((err) => next(err));
-});
+    .catch((err) => next(err))
+})
 
-module.exports = router;
+module.exports = router

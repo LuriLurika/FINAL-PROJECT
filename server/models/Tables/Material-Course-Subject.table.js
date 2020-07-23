@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const materialCourseSubjectSchema = new Schema(
   {
@@ -20,12 +20,13 @@ const materialCourseSubjectSchema = new Schema(
 
     material: {
       type: String,
+      required: true
     },
-  },
-  {
+    
+  },{
     timestamps: true,
   }
-);
+)
 
 const MaterialCourseSubjects = mongoose.model("MaterialCourseSubjects", materialCourseSubjectSchema)
 

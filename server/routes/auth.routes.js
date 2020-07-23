@@ -1,16 +1,15 @@
-const express = require("express");
-const router = express.Router();
-const passport = require("passport");
+const express = require("express")
+const router = express.Router()
+const passport = require("passport")
 
-const User = require("../models/User.model");
-const bcrypt = require("bcrypt");
+const User = require("../models/User.model")
+const bcrypt = require("bcrypt")
 
 
 
 router.post("/signup", (req, res, next) => {
-
   const { username, password } = req.body
-
+  
   if (!username || !password) {
     res.status(400).json({ message: "Provide username and password" })
     return
@@ -36,7 +35,7 @@ router.post("/signup", (req, res, next) => {
       return
     }
 
-    const salt = bcrypt.genSaltSync(10);
+    const salt = bcrypt.genSaltSync(10)
     const hashPass = bcrypt.hashSync(password, salt)
 
     const aNewUser = new User({
@@ -49,15 +48,17 @@ router.post("/signup", (req, res, next) => {
         res
           .status(400)
           .json({ message: "Saving user to database went wrong." })
-        return;
+        return
       }
 
       req.login(aNewUser, (err) => {
         if (err) {
           res.status(500).json({ message: "Login after signup went bad." })
-          return;
+          return
         }
 
+        // Send the user's information to the frontend
+        // We can use also: res.status(200).json(req.user)
         res.status(200).json(aNewUser)
       })
     })
@@ -74,8 +75,9 @@ router.post("/login", (req, res, next) => {
     }
 
     if (!theUser) {
-     
-      res.status(401).json(failureDetails);
+      // "failureDetails" contains the error messages
+      // from our logic in "LocalStrategy" { message: '...' }.
+      res.status(401).json(failureDetails)
       return
     }
 
@@ -86,16 +88,15 @@ router.post("/login", (req, res, next) => {
         return
       }
 
-    
+      // We are now logged in (that's why we can also send req.user)
       res.status(200).json(theUser)
     })
   })(req, res, next)
 })
 
 
-
 router.post("/logout", (req, res, next) => {
- 
+  // req.logout() is defined by passport
   req.logout()
   res.status(200).json({ message: "Log out success!" })
 })
@@ -103,7 +104,7 @@ router.post("/logout", (req, res, next) => {
 router.get("/loggedin", (req, res, next) => {
   if (req.isAuthenticated()) {
     res.status(200).json(req.user)
-    return;
+    return
   }
   res.status(403).json({ message: "Unauthorized" })
 })
