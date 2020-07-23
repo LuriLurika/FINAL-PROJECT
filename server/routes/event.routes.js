@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Event = require("../models/Event.model");
-const User = require("../models/User.model");
+// const User = require("../models/User.model");
 
 // const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.user.type) ? next() : res.json({
 //     message: "Area Restringida!"
@@ -12,9 +12,10 @@ const User = require("../models/User.model");
 //Crear evento ( solo los pueden crear el DIRECTOR Y el TEACHER) -------checkRole(['DIRECTOR', 'TEACHER']),
 
 router.post('/', (req, res) => {
-    //title, description, creator, participants, eventDate
+
+    const { title, description, participants, eventDate } = req.body
     Event
-        .create(req.body)
+        .create({title, description, participants, eventDate, creator: req.user.id})
         .then((response) => res.json(response))
         .catch((err) => next(err));
 })

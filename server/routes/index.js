@@ -11,7 +11,7 @@ module.exports = app => {
     app.use("/api/courses", require("./courses.routes"))
     app.use("/api/users", require("./users.routes"))
     app.use("/api/teachers", require("./teachers.routes"))
-    app.use("/api/subjects", require("./subjects.routes")) //Solo tiene acceso el Director checkRole(['DIRECTOR']),
+    app.use("/api/subjects",  require("./subjects.routes")) //Solo tiene acceso el Director checkRole(['DIRECTOR']),
     app.use("/api/messages", require("./message.routes"))
     app.use("/api/events", require("./event.routes"))
 
