@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 require('dotenv').config()
+
 const Course = require('../models/Course.model')
 const Subject = require('../models/Subject.model')
 const User = require('../models/User.model')
@@ -15,6 +16,7 @@ const courses = [
     { title: 'Quinto', subjects: [] },
     { title: 'Sexto', subjects: [] }
 ]
+
 const subjects = [
     { title: 'Matemáticas', teacher: 'users.type.teacher.id' },
     { title: 'Lengua Castellana y Literatura' },
@@ -53,31 +55,21 @@ const users = [
 ]
 
 let usersCreadted = []
-User.create(users).then(users => { //creamos usuarios
-    console.log('se han creado los usuarios')
-    const teacher = users[users.length - 1];
-    usersCreadted = [...users] //cogemos el último user que es profesor
-    return Subject.create(subjects.map(elm => ({ //mapeamos las asignaturas y le añadimos el id del profe
-        ...elm,
-        teacher: teacher.id
-    }))
-    )
-}).then(subjects => {
-    console.log('se han creado las asignaturas')
-    return Course.create(courses.map((elm, index) => ({ //creamos el curso
-        ...elm,
-        subjects: subjects.map(subject => subject.id),
-        users: !index ? usersCreadted.filter(elm => elm.type === "STUDENT") : [] // mapeamos el curso y añadimos el id de las asignaturas
-    })))
-})
+
+User
+    .create(users).then(users => {
+        console.log('Se han creado los usuarios')
+        const teacher = users[users.length - 1]
+        usersCreadted = [...users]
+        return Subject.create(subjects.map(elm => ({ ...elm,teacher: teacher.id })))
+    })
+    .then(subjects => {
+        console.log('Se han creado las asignaturas')
+        return Course.create(courses.map((elm, index) => ({ ...elm, subjects: subjects.map(subject => subject.id),
+        users: !index ? usersCreadted.filter(elm => elm.type === "STUDENT") : [] })))
+    })
     .then(() => {
-        console.log('se han creado los cursos')
+        console.log('Se han creado los cursos')
         mongoose.connection.close()
     })
-        .catch(err => console.log(err))
-
-/*Promise
-    .all([coursePromise, subjectPromise, userPromise])
-    .then(results => console.log(`Created ${results.length} collections`))
-    .then(() => mongoose.connection.close())
-    .catch(err => console.log(err))*/
+    .catch(err => console.log(err))

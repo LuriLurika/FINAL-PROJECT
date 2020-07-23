@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const coursesSchema = new Schema({
 
     title: {
         type: String,
         enum: ['Primero', 'Segundo', 'Tercero', 'Cuarto', 'Quinto', 'Sexto'],
-        required: true
+        required: true,
     },
 
     subjects: [{ 
@@ -23,8 +23,8 @@ const coursesSchema = new Schema({
     timestamps: true
 })
 
-const Course = mongoose.model("Course", coursesSchema);
-module.exports = Course;
+const Course = mongoose.model("Course", coursesSchema)
+module.exports = Course
 
 
 

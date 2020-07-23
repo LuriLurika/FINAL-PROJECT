@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const parentsStudentsSchema = new Schema(
   {
@@ -7,12 +7,12 @@ const parentsStudentsSchema = new Schema(
       type: mongoose.ObjectId,
       ref: "User", //front filter if user type parent-student
     },
-  },
-  {
+
+  },{
     timestamps: true,
   }
-);
+)
 
-const ParentStudents = mongoose.model("ParentStudents", parentsStudentsSchema);
+const ParentStudents = mongoose.model("ParentStudents", parentsStudentsSchema)
 
 module.exports = ParentStudents

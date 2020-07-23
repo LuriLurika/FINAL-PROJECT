@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const userCourseSchema = new Schema(
   {
@@ -13,12 +13,11 @@ const userCourseSchema = new Schema(
       ref: "Course",
     },
 
-  },
-  {
+  },{
     timestamps: true,
   }
-);
+)
 
-const UserCourse = mongoose.model("UserCourse", userCourseSchema);
+const UserCourse = mongoose.model("UserCourse", userCourseSchema)
 
-module.exports = UserCourse;
+module.exports = UserCourse
