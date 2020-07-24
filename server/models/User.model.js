@@ -6,7 +6,7 @@ const userSchema = new Schema(
     name: {
       type: String,
       required: true,
-      set: text => text.charAt(0).toUpperCase() + text.substring(1)     
+      set: text => text.charAt(0).toUpperCase() + text.substring(1)
     },
 
     lastname: {
@@ -17,13 +17,18 @@ const userSchema = new Schema(
 
     email: {
       type: String,
-      match: /^[A-Z0-9.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/
+      validate: {
+        validator: function (v) {
+          return [/[A-Za-z0-9.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2, }/]
+        },
+        message: "Please enter a valid email"
+      },
     },
-     
+
     username: {
-       type: String,
-       required: true, 
-       unique: true
+      type: String,
+      //required: true, 
+      unique: true
     },
 
     password: {
@@ -47,10 +52,10 @@ const userSchema = new Schema(
       type: mongoose.ObjectId,
       ref: "User", //user type Parent
     },
-    
-  },{
-    timestamps: true,
-  }
+
+  }, {
+  timestamps: true,
+}
 )
 
 const User = mongoose.model("User", userSchema)

@@ -7,18 +7,19 @@ const coursesSchema = new Schema({
         type: String,
         enum: ['Primero', 'Segundo', 'Tercero', 'Cuarto', 'Quinto', 'Sexto'],
         required: true,
+        unique: true
     },
 
-    subjects: [{ 
+    subjects: [{
         type: mongoose.ObjectId,
         ref: "Subject"
     }],
 
-    users: [{ 
+    users: [{
         type: mongoose.ObjectId,
         ref: "User"
     }]
-    
+
 }, {
     timestamps: true
 })

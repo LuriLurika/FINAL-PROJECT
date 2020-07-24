@@ -7,8 +7,12 @@ import AuthService from './../service/AuthService'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 
-import Index from './pages/index'
+// import Index from './pages/Index/index'
 import Navigation from './ui/Navbar'
+import Spinner from './ui/Spinner'
+import Login from './pages/Login'
+
+
 
 /***************PRUEBA RUTAS**************/
 import Courses from './pages/pruebarutas/courses'
@@ -47,14 +51,14 @@ class App extends Component {
     return (
       <>
         <Navigation />
+        <Spinner />
+
         <Switch>
-          <Route exact path="/" render={() => <Index />} />
+          <Route exact path="/login" render={() => <Login />} />
           <Route path="/courses" render={() => <Courses />} />
           <Route path="/subjects" render={() => <Subjects />} />
           <Route path="/teachers" render={() => <Teachers />} />
           <Route path="/users" render={() => <Users />} />
-
-
 
         </Switch>
       </>
