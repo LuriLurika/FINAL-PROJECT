@@ -14,10 +14,9 @@ import Navigation from './ui/Navbar'
 import Courses from './pages/pruebarutas/courses'
 import Subjects from './pages/pruebarutas/subjects'
 import Teachers from './pages/pruebarutas/teachers'
-import Users from './pages/pruebarutas/users'
-
-
-
+import Users from './Users/Users-list'
+import Messages from './Messages/Message-list'
+import Events from './Events/Event-list'
 
 
 
@@ -53,6 +52,8 @@ class App extends Component {
           <Route path="/subjects" render={() => <Subjects />} />
           <Route path="/teachers" render={() => <Teachers />} />
           <Route path="/users" render={() => <Users />} />
+          <Route path="/messages" render={() => <Messages />} />
+          <Route path="/events" render={() => <Events />} />
 
 
 

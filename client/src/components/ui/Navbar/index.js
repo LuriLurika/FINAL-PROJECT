@@ -46,7 +46,13 @@ class Navigation extends Component {
                             <NavLink to="/teachers" activeStyle={{ color: 'pink' }}>Teachers routes</NavLink>
                         </Nav.Link>
                         <Nav.Link as="span">
-                            <NavLink to="/users" activeStyle={{ color: 'pink' }}>Users routes</NavLink>
+                            <NavLink to="/users" activeStyle={{ color: 'pink' }}>Listado de estudiantes</NavLink>
+                        </Nav.Link>
+                          <Nav.Link as="span">
+                            <NavLink to="/messages" activeStyle={{ color: 'pink' }}>Mensajes</NavLink>
+                        </Nav.Link>
+                        <Nav.Link as="span">
+                            <NavLink to="/events" activeStyle={{ color: 'pink' }}>Eventos</NavLink>
                         </Nav.Link>
 
                         {this.props.loggedInUser ?
