@@ -9,12 +9,12 @@ mongoose.connect(`mongodb://localhost/${process.env.DB}`, { useUnifiedTopology: 
 
 
 const courses = [
-    { title: 'Primero', subjects: []  },
-    { title: 'Segundo', subjects: [] },
-    { title: 'Tercero', subjects: [] },
-    { title: 'Cuarto', subjects: [] },
-    { title: 'Quinto', subjects: [] },
-    { title: 'Sexto', subjects: [] }
+    { title: '1º de primaria', subjects: []  },
+    { title: '2º de primaria', subjects: [] },
+    { title: '3º de primaria', subjects: [] },
+    { title: '4º de primaria', subjects: [] },
+    { title: '5º de primaria', subjects: [] },
+    { title: '6º de primaria', subjects: [] }
 ]
 
 const subjects = [

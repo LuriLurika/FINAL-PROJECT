@@ -9,6 +9,12 @@ font-family: 'Oswald', sans-serif;*/
   /*var(--main-color)*/
 }
 
+#root {
+  display: grid;
+  height: 100vh;
+  grid-template: auto 1fr auto / auto 1fr auto
+}
+
 .amatic-letter {
   font-family: 'Amatic SC', cursive;
 }
@@ -55,8 +61,32 @@ img {
   box-sizing: unset;
   box-shadow: 0px 5px 5px 0px rgba(161, 161, 161, 1);
   padding-right: 15px;
+  background: lightpink;
+  grid-column: 1 / 4;
 }
 
 .margin-right {
   margin-right: 25px;
 }
+
+/*************PROFILE****************/
+
+.left-sidebar {
+  background: lightblue;
+  grid-column: 1 / 2;
+  padding: 1rem;
+}
+
+main {
+  background: coral;
+  grid-column: 2 / 3;
+  padding: 20px;
+}
+
+footer {
+  background: wheat;
+  padding: 2rem;
+  text-align: center;
+  grid-column: 1 / 4;
+}
+

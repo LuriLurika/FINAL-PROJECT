@@ -19,16 +19,16 @@ const userSchema = new Schema(
       type: String,
       validate: {
         validator: function (v) {
-          return [/[A-Za-z0-9.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2, }/]
+          return [/^[A-Z0-9.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/]
         },
-        message: "Please enter a valid email"
-      },
+        message: 'Please enter a valid email'
+        }
     },
 
     username: {
-      type: String,
-      //required: true, 
-      unique: true
+       type: String,
+       //required: true, 
+       unique: true
     },
 
     password: {
