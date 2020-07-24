@@ -10,7 +10,9 @@ module.exports = app => {
     app.use("/api/messages", require("./message.routes"))
     app.use("/api/events", require("./event.routes"))
 
-
+    app.use((req, res) => {
+    res.sendFile(__dirname + "/public/index.html");
+})
 
 
 }
