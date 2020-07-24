@@ -5,7 +5,7 @@ const coursesSchema = new Schema({
 
     title: {
         type: String,
-        enum: ['Primero', 'Segundo', 'Tercero', 'Cuarto', 'Quinto', 'Sexto'],
+        enum: ['1º de primaria', '2º de primaria', '3º de primaria', '4º de primaria', '5º de primaria', '6º de primaria'],
         required: true,
     },
 

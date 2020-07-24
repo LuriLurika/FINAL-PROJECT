@@ -1,32 +1,34 @@
 import React, { Component } from 'react'
 
 import SchoolHackApi from '../../../service/SchoolHackApi'
+import { Link } from 'react-router-dom' 
 
 
-class Courses extends Component {
+
+class Subjects extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            courses: undefined,
+            subjects: undefined,
         }
         this.schoolHackApi = new SchoolHackApi()
     }
 
     componentDidMount = () => {
         this.schoolHackApi
-            .getAllCourses()
-            .then(response => { this.setState({ courses: response.data }) })
+            .getAllSubjects()
+            .then(response => { this.setState({ subjects: response.data }) })
             .catch(err => console.log(err))
     }
 
     render() {
         return (
             <>
-                <h1>Courses</h1>
+                <h1>Subjects</h1>
 
-                {!this.state.courses ? <p>CARGANDO</p> :
+                {!this.state.subjects ? <p>CARGANDO</p> :
                     <ul>
-                        {this.state.courses.map(elm => <li key={elm._id} {...elm}>{elm.title}</li>)}
+                        {this.state.subjects.map(elm => <li><Link key={elm._id} {...elm}>{elm.title}</Link></li>)}
                     </ul>
                 }
             </>
@@ -34,4 +36,4 @@ class Courses extends Component {
     }
 }
 
-export default Courses
+export default Subjects

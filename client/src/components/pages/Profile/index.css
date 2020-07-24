@@ -1,0 +1,25 @@
+.orange{
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+}
+
+.blue{
+    background-color: paleturquoise;
+}
+
+.blue a{
+    padding-bottom: 20px;
+}
+
+.green{
+    background-color: greenyellow;
+}
+
+.pink{
+    background-color: hotpink;
+}
+
+img{
+    width: 50px;
+}

@@ -26,7 +26,7 @@ class Navigation extends Component {
 
     render() {
         return (
-            <Navbar expand="lg" sticky="top" >
+            <Navbar className="mine-header" expand="lg" sticky="top" >
                 <Navbar.Brand>
                     <Link to="/">SchoolHack</Link>
                 </Navbar.Brand>

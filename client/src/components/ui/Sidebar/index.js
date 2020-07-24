@@ -1,34 +1,32 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 import { withRouter } from "react-router";
-
+import { NavLink } from 'react-router-dom'
 
 const Side = props => {
 
 
     return (
-        <>
-
-            <Nav className="col-md-12 d-none d-md-block bg-light sidebar"
+        <div class="left-sidebar" contenteditable>
+            <Nav className=" d-none d-md-block bg-light sidebar"
                 activeKey="/home"
-                onSelect={selectedKey => alert(`selected ${selectedKey}`)}
-            >
-                <div className="sidebar-sticky"></div>
+                onSelect={selectedKey => alert(`selected ${selectedKey}`)}>
+
                 <Nav.Item>
-                    <Nav.Link href="Mensajes">Mensajes</Nav.Link>
+                    <NavLink to="/messages">Mensajes</NavLink>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="Eventos">Eventos</Nav.Link>
+                    <NavLink to="/events">Eventos</NavLink>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="link-2">Perfil</Nav.Link>
+                    <NavLink to="/profile">Perfil</NavLink>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="disabled" >Cursos</Nav.Link>
+                    <NavLink to="/courses">Cursos</NavLink>
                 </Nav.Item>
             </Nav>
-
-        </>
+        </div>
+            
     );
 };
 const Sidebar = withRouter(Side);
