@@ -1,0 +1,34 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lft-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.lft-box-text {
+    font-weight: bold;
+    font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    text-transform: uppercase;
+}
+
+.flex-end {
+    align-items: flex-end;
+}
+
+.form-login {
+    border: solid 3px var(--dark-color);
+    border-radius: 3%;
+    padding: 90px 50px;
+}
+
+.form-login Label {
+    padding: 10px 0;
+}

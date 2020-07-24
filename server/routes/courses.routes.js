@@ -8,7 +8,7 @@ const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.
 // checkRole(['DIRECTOR'])
 
 router.get("/", (req, res, next) => {
-  Course.find()
+  Course.find().sort({ title: 1 })
     .then((response) => res.json(response))
     .catch((err) => next(err))
 })

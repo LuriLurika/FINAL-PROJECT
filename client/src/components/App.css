@@ -1,38 +1,92 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Oswald:wght@300;400;700&display=swap');
+/* font-family: 'Amatic SC', cursive;
+font-family: 'Oswald', sans-serif;*/
+
+:root {
+  --main-color: #10bb4f;
+  --light-color: #5eef7e;
+  --dark-color: #008921;
+  /*var(--main-color)*/
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#root {
+  display: grid;
+  height: 100vh;
+  grid-template: auto 1fr auto / auto 1fr auto
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.amatic-letter {
+  font-family: 'Amatic SC', cursive;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  font-family: 'Oswald', sans-serif;
+}
+
+img {
+  width: 100%;
+}
+
+.center-page {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+/*************NAVBAR****************/
+
+.logo-img {
+  width: 80px;
+  margin-top: -20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.logo-letter {
+  color: var(--main-color);
+  font-weight: bold;
+  font-size: 2em;
+  align-self: baseline;
+  text-transform: uppercase;
+  text-decoration: none;
 }
+
+.logo-letter a:hover {
+  text-decoration: none;
+  color: var(--main-color);
+}
+
+.navbar {
+  border-bottom: solid 3px var(--dark-color);
+  background-color: white;
+  width: 100%;
+  box-sizing: unset;
+  box-shadow: 0px 5px 5px 0px rgba(161, 161, 161, 1);
+  padding-right: 15px;
+  background: lightpink;
+  grid-column: 1 / 4;
+}
+
+.margin-right {
+  margin-right: 25px;
+}
+
+/*************PROFILE****************/
+
+.left-sidebar {
+  background: lightblue;
+  grid-column: 1 / 2;
+  padding: 1rem;
+}
+
+main {
+  background: coral;
+  grid-column: 2 / 3;
+  padding: 20px;
+}
+
+footer {
+  background: wheat;
+  padding: 2rem;
+  text-align: center;
+  grid-column: 1 / 4;
+}
+

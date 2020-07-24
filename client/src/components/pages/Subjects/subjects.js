@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
 import SchoolHackApi from '../../../service/SchoolHackApi'
+import { Link } from 'react-router-dom' 
+
 
 
 class Subjects extends Component {
@@ -26,7 +28,7 @@ class Subjects extends Component {
 
                 {!this.state.subjects ? <p>CARGANDO</p> :
                     <ul>
-                        {this.state.subjects.map(elm => <li key={elm._id} {...elm}>{elm.title}</li>)}
+                        {this.state.subjects.map(elm => <li><Link key={elm._id} {...elm}>{elm.title}</Link></li>)}
                     </ul>
                 }
             </>

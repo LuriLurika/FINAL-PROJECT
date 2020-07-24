@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import SchoolHackApi from '../../../service/SchoolHackApi'
-
+import './index.css'
 
 class Courses extends Component {
     constructor(props) {
@@ -15,7 +15,11 @@ class Courses extends Component {
     componentDidMount = () => {
         this.schoolHackApi
             .getAllCourses()
-            .then(response => { this.setState({ courses: response.data }) })
+            .then(response => {
+                const ord = response.data.sort()
+                
+                this.setState({ courses: ord})
+            })
             .catch(err => console.log(err))
     }
 
