@@ -43,9 +43,9 @@ class MessageList extends Component {
                 
                 <Container as="main">
                     <h3>Mensajes:</h3>
-                    {
-                        /*this.props.loggedInUser && */<Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }}>Nuevo mesaje</Button>
-                    }
+                    { /*this.props.loggedInUser && */}
+                        <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }}>Nuevo mesaje</Button>
+                    
 
                     {
                         !this.state.messages ? <h3>Cargando...</h3> :

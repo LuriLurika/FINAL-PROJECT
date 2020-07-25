@@ -4,12 +4,12 @@ import './App.css'
 
 import AuthService from './../service/AuthService'
 
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, /*Redirect*/ } from 'react-router-dom'
 
 
 import Index from './pages/Index'
 import Navigation from './ui/Navbar'
-import Spinner from './ui/Spinner'
+// import Spinner from './ui/Spinner'
 import Login from './pages/Login'
 
 
@@ -23,7 +23,7 @@ import Messages from './Messages/Message-list'
 import Events from './Events/Event-list'
 import Sidebar from './ui/Sidebar'
 import Profile from './pages/Profile/index'
-
+import UserDetails from './Users/User-details'
 
 
 
@@ -57,16 +57,17 @@ class App extends Component {
         <Sidebar />
         <Switch>
           
-          <main contenteditable>
+          <main>
             <Route exact path="/" render={() => <Index />} />
             <Route exact path="/login" render={() => <Login />} />
             <Route path="/courses" render={() => <Courses />} />
             <Route path="/subjects" render={() => <Subjects />} />
             <Route path="/teachers" render={() => <Teachers />} />
             <Route path="/users" render={() => <Users />} />
+            <Route path="/users/:id" render={ props => <UserDetails {...props}/>} />
             <Route path="/profile" render={() => <Profile />} />
             <Route path="/messages" render={() => <Messages />} />
-          <Route path="/events" render={() => <Events />} />
+            <Route path="/events" render={() => <Events />} />
           </main>
           
         </Switch>

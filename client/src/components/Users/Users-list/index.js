@@ -32,7 +32,7 @@ class Users extends Component {
 
     handleModal = status => this.setState({ showModal: status })
 
-    handleUsersSubmit = () => {
+    handleUserSubmit = () => {
         this.handleModal(false)
         this.updatedUsersList()
     }
@@ -43,9 +43,10 @@ class Users extends Component {
                 
                 <Container as="main">
                     <h3>Estudiantes:</h3>
-                    {
-                        /*this.props.loggedInUser && */<Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }}>Nuevo estudiante</Button>
-                    }
+                    
+                    {/*this.props.loggedInUser && */}
+                    <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }} > Nuevo estudiante </Button>
+                    
 
                     {
                         !this.state.users ? <h3>Cargando...</h3>:
@@ -59,7 +60,7 @@ class Users extends Component {
 
                 <Modal size="lg" show={this.state.showModal} onHide={() => this.handleModal(false)}>
                     <Modal.Body>
-                        <UserForm handleUsersSubmit={this.handleUsersSubmit} />
+                        <UserForm handleUserSubmit={this.handleUserSubmit} />
                     </Modal.Body>
                 </Modal>
 

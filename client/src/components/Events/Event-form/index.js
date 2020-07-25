@@ -23,7 +23,7 @@ class EventForm extends Component {
         this.setState({ [name]: value })
     }
 
-    handleFormSubmit = e => {
+    handleEventsSubmit = e => {
         e.preventDefault()
         this.schoolHackApi
             .createEvents(this.state)
@@ -36,7 +36,7 @@ class EventForm extends Component {
             <>
                 <h3>Nuevo Evento</h3>
                 <hr></hr>
-                <Form onSubmit={this.handleFormSubmit}>
+                <Form onSubmit={this.handleEventsSubmit}>
                     <Form.Group>
                         <Form.Label>Título</Form.Label>
                         <Form.Control onChange={this.handleInputChange} value={this.state.title} name="title" type="text" />
@@ -53,7 +53,7 @@ class EventForm extends Component {
                     </Form.Group> {/* Esto debería ser un desplegable de los usuarios existentes */}
 
                     <Form.Group>
-                        <Form.Label>Fecha</Form.Label>
+                        <Form.Label>Fecha  </Form.Label>
                         <Form.Control onChange={this.handleInputChange} value={this.state.eventDate} name="eventDate" type="text" />
                     </Form.Group> {/* Ver cómo poner la opción de que despliegue un calendario y se pueda seleccionar */}
 

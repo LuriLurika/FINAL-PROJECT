@@ -22,11 +22,11 @@ class MessageForm extends Component {
         this.setState({ [name]: value })
     }
 
-    handleFormSubmit = e => {
+    handleMessagesSubmit = e => {
         e.preventDefault()
         this.schoolHackApi
             .createMessages(this.state)
-            .then(() => this.props.handleUserSubmit())
+            .then(() => this.props.handleMessagesSubmit())
             .catch(err => console.log(err))
     }
 
@@ -35,7 +35,7 @@ class MessageForm extends Component {
             <>
                 <h3>Nuevo Mensaje</h3>
                 <hr></hr>
-                <Form onSubmit={this.handleFormSubmit}>
+                <Form onSubmit={this.handleMessagesSubmit}>
                     <Form.Group>
                         <Form.Label>Título</Form.Label>
                         <Form.Control onChange={this.handleInputChange} value={this.state.title} name="title" type="text" />
@@ -51,7 +51,8 @@ class MessageForm extends Component {
                         <Form.Control onChange={this.handleInputChange} value={this.state.receivedBy} name="receivedBy" type="text" />
                     </Form.Group> {/* Esto debería ser un desplegable de los usuarios existentes */}
 
-                                       
+                       
+
                     <Button variant="dark" type="submit">Submit</Button>
                 </Form>
             </>

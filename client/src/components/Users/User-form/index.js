@@ -13,7 +13,7 @@ class UserForm extends Component {
             email: '',
             username: '',
             password: '',
-            profileImg: '',
+            profileImg: 'https://res.cloudinary.com/dz0aow7wm/image/upload/v1595247178/School%20Hack/images_rtgo7j.jpg', // esto no va aca!! es solo para que apaezca con foto
             type: '',
             parent:''
 
