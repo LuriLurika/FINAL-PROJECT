@@ -32,7 +32,8 @@ class Login extends Component {
         this.authService
             .login(this.state)
             .then(response => {
-                this.props.setTheUser(response.data)
+                //this.props.setTheUser(response.data)
+                this.props.onLoginSucces(response.data)
                 // this.props.handleToast(true, 'Sesión inciada')
                 // this.props.history.push('/')
             })

@@ -6,7 +6,8 @@ const Subject = require('../models/Subject.model')
 const User = require('../models/User.model')
 
 mongoose.connect(`mongodb://localhost/${process.env.DB}`, { useUnifiedTopology: true, useNewUrlParser: true })
-
+//mongoose.connect(`mongodb+srv://EFdez:1234@cluster0.umhf5.mongodb.net/SchoolHack?retryWrites=true&w=majority`,
+//{ useNewUrlParser: true, useUnifiedTopology: true })
 
 const courses = [
     { title: '1º de primaria', subjects: []  },
@@ -18,17 +19,17 @@ const courses = [
 ]
 
 const subjects = [
-    { title: 'Matemáticas', teacher: 'users.type.teacher.id' },
-    { title: 'Lengua Castellana y Literatura' },
-    { title: 'Primera Lengua Extranjera' },
-    { title: 'Ciencias Sociales' },
-    { title: 'Ciencias de la Naturaleza' },
-    { title: 'Educación Física' },
-    { title: 'Valores Sociales y Cívicos' },
-    { title: 'Educación Artística' },
-    { title: 'Tecnología' },
-    { title: 'Segunda Lengua Extranjera' },
-    { title: 'Religión' },
+    { title: 'Matemáticas', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
+    { title: 'Lengua Castellana y Literatura', description: 'Descripción de la asignatura'},
+    { title: 'Primera Lengua Extranjera', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
+    { title: 'Ciencias Sociales', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
+    { title: 'Ciencias de la Naturaleza', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
+    { title: 'Educación Física', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
+    { title: 'Valores Sociales y Cívicos', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
+    { title: 'Educación Artística', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
+    { title: 'Tecnología', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
+    { title: 'Segunda Lengua Extranjera', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
+    { title: 'Religión', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura' },
 ]   
 
 const users = [

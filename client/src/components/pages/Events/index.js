@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import SchoolHackApi from '../../../service/SchoolHackApi'
 
-import EventCard from './event-card'
-import EventForm from '../Event-form'
+import EventCard from './Event-list/index.js'
+import EventForm from './Event-form'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
-class EventList extends Component {
+class Events extends Component {
     constructor (props){
         super(props)
         this.state = {
@@ -67,4 +67,4 @@ class EventList extends Component {
     }
 }
 
-export default EventList
+export default Events

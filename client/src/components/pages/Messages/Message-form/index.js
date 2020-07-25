@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SchoolHackApi from '../../../service/SchoolHackApi'
+import SchoolHackApi from '../../../../service/SchoolHackApi'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -22,20 +22,23 @@ class MessageForm extends Component {
         this.setState({ [name]: value })
     }
 
-    handleFormSubmit = e => {
+   /* handleFormSubmit = e => {
         e.preventDefault()
         this.schoolHackApi
             .createMessages(this.state)
             .then(() => this.props.handleUserSubmit())
             .catch(err => console.log(err))
-    }
+    }*/
 
     render() {
         return (
             <>
                 <h3>Nuevo Mensaje</h3>
                 <hr></hr>
-                <Form onSubmit={this.handleFormSubmit}>
+                <Form onSubmit={e => {
+                    e.preventDefault()
+                    this.props.onMessageSubmit(this.state)
+                }}>
                     <Form.Group>
                         <Form.Label>Título</Form.Label>
                         <Form.Control onChange={this.handleInputChange} value={this.state.title} name="title" type="text" />
