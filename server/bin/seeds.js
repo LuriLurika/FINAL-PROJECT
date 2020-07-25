@@ -8,6 +8,9 @@ const User = require('../models/User.model')
 mongoose.connect(`mongodb://localhost/${process.env.DB}`, { useUnifiedTopology: true, useNewUrlParser: true })
 
 
+// mongoose.connect(`mongodb+srv://EFdez:1234@cluster0.umhf5.mongodb.net/SchoolHack?retryWrites=true&w=majority`, { useNewUrlParser: true,useUnifiedTopology: true})
+
+
 const courses = [
     { title: '1º de primaria', subjects: []  },
     { title: '2º de primaria', subjects: [] },

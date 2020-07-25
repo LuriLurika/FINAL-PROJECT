@@ -5,15 +5,25 @@ const User = require("../models/User.model")
 const Course = require("../models/Course.model")
 const Subject = require("../models/Subject.model")
 
+// const cloudUploader = require("../configs/cloudinary.config");
+
 
 const MaterialCourseSubjects = require("../models/Tables/Material-Course-Subject.table")
 const ParentStudents = require("../models/Tables/Parents-Students.table")
 const CourseSubjects = require("../models/Tables/Course-Subject.table")
 const UserCourse = require("../models/Tables/User-Course.table")
 
-//Devuelve un listado con los datos de todos los alumnos 
+//Devuelve un listado con los datos de todos los alumnos ----NUEVO!!!
 router.get("/", (req, res, next) => {
   User.find({ type: "STUDENT" })
+    .then((response) => res.json(response))
+    .catch((err) => next(err))
+})
+
+//Devuelve el detalle de un alumno 
+
+router.get("/:id", (req, res, next) => {
+  User.findById(req.params.id)
     .then((response) => res.json(response))
     .catch((err) => next(err))
 })
@@ -58,10 +68,22 @@ router.get("/:id/subjects", (req, res, next) => {
 })
 
 //Crea un nuevo usuario (en front capamos para que solo pueda crearlo el director) ***ok***
-router.post("/new", (req, res, next) => {
-  User.create(req.body)
-    .then((response) => res.json(response))
-    .catch((err) => next(err))
+router.post("/new", /*cloudUploader.single('imageFile'),*/(req, res, next) => {
+
+  const { name, lastname, email, username, password, profileImg, type, parent } = req.body
+  
+  if (req.file !== undefined) {
+
+
+    User.create({ name, lastname, email, username, password, profileImg: req.file.url, type, parent })
+      .then((response) => res.json(response))
+      .catch((err) => next(err))
+  } else {
+    User.create({ name, lastname, email, username, password, profileImg, type, parent })
+      .then((response) => res.json(response))
+      .catch((err) => next(err))
+    
+  }
 })
 
 //El usuario puede modificar su perfil ***ok***
