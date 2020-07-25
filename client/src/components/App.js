@@ -17,7 +17,7 @@ import Login from './pages/Login'
 /***************PRUEBA RUTAS**************/
 import Courses from './pages/Curses'
 import Subjects from './pages/Subjects/subjects'
-import Teachers from './pages/pruebarutas/teachers'
+import Teachers from './pages/Teacher'
 import Users from './Users/Users-list'
 import Messages from './Messages/Message-list'
 import Events from './Events/Event-list'
@@ -66,7 +66,7 @@ class App extends Component {
             <Route path="/users" render={() => <Users />} />
             <Route path="/profile" render={() => <Profile />} />
             <Route path="/messages" render={() => <Messages />} />
-          <Route path="/events" render={() => <Events />} />
+            <Route path="/events" render={() => <Events />} />
           </main>
           
         </Switch>
