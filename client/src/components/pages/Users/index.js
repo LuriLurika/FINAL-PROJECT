@@ -3,6 +3,7 @@ import SchoolHackApi from '../../../service/SchoolHackApi'
 
 import UserCard from './User-Card'
 import UserForm from '../../common/User-form'
+import Spinner  from '../../ui/Spinner'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -20,6 +21,15 @@ class Users extends Component {
         this.schoolHackApi = new SchoolHackApi()
     }
 
+    // deleteUser = id => {
+    //     const UsersCopy = [...this.state.movies]
+    //     UsersCopy.splice(id, 1)
+    //     this.setState({
+    //         users: UsersCopy
+    //     })
+    // }
+
+
     componentDidMount = () => this.updatedUsersList()
     
 
@@ -33,9 +43,7 @@ class Users extends Component {
     saveUserInfo = () => {
 
     }
-    componentDidUpdate = (oldProps, oldState) => {
-
-    }
+    
 
     handleModal = status => this.setState({ showModal: status })
 
@@ -54,15 +62,16 @@ class Users extends Component {
                 
                 <Container as="main">
                     <h3>Estudiantes:</h3>
-                    {
-                        /*this.props.loggedInUser && */<Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }}>Nuevo estudiante</Button>
-                    }
+                    
+                    {/*this.props.loggedInUser && */}
+                    <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }} > Nuevo estudiante </Button>
+                    
 
                     {
-                        !this.state.users ? <h3>Cargando...</h3>:
+                        !this.state.users ? <h3> <Spinner /></h3>:
 
                             <Row>
-                                {this.state.users.map(elm => <UserCard  key={elm._id} {...elm} />)}
+                                {this.state.users.map((elm,idx) => <UserCard  key={elm._id} {...elm} removeUser={() => this.deleteUser(idx)}/>)}
                             </Row>
 
                     }

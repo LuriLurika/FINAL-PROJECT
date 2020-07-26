@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import SchoolHackApi from '../../../service/SchoolHackApi'
 
+import Spinner from '../../ui/Spinner'
+
 
 class Teachers extends Component {
     constructor(props) {
@@ -24,7 +26,7 @@ class Teachers extends Component {
             <>
                 <h1>Teachers</h1>
 
-                {!this.state.teachers ? <p>CARGANDO</p> :
+                {!this.state.teachers ? <Spinner/ > :
                     <ul>
                         {this.state.teachers.map(elm => <li key={elm._id} {...elm}>{elm.name} {elm.lastname}</li>)}
                     </ul>

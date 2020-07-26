@@ -17,7 +17,7 @@ const MessageCard = ({ _id, title, body, sendedBy, receivedBy }) => {
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">Enviado por: {sendedBy.name}</Card.Subtitle>
-                    <Card.Subtitle className="mb-2 text-muted">Para: {receivedBy.name}</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted">Para: {receivedBy.username}</Card.Subtitle>
                     <Card.Text>{body}</Card.Text>
                     <Link to={`/user/${_id}`} className="btn btn-dark btn-block btn-sm">Eliminar mensaje</Link> {/*No funciona*/}
                 </Card.Body>

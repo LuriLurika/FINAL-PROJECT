@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import SchoolHackApi from '../../../service/SchoolHackApi'
 
 import EventCard from './Event-list/index.js'
-import EventForm from './Event-form'
+import EventForm from '../../common/Event-form'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -43,9 +43,10 @@ class Events extends Component {
                 
                 <Container as="main">
                     <h3>Eventos:</h3>
-                    {
-                        /*this.props.loggedInUser && */<Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }}>Nuevo Evento</Button>
-                    }
+                    {/*this.props.loggedInUser && */}
+                    
+                    <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }}>Nuevo Evento</Button>
+                    
 
                     {
                         !this.state.events ? <h3>Cargando...</h3> :

@@ -1,20 +1,23 @@
 .spinner {
     width: 150px;
     margin: 0 auto;
-    animation: pulse 2s infinite;
+    animation: pulse 1.5s infinite;
     animation-name: pulse;
 }
 
+.spinner img {
+    width: 150%;
+}
 
 
 @keyframes pulse {
     0% {
-        transform: scale(.8);
+        transform: scale(.7);
     }
     50% {
         transform: scale(1.1);
     }
     100% {
-        transform: scale(.8);
+        transform: scale(.7);
     }
 }

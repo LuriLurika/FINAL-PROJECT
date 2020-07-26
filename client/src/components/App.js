@@ -22,7 +22,7 @@ import Messages from './pages/Messages'
 import Events from './pages/Events'
 import Sidebar from './ui/Sidebar'
 import Profile from './pages/Profile/index'
-
+import UserDetails from './pages/Users/User-details'
 
 
 
@@ -54,7 +54,7 @@ class App extends Component {
         <Sidebar />
         <Switch>
           
-          <main contenteditable>
+          <main>
             <Route exact path="/" render={() => <Index />} />
             <Route exact path="/login" render={() => <Login onLoginSuccess={userLogged => {
               this.setState({ loggedInUser: userLogged, toast: { visible: true, text: `Bienvenido ${userLogged.name}`} })
@@ -62,7 +62,10 @@ class App extends Component {
             <Route path="/courses" render={() => <Courses />} />
             <Route path="/subjects" render={() => <Subjects />} />
             <Route path="/teachers" render={() => <Teachers />} />
-            <Route path="/users" render={() => <Users />} />
+            <Route exact path="/users" render={() => <Users />} />
+
+            <Route path="/users/:id" render={ props => <UserDetails {...props}/>} />
+            
             <Route path="/profile" render={() => <Profile user={this.state.loggedInUser} onUserChange={newUserInfor =>
               this.handlerUserChange(newUserInfor)} />} />
             <Route path="/messages" render={() => <Messages />} />

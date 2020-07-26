@@ -3,11 +3,14 @@ import { Nav } from "react-bootstrap";
 import { withRouter } from "react-router";
 import { NavLink } from 'react-router-dom'
 
+
+
 import './../../App.css'
 
 const Side = props => {
 
-
+    if (window.location.pathname.match(/login/)) {return null}
+  
     return (
 
         <div className="left-sidebar" contenteditable>
