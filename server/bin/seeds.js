@@ -19,17 +19,17 @@ const courses = [
 ]
 
 const subjects = [
-    { title: 'Matemáticas', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
-    { title: 'Lengua Castellana y Literatura', description: 'Descripción de la asignatura'},
-    { title: 'Primera Lengua Extranjera', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
-    { title: 'Ciencias Sociales', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
-    { title: 'Ciencias de la Naturaleza', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
-    { title: 'Educación Física', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
-    { title: 'Valores Sociales y Cívicos', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
-    { title: 'Educación Artística', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
-    { title: 'Tecnología', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
-    { title: 'Segunda Lengua Extranjera', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura'},
-    { title: 'Religión', teacher: 'users.type.teacher.id', description: 'Descripción de la asignatura' },
+    { title: 'Matemáticas', teacher: 'users.type.teacher.id', description: 'Matemáticas'},
+    { title: 'Lengua Castellana y Literatura', description: 'Lengua Castellana y Literatura'},
+    { title: 'Primera Lengua Extranjera', teacher: 'users.type.teacher.id', description: 'Primera lengua Extranjera. Inglés.'},
+    { title: 'Ciencias Sociales', teacher: 'users.type.teacher.id', description: 'Ciencias Sociales'},
+    { title: 'Ciencias de la Naturaleza', teacher: 'users.type.teacher.id', description: 'Ciencias de la Naturaleza'},
+    { title: 'Educación Física', teacher: 'users.type.teacher.id', description: 'Educación Física'},
+    { title: 'Valores Sociales y Cívicos', teacher: 'users.type.teacher.id', description: 'Valores Sociales y Cívicos'},
+    { title: 'Educación Artística', teacher: 'users.type.teacher.id', description: 'Educación Artística'},
+    { title: 'Tecnología', teacher: 'users.type.teacher.id', description: 'Tecnología'},
+    { title: 'Segunda Lengua Extranjera', teacher: 'users.type.teacher.id', description: 'Segunda Lengua Extranjera'},
+    { title: 'Religión', teacher: 'users.type.teacher.id', description: 'Religión' },
 ]   
 
 const users = [

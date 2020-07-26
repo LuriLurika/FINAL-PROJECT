@@ -8,6 +8,7 @@ const MaterialCourseSubjects = require("../models/Tables/Material-Course-Subject
 //VER TODAS LAS ASIGNATURAS
 router.get("/", (req, res, next) => {
   Subject.find()
+    .populate('teacher')
     .then((response) => res.json(response))
     .catch((err) => next(err))
 })
@@ -39,5 +40,6 @@ router.post("/", (req, res, next) => {
     .then((response) => res.json(response))
     .catch((err) => next(err))
 })
+
 
 module.exports = router

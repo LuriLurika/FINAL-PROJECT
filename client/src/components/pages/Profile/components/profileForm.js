@@ -14,7 +14,7 @@ class ProfileEditForm extends Component {
         }
     }
     render() {
-        return (<button onClick={() => this.props.onSaveClick(this.state)}> GUArdar</button>)
+        return (<button onClick={() => this.props.onSaveClick(this.state)}> Guardar</button>)
     }
 }
 
