@@ -6,84 +6,149 @@ import SchoolHackApi from '../../../service/SchoolHackApi'
 import Button from 'react-bootstrap/Button'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus} from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { faTrashAlt} from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from 'react-bootstrap'
 
+const emptySubject = {
+    id: '',
+    title: '',
+    description: '',
+    teacher: ''
+}
 
 class Subjects extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            subjects: undefined,
-            description: ''
-        }
-        this.schoolHackApi = new SchoolHackApi()
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      subjects: undefined,
+      description: "",
+      showModal: false,
+      selected: emptySubject,
+    };
+    this.schoolHackApi = new SchoolHackApi();
+  }
 
-    componentDidMount = () => {
-        this.schoolHackApi
-            .getAllSubjects()
-            .then(response => { this.setState({ subjects: response.data }) })
-            .catch(err => console.log(err))
-    }
+  componentDidMount = () => this.updatedSubjectList()
+    
+  updatedSubjectList = () => {
+    this.schoolHackApi
+      .getAllSubjects()
+      .then((response) => {
+        this.setState({ subjects: response.data });
+      })
+      .catch((err) => console.log(err));
+  };
 
-    render() {
-        const {subjects, description} = this.state
-        return (
-            <>
-                <h1>Subjects</h1>  <Button><FontAwesomeIcon icon={faPlus} /></Button>
+  handleDelete = (id) => {
+    this.schoolHackApi.deleteSubject(id).then(() => {
+      this.setState({
+        subjects: this.state.subjects.filter((elm) => elm._id !== id),
+      });
+    });
+  };
 
-                <div className="row">
-                <div className="col-md-6">
-                    {!subjects ? <p>CARGANDO</p> :
-                            <CustomTable
-                                data={subjects}
-                                header={(
-                                    <>
-                                        <th>Asignatura</th>
-                                        <th>Profesor</th>
-                                        <th>Acciones</th>
-                                    </>
-                                )}
-                                rowMap={elm =>
-                                    
-                                    <tr>
-                                        <td>
-                                            {elm.title}
-                                        </td>
-                                        <td>
-                                            <img src={elm.teacher.profileImg} alt={elm.teacher.name} /> {elm.teacher.name} {elm.teacher.lastname} 
-                                        </td>
-                                        <td>
-                                            <Button><FontAwesomeIcon icon={faEdit} /></Button>
-                                            <Button><FontAwesomeIcon icon={faTrashAlt} /></Button>
-                                        </td>
-                                    </tr>
-                                }
-                            />
-                       
-                    }
-                </div>
-                    {/* <Modal size="lg" show={this.state.showModal} onHide={() => this.handleModal(false)}>
+    handleSubjectSubmit = (updateSubjectInfo) => {
+        const action = updateSubjectInfo.id
+            ? this.schoolHackApi.updateSubject(updateSubjectInfo)
+            : this.schoolHackApi.createSubject(updateSubjectInfo)
+      action
+      .then(() => {
+        this.updatedSubjectList();
+        this.setState({showModal: false});
+      })
+      .catch((err) => console.log("error en create Subject", err));
+  };
 
-                        <Modal.Body>
-                            <SubjectForm
-                                role="DIRECTOR"
-                                id=""
-                                title=""
-                                description=""
-                                teacher=""
-                                onUserChanged={this.handleUsersSubmit} />
-                        </Modal.Body>
-                    </Modal> */}
-                </div>
-
-                
-            </>
-        )
-    }
+  render() {
+    const { subjects, description, showModal, selected } = this.state;
+    return (
+      <>
+        <h1>Subjects</h1>{" "}
+        <Button onClick={() => this.setState({selected: emptySubject, showModal: true})}>
+          <FontAwesomeIcon icon={faPlus} />
+        </Button>
+        <div className="row">
+          <div className="col-md-6">
+            {!subjects ? (
+              <p>CARGANDO</p>
+            ) : (
+              <CustomTable
+                data={subjects}
+                header={
+                  <>
+                    <th>Asignatura</th>
+                    <th>Profesor</th>
+                    <th>Acciones</th>
+                  </>
+                }
+                rowMap={(elm) => (
+                  <tr>
+                    <td>{elm.title}</td>
+                    <td>
+                      <img
+                        src={elm.teacher.profileImg}
+                        alt={elm.teacher.name}
+                      />{" "}
+                      {elm.teacher.name} {elm.teacher.lastname}
+                    </td>
+                    <td>
+                      <Button
+                        onClick={() =>
+                          this.setState({ description: elm.description })
+                        }
+                      >
+                        <FontAwesomeIcon icon={faInfo} />
+                      </Button>
+                      <Button
+                        onClick={() =>
+                          this.setState({
+                            selected: {
+                              id: elm._id,
+                              title: elm.title,
+                              description: elm.description,
+                              teacher: elm.teacher,
+                            },
+                            showModal: true,
+                          })
+                        }
+                      >
+                        <FontAwesomeIcon icon={faEdit} />
+                      </Button>
+                      <Button onClick={() => this.handleDelete(elm._id)}>
+                        <FontAwesomeIcon icon={faTrashAlt} />
+                      </Button>
+                    </td>
+                  </tr>
+                )}
+              />
+            )}
+          </div>
+          <div className="col-md-6">
+            <p>{description}</p>
+          </div>
+          <Modal
+            size="lg"
+            show={showModal}
+            onHide={() => this.setState({ showModal: false })}
+          >
+            <Modal.Body>
+              <SubjectForm
+                role="DIRECTOR"
+                id={selected.id}
+                title={selected.title}
+                description={selected.description}
+                teacher={selected.teacher}
+                onSubjectChanged={this.handleSubjectSubmit}
+              />
+            </Modal.Body>
+          </Modal>
+        </div>
+      </>
+    );
+  }
 }
 
 

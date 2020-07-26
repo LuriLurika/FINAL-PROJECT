@@ -8,10 +8,10 @@ import Events from './components/events'
 
 class ProfileEdit extends Component {
     
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            user: this.props.user,
+            user: props.user,
             showModal: false
         };
     }
