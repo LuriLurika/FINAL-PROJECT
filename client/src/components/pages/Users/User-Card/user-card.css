@@ -1,4 +1,15 @@
 .user-card img {
-    height: 180px;
+    width: 100%;
     object-fit: cover;
+}
+
+.rounded-circle {
+    border-radius: 50%;
+    border: 100;
+    background-color: pink;
+}
+
+.rounded-circle img {
+    width: 100%;
+    border: 1px solid green;
 }

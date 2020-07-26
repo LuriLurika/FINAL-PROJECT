@@ -16,7 +16,8 @@ font-family: 'Oswald', sans-serif;*/
 #root {
   display: grid;
   height: 100vh;
-  grid-template: auto 1fr auto / auto 1fr auto
+  grid-template: auto 1fr auto / auto 1fr auto;
+
 }
 
 .amatic-letter {
@@ -45,33 +46,45 @@ img {
 }
 
 main {
-  
   grid-column: 2 / 3;
   padding: 20px;
 }
 
 footer {
- 
   padding: 2rem;
   text-align: center;
   grid-column: 1 / 4;
 }
 
 .table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #008921;
-}
-.table-bordered td, .table-bordered th {
-    border: 1px solid #008921;
+  vertical-align: bottom;
+  border-bottom: 2px solid #008921;
 }
 
-.table-striped{
+.table-bordered td, .table-bordered th {
+  border: 1px solid #008921;
+}
+
+.table-striped {
   background-color: rgba(0, 137, 33, 0.15);
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #10bb4f;
-    border-color: #10bb4f;
-    margin: 5px;
+  color: #fff;
+  background-color: #10bb4f;
+  border-color: #10bb4f;
+  margin: 5px;
+}
+
+/***************user detail**********************/
+
+.rounded-circle {
+  border-radius: 50%!important;
+  border: 100;
+}
+
+.rounded-circle img {
+  width: 100%;
+  border: 1px solid green;
+  /* border-radius: 50%; */
 }

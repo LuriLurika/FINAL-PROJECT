@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     background-color: white;
+    margin-top: -130px;
 }
 
 .lft-box {
@@ -167,4 +168,8 @@
 .btn-line:hover::after {
     opacity: 0;
     transform: scale(0.1, 1);
+}
+
+.center-grid {
+    display: grid;
 }

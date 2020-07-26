@@ -39,9 +39,7 @@ class Login extends Component {
     render() {
 
         return (
-            <div className='container center-grid login-page vh-100
-            
-            '>
+            <div className='container center-grid login-page vh-100'>
                 <div className='row'>
                     <div className='lft-box col-8'>
                         <div className='d-flex flex-end'>
