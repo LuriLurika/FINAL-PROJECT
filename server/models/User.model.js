@@ -49,8 +49,8 @@ const userSchema = new Schema(
     },
 
     parent: {
-      type: String
-      
+      type: String,
+      default: ""
     },
 
   }, {

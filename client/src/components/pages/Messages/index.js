@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import SchoolHackApi from '../../../service/SchoolHackApi'
 
-import MessageCard from './message-card'
-import MessageForm from '../Message-form'
+import MessageCard from './Message-card'
+import MessageForm from '../../common/Message-form'
+import Spinner from '../../ui/Spinner'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
-class MessageList extends Component {
+class Messages extends Component {
     constructor (props){
         super(props)
         this.state = {
@@ -30,14 +31,24 @@ class MessageList extends Component {
             .catch(err => console.log(err))
     }
 
-    handleModal = status => this.setState({ showModal: status })
+    saveMessageInfo = () => {
 
-    handleMessagesSubmit = () => {
-        this.handleModal(false)
-        this.updatedMessagesList()
     }
 
-    render () {
+    
+    handleModal = status => this.setState({ showModal: status })
+
+    handleMessagesSubmit = newMessageInfo => {
+
+        this.schoolHackApi.createMessages(newMessageInfo)
+            .then(() => {
+                this.updatedMessageList()
+                this.handleModal(false)
+            }).catch(err => console.log('error en createMessages', err))
+    }
+
+    render() {
+        console.log(this.state.messages)
         return (
             <>
                 
@@ -48,7 +59,7 @@ class MessageList extends Component {
                     
 
                     {
-                        !this.state.messages ? <h3>Cargando...</h3> :
+                        !this.state.messages ? <h3><Spinner/></h3> :
 
                             <Row>
                                 {this.state.messages.map(elm => <MessageCard key={elm._id} {...elm} />)}
@@ -59,7 +70,12 @@ class MessageList extends Component {
 
                 <Modal size="lg" show={this.state.showModal} onHide={() => this.handleModal(false)}>
                     <Modal.Body>
-                        <MessageForm handleMessagesSubmit={this.handleMessagesSubmit} />
+                        <MessageForm
+                            id=''
+                            title=''
+                            body=''
+                            recievedBy=''
+                            onMessageChanged={this.handleMessagesSubmit}  />
                     </Modal.Body>
                 </Modal>
             </>
@@ -67,4 +83,4 @@ class MessageList extends Component {
     }
 }
 
-export default MessageList
+export default Messages

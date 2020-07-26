@@ -3,10 +3,6 @@ import { Nav } from "react-bootstrap";
 import { withRouter } from "react-router";
 import { NavLink } from 'react-router-dom'
 
-// import Container from 'react-bootstrap/Row'
-// import Row from 'react-bootstrap/Row'
-// import Col from 'react-bootstrap/Col'
-
 import './../../App.css'
 
 const Side = props => {
@@ -35,10 +31,10 @@ const Side = props => {
                     <NavLink to="/users">Estudiantes</NavLink>
                 </Nav.Item>
                 <Nav.Item>
-                    <NavLink to="/subjects">Asignaturas</NavLink>                    
+                    <NavLink to="/subjects">Asignaturas</NavLink>
                 </Nav.Item>
-                  <Nav.Item>
-                    <NavLink to="/teachers">Profesores</NavLink>                    
+                <Nav.Item>
+                    <NavLink to="/teachers">Profesores</NavLink>
                 </Nav.Item>
             </Nav>
         </div>

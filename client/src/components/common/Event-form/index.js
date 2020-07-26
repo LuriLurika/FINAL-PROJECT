@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
-import SchoolHackApi from '../../../service/SchoolHackApi'
+
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 class EventForm extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            title: '',
-            description: '',
-            participants: '',
-            eventDate: ''
+            title: props.title,
+            description: props.description,
+            participants: props.participants,
+            eventDate: props.eventDate
             
 
         }
-        this.schoolHackApi = new SchoolHackApi()
+
     }
 
     handleInputChange = e => {
@@ -23,13 +23,7 @@ class EventForm extends Component {
         this.setState({ [name]: value })
     }
 
-    handleEventsSubmit = e => {
-        e.preventDefault()
-        this.schoolHackApi
-            .createEvents(this.state)
-            .then(() => this.props.handleEventSubmit())
-            .catch(err => console.log(err))
-    }
+  
 
     render() {
         return (

@@ -2,16 +2,20 @@ const express = require("express")
 const router = express.Router()
 
 const Message = require("../models/Messages.model")
+const User = require("../models/User.model")
 
 
 
 //Crear mensaje ( todos menos el Student puede crear un msj) checkRole(['DIRECTOR', 'TEACHER', 'PARENT']),
 router.post('/', (req, res) => {
     
-    const{title, body, receivedBy} = req.body
+    const { title, body, receivedBy } = req.body
+
+    User.find({ email: receivedBy })
     
-    Message
-        .create({title, body, receivedBy, sendedBy: req.user.id})
+        .then(() => {
+            Message.create({title, body, receivedBy, sendedBy: req.user.id})
+    } )
         .then((response) => res.json(response))
         .catch((err) => next(err))
 })
@@ -19,6 +23,8 @@ router.post('/', (req, res) => {
 //VER MENSAJES
 //checkRole(['DIRECTOR', 'TEACHER', 'PARENT']),
 router.get("/", (req, res, next) => {
+
+
     Message
         .find()
         .populate('sendedBy')

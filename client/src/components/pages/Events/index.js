@@ -1,58 +1,58 @@
 import React, { Component } from 'react'
 import SchoolHackApi from '../../../service/SchoolHackApi'
 
-import UserCard from './user-card'
-import UserForm from '../User-form'
+import EventCard from './Event-list/index.js'
+import EventForm from '../../common/Event-form'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
-
-class Users extends Component {
-    constructor(props) {
+class Events extends Component {
+    constructor (props){
         super(props)
         this.state = {
-            users: undefined,
+            events: undefined,
             showModal: false
         }
+
         this.schoolHackApi = new SchoolHackApi()
     }
 
-    componentDidMount = () => this.updatedUsersList()
-    
+    componentDidMount = () => this.updatedEventsList()
 
-    updatedUsersList = () => {
+
+    updatedEventsList = () => {
         this.schoolHackApi
-            .getAllUsers()
-            .then(response => { this.setState({ users: response.data }) })
+            .getAllEvents()
+            .then(response => { this.setState({ events: response.data }) })
             .catch(err => console.log(err))
     }
 
     handleModal = status => this.setState({ showModal: status })
 
-    handleUserSubmit = () => {
+    handleEventsSubmit = () => {
         this.handleModal(false)
-        this.updatedUsersList()
+        this.updatedEventsList()
     }
 
-    render() {
+    render () {
         return (
             <>
                 
                 <Container as="main">
-                    <h3>Estudiantes:</h3>
-                    
+                    <h3>Eventos:</h3>
                     {/*this.props.loggedInUser && */}
-                    <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }} > Nuevo estudiante </Button>
+                    
+                    <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }}>Nuevo Evento</Button>
                     
 
                     {
-                        !this.state.users ? <h3>Cargando...</h3>:
+                        !this.state.events ? <h3>Cargando...</h3> :
 
                             <Row>
-                                {this.state.users.map(elm => <UserCard key={elm._id} {...elm} />)}
+                                {this.state.events.map(elm => <EventCard key={elm._id} {...elm} />)}
                             </Row>
 
                     }
@@ -60,13 +60,12 @@ class Users extends Component {
 
                 <Modal size="lg" show={this.state.showModal} onHide={() => this.handleModal(false)}>
                     <Modal.Body>
-                        <UserForm handleUserSubmit={this.handleUserSubmit} />
+                        <EventForm handleEventsSubmit={this.handleEventsSubmit} />
                     </Modal.Body>
                 </Modal>
-
             </>
         )
     }
 }
 
-export default Users
+export default Events

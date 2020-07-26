@@ -9,6 +9,12 @@ const subjectsSchema = new Schema(
       set: text => text.charAt(0).toUpperCase() + text.substring(1)
     },
 
+    description: {
+      type: String,
+      required: false
+
+    },
+
     teacher: {
       type: mongoose.ObjectId,
       ref: 'User' //user type teacher
