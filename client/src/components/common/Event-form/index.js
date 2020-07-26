@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
-import SchoolHackApi from '../../../service/SchoolHackApi'
+
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 class EventForm extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            title: '',
-            description: '',
-            participants: '',
-            eventDate: ''
+            title: props.title,
+            description: props.description,
+            participants: props.participants,
+            eventDate: props.eventDate
             
 
         }
-        this.schoolHackApi = new SchoolHackApi()
+
     }
 
     handleInputChange = e => {
@@ -23,20 +23,14 @@ class EventForm extends Component {
         this.setState({ [name]: value })
     }
 
-    handleFormSubmit = e => {
-        e.preventDefault()
-        this.schoolHackApi
-            .createEvents(this.state)
-            .then(() => this.props.handleEventSubmit())
-            .catch(err => console.log(err))
-    }
+  
 
     render() {
         return (
             <>
                 <h3>Nuevo Evento</h3>
                 <hr></hr>
-                <Form onSubmit={this.handleFormSubmit}>
+                <Form onSubmit={this.handleEventsSubmit}>
                     <Form.Group>
                         <Form.Label>Título</Form.Label>
                         <Form.Control onChange={this.handleInputChange} value={this.state.title} name="title" type="text" />
@@ -53,7 +47,7 @@ class EventForm extends Component {
                     </Form.Group> {/* Esto debería ser un desplegable de los usuarios existentes */}
 
                     <Form.Group>
-                        <Form.Label>Fecha</Form.Label>
+                        <Form.Label>Fecha  </Form.Label>
                         <Form.Control onChange={this.handleInputChange} value={this.state.eventDate} name="eventDate" type="text" />
                     </Form.Group> {/* Ver cómo poner la opción de que despliegue un calendario y se pueda seleccionar */}
 
