@@ -21,9 +21,10 @@ class Users extends Component {
     }
 
     componentDidMount = () => this.updatedUsersList()
-    
+
 
     updatedUsersList = () => {
+
         this.schoolHackApi
             .getAllUsers()
             .then(response => { this.setState({ users: response.data }) })
@@ -33,6 +34,7 @@ class Users extends Component {
     handleModal = status => this.setState({ showModal: status })
 
     handleUsersSubmit = () => {
+
         this.handleModal(false)
         this.updatedUsersList()
     }
@@ -40,7 +42,7 @@ class Users extends Component {
     render() {
         return (
             <>
-                
+
                 <Container as="main">
                     <h3>Estudiantes:</h3>
                     {
@@ -48,7 +50,7 @@ class Users extends Component {
                     }
 
                     {
-                        !this.state.users ? <h3>Cargando...</h3>:
+                        !this.state.users ? <h3>Cargando...</h3> :
 
                             <Row>
                                 {this.state.users.map(elm => <UserCard key={elm._id} {...elm} />)}

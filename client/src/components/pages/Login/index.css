@@ -38,6 +38,7 @@
 
 .form-login:hover {
     transform: scale(1.1);
+    box-shadow: -5px 0 5px -5px #333;
 }
 
 .form-login Label {
@@ -132,8 +133,8 @@
     border-bottom-width: 4px;
     border-top-style: solid;
     border-bottom-style: solid;
-    border-top-color: rgba(0, 137, 33, 0.2);
-    border-bottom-color: rgba(0, 137, 33, 0.2);
+    border-top-color: rgba(0, 137, 33);
+    border-bottom-color: rgba(0, 137, 33);
     transform: scale(0.1, 1);
 }
 
