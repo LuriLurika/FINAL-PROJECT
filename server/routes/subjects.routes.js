@@ -15,27 +15,29 @@ router.get("/", (req, res, next) => {
 
 //MODIFICAR UNA ASIGNATURA
 router.put("/:id", (req, res, next) => {
-   const { title, teacher, subjectsMaterials } = req.body
+   const { title, teacher, description, subjectsMaterials } = req.body
 
-  Subject.findByIdAndUpdate(req.params.id, { title, teacher, subjectsMaterials }, { new: true })
+  Subject.findByIdAndUpdate(req.params.id, { title, teacher, description, subjectsMaterials }, { new: true })
     .then((response) => res.json(response))
     .catch((err) => next(err))
 })
 
 //ELIMINAR UNA ASIGNATURA
 router.delete("/:id", (req, res, next) => {
-  Promise.all([
-    Subject.findByIdAndDelete(req.params.id),
-    MaterialCourseSubjects.findByIdAndDelete({
-      Subjects: req.params.id,
-    }),
-  ])
+ 
+  Subject.findByIdAndDelete(req.params.id)
+      
+    //MaterialCourseSubjects.findByIdAndDelete({
+      //Subjects: req.params.id,
+    //}),
+  
     .then((response) => res.json(response))
     .catch((err) => console.log("BBDD error", err))
 })
 
 //CREAR ASIGNATURA
 router.post("/", (req, res, next) => {
+  console.log(req.body)
   Subject.create(req.body)
     .then((response) => res.json(response))
     .catch((err) => next(err))

@@ -6,6 +6,8 @@ import Logo from './../../logoverde.png'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+import ToastPage from './../../ui/Toast'
+
 import './index.css'
 
 class Login extends Component {
@@ -30,7 +32,7 @@ class Login extends Component {
             .login(this.state)
             .then(response => {
                 this.props.setTheUser(response.data)
-                // this.props.handleToast(true, 'Sesión inciada')
+                this.props.handleToast(true, 'Sesión inciada')
                 // this.props.history.push('/')
             })
             .catch(err => console.log(err.response.data.message))
@@ -39,9 +41,7 @@ class Login extends Component {
     render() {
 
         return (
-            <div className='container center-grid login-page vh-100
-            
-            '>
+            <div className='container center-grid login-page vh-100'>
                 <div className='row'>
                     <div className='lft-box col-8'>
                         <div className='d-flex flex-end'>
@@ -55,17 +55,17 @@ class Login extends Component {
                         </div>
                     </div>
                     <div className='right-box col-4'>
-                        <div className='form-login'>
+                        <div className='form-login form-login-page'>
                             <Form onSubmit={this.handleFormSubmit}>
-                                <Form.Group className='form-group' controlId="formBasicEmail">
-                                    <Form.Control className='form-control' onChange={this.handleInputChange} value={this.state.username} name="username" type="text" placeholder="Usuario" />
-                                    <Form.Label className='form-label' >Usuario</Form.Label>
+                                <Form.Group className='form-group form-group-page' controlId="formBasicEmail">
+                                    <Form.Control className='form-control form-control-page' onChange={this.handleInputChange} value={this.state.username} name="username" type="text" placeholder="Usuario" />
+                                    <Form.Label className='form-label form-label-page' >Usuario</Form.Label>
 
                                 </Form.Group>
 
-                                <Form.Group className='form-group' controlId="formBasicPassword">
-                                    <Form.Control className='form-control' onChange={this.handleInputChange} value={this.state.password} name="password" type="password" placeholder="Contraseña" />
-                                    <Form.Label className='form-label' >Contraseña</Form.Label>
+                                <Form.Group className='form-group form-group-page' controlId="formBasicPassword">
+                                    <Form.Control className='form-control form-control-page' onChange={this.handleInputChange} value={this.state.password} name="password" type="password" placeholder="Contraseña" />
+                                    <Form.Label className='form-label form-label-page' >Contraseña</Form.Label>
                                 </Form.Group>
 
                                 <Button className='btn-line' type="submit"><span>Iniciar sesión</span></Button>

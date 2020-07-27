@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     background-color: white;
+    margin-top: -130px;
 }
 
 .lft-box {
@@ -28,7 +29,7 @@
     align-items: flex-end;
 }
 
-.form-login {
+.form-login-page {
     border-left: solid 3px var(--dark-color);
     padding: 90px 50px;
     width: 100%;
@@ -36,12 +37,12 @@
     transition: all 0.3s ease
 }
 
-.form-login:hover {
+.form-login-page:hover {
     transform: scale(1.1);
     box-shadow: -5px 0 5px -5px #333;
 }
 
-.form-login Label {
+.form-login-page Label {
     padding: 10px 0;
 }
 
@@ -52,19 +53,19 @@
 
 /***********PLACEHOLDER ANIM****************/
 
-.form-group {
+.form-group-page {
     margin-bottom: 1em;
     transition: all .5s;
 }
 
-.form-label {
+.form-label-page {
     display: block;
     transform: translateY(-2.5em);
     transform-origin: 0 0;
     transition: all .5s;
 }
 
-.form-control {
+.form-control-page {
     box-shadow: none;
     border-color: rgba(0, 137, 33, 0.2);
     border-style: none none solid none;
@@ -74,22 +75,22 @@
     padding: 15px;
 }
 
-.form-control::placeholder {
+.form-control-page::placeholder {
     color: transparent;
 }
 
-.form-control:focus {
+.form-control-page:focus {
     box-shadow: none;
     outline: none;
     border-color: var(--dark-color);
 }
 
-.form-control:focus+.form-label, .form-control:not(:placeholder-shown)+.form-label {
+.form-control-page:focus+.form-label-page, .form-control-page:not(:placeholder-shown)+.form-label-page {
     transform: translateY(-4.5em);
     color: var(--dark-color);
 }
 
-.form-group:focus-within {
+.form-group-page:focus-within {
     transform: scale(1.1, 1.1);
 }
 
@@ -167,4 +168,8 @@
 .btn-line:hover::after {
     opacity: 0;
     transform: scale(0.1, 1);
+}
+
+.center-grid {
+    display: grid;
 }

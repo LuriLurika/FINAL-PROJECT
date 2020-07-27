@@ -1,15 +1,22 @@
 import React, { Component } from 'react'
+import CustomTable from '../../common/Table'
 
 import SchoolHackApi from '../../../service/SchoolHackApi'
+import Button from 'react-bootstrap/Button'
 
-import Spinner from '../../ui/Spinner'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { Modal } from 'react-bootstrap'
+import Spinner from './../../ui/Spinner'
 
 
-class Teachers extends Component {
+class Teacher extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            teachers: undefined,
+            teachers: undefined
         }
         this.schoolHackApi = new SchoolHackApi()
     }
@@ -22,18 +29,59 @@ class Teachers extends Component {
     }
 
     render() {
+        const { teachers } = this.state
         return (
             <>
-                <h1>Teachers</h1>
+                <h1>Profesores</h1>  <Button><FontAwesomeIcon icon={faPlus} /></Button>
 
-                {!this.state.teachers ? <Spinner/ > :
-                    <ul>
-                        {this.state.teachers.map(elm => <li key={elm._id} {...elm}>{elm.name} {elm.lastname}</li>)}
-                    </ul>
-                }
+                <div className="row">
+                    <div className="col-md-6">
+                        {!teachers ? <Spinner /> :
+                            <CustomTable
+                                data={teachers}
+                                header={(
+                                    <>
+
+                                        <th>Profesor</th>
+                                        <th>Acciones</th>
+                                    </>
+                                )}
+                                rowMap={elm =>
+
+                                    <tr>
+                                        <td>
+                                            <img src={elm.profileImg} alt={elm.name} /> {elm.name} {elm.lastname}
+                                        </td>
+                                        <td>
+                                            <Button><FontAwesomeIcon icon={faEdit} /></Button>
+                                            <Button><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                                        </td>
+                                    </tr>
+                                }
+                            />
+
+                        }
+                    </div>
+                    {/* <Modal size="lg" show={this.state.showModal} onHide={() => this.handleModal(false)}>
+
+                        <Modal.Body>
+                            <SubjectForm
+                                role="DIRECTOR"
+                                id=""
+                                title=""
+                                description=""
+                                teacher=""
+                                onUserChanged={this.handleUsersSubmit} />
+                        </Modal.Body>
+                    </Modal> */}
+                </div>
+
+
             </>
         )
     }
 }
 
-export default Teachers
+
+export default Teacher
+

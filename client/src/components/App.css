@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Oswald:wght@300;400;700&display=swap');
 /* font-family: 'Amatic SC', cursive;
 font-family: 'Oswald', sans-serif;*/
+h3{
+  color: #008921;
+}
 
 :root {
   --main-color: #10bb4f;
@@ -16,7 +19,7 @@ font-family: 'Oswald', sans-serif;*/
 #root {
   display: grid;
   height: 100vh;
-  grid-template: auto 1fr auto / auto 1fr auto
+  grid-template: auto 1fr auto / auto 1fr auto;
 }
 
 .amatic-letter {
@@ -40,19 +43,16 @@ img {
 /*************PROFILE****************/
 
 .left-sidebar {
-  background: lightblue;
   grid-column: 1 / 2;
   padding: 1rem;
 }
 
 main {
-  
   grid-column: 2 / 3;
   padding: 20px;
 }
 
 footer {
- 
   padding: 2rem;
   text-align: center;
   grid-column: 1 / 4;
@@ -63,8 +63,7 @@ footer {
   border-bottom: 2px solid #008921;
 }
 
-.table-bordered td,
-.table-bordered th {
+.table-bordered td, .table-bordered th {
   border: 1px solid #008921;
 }
 
@@ -74,9 +73,15 @@ footer {
 
 .btn-primary {
   color: #fff;
-  background-color: #10BB4F;
-  border-color: #10BB4F;
+  background-color: #10bb4f;
+  border-color: #10bb4f;
   margin: 5px;
 }
 
+/***************user detail**********************/
 
+.rounded-circle {
+  border-radius: 50%!important;
+  width: 120%;
+  border: 1px solid green;
+}

@@ -57,7 +57,7 @@ class UserDetails extends Component {
                     
 
                     <Row>
-                        <Col md={{ span: 2, offset: 1 }}> <img src={user.profileImg} alt={user.username} />
+                        <Col className="d-flex align-self-center" md={{ span: 2, offset: 1 }}> <img className='rounded-circle' src={user.profileImg} alt={user.username} />
                         </Col>
                         <Col md={{ span: 7, offset: 1 }}>
                             <h1>{user.lastname}, {user.name}</h1>

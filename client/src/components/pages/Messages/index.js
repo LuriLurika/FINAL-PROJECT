@@ -13,6 +13,9 @@ import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
 class Messages extends Component {
     constructor (props){
         super(props)
@@ -58,7 +61,7 @@ class Messages extends Component {
                 <Container as="main">
                     <h3>Mensajes:</h3>
                     { /*this.props.loggedInUser && */}
-                        <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }}> <FontAwesomeIcon icon={faPlus}/></Button>
+                    <Button onClick={() => this.handleModal(true)} size="sm" ><FontAwesomeIcon icon={faEnvelope} /></Button>
                     
 
                     {
