@@ -5,13 +5,6 @@ const User = require("../models/User.model")
 const Course = require("../models/Course.model")
 const Subject = require("../models/Subject.model")
 
-// const cloudUploader = require("../configs/cloudinary.config");
-
-
-const MaterialCourseSubjects = require("../models/Tables/Material-Course-Subject.table")
-const ParentStudents = require("../models/Tables/Parents-Students.table")
-const CourseSubjects = require("../models/Tables/Course-Subject.table")
-const UserCourse = require("../models/Tables/User-Course.table")
 
 //Devuelve un listado con los datos de todos los alumnos ----NUEVO!!!
 router.get("/", (req, res, next) => {
@@ -38,7 +31,7 @@ router.get("/:id/teachers", (req, res, next) => {
 
     })
     .then((subject) => { 
-      console.log(subject)
+      
       return  Subject.find({ _id: {$in: subject} }).populate('teacher','name')
     })    
     .then((response) => {
@@ -68,7 +61,7 @@ router.get("/:id/subjects", (req, res, next) => {
 })
 
 //Crea un nuevo usuario (en front capamos para que solo pueda crearlo el director) ***ok***
-router.post("/new", /*cloudUploader.single('imageFile'),*/(req, res, next) => {
+router.post("/new", (req, res, next) => {
 
   const { name, lastname, email, username, password, profileImg, type, parent } = req.body
   
@@ -93,23 +86,11 @@ router.put("/:id", (req, res, next) => {
     .catch((err) => next(err))
 })
 
-//Eliminar un user(primero se eliminan las relaciones y después el usuario) ***ok***
+//Eliminar un user***ok***
 router.delete("/:id", (req, res, next) => {
-  // Promise.all([
+  
     User.findByIdAndDelete(req.params.id)
-  //   MaterialCourseSubjects.findOneAndRemove({
-  //     user: req.params.id,
-  //   }),
-  //   ParentStudents.findOneAndRemove({
-  //     user: req.params.id,
-  //   }),
-  //   CourseSubjects.findOneAndRemove({
-  //     user: req.params.id,
-  //   }),
-  //   UserCourse.findOneAndRemove({
-  //     user: req.params.id,
-  //   }),
-  // ])
+
     .then((response) => res.json(response))
     .catch((err) => next(err))
 })

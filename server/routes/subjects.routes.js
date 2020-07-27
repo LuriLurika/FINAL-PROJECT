@@ -32,12 +32,12 @@ router.delete("/:id", (req, res, next) => {
     //}),
   
     .then((response) => res.json(response))
-    .catch((err) => console.log("BBDD error", err))
+    .catch((err) => next(err))
 })
 
 //CREAR ASIGNATURA
 router.post("/", (req, res, next) => {
-  console.log(req.body)
+ 
   Subject.create(req.body)
     .then((response) => res.json(response))
     .catch((err) => next(err))
