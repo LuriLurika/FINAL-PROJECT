@@ -19,6 +19,7 @@ router.get("/", (req, res, next) => {
 
 //LISTADO DE LOS ALUMNOS DE CADA PROFESOR 
 router.get("/:id/users", (req, res, next) => {
+  
   Subject.find({ teacher: req.params.id }) 
     .then(subjects => {
       return subjects.length === 0 ? new Promise((resolve, reject) => resolve([]))

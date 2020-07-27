@@ -31,6 +31,7 @@ router.get("/:id/teachers", (req, res, next) => {
 
     })
     .then((subject) => { 
+      
       return  Subject.find({ _id: {$in: subject} }).populate('teacher','name')
     })    
     .then((response) => {
@@ -85,10 +86,11 @@ router.put("/:id", (req, res, next) => {
     .catch((err) => next(err))
 })
 
-//Eliminar un user(primero se eliminan las relaciones y después el usuario) ***ok***
+//Eliminar un user***ok***
 router.delete("/:id", (req, res, next) => {
-  User.findByIdAndDelete(req.params.id)
-       
+  
+    User.findByIdAndDelete(req.params.id)
+
     .then((response) => res.json(response))
     .catch((err) => next(err))
 })

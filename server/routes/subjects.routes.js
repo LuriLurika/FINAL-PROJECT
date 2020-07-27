@@ -27,7 +27,7 @@ router.delete("/:id", (req, res, next) => {
  
   Subject.findByIdAndDelete(req.params.id)
     .then((response) => res.json(response))
-    .catch((err) => next(err));
+    .catch((err) => next(err))
 })
 
 //CREAR ASIGNATURA

@@ -5,35 +5,84 @@ const Course = require('../models/Course.model')
 const Subject = require('../models/Subject.model')
 const User = require('../models/User.model')
 
-mongoose.connect(`mongodb://localhost/${process.env.DB}`, { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect(`mongodb://localhost/${process.env.DB}`, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+})
 
 // mongoose.connect(`mongodb+srv://EFdez:1234@cluster0.umhf5.mongodb.net/SchoolHack?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
 
-const courses = [
-    { title: '1º de primaria', subjects: [] },
-    { title: '2º de primaria', subjects: [] },
-    { title: '3º de primaria', subjects: [] },
-    { title: '4º de primaria', subjects: [] },
-    { title: '5º de primaria', subjects: [] },
-    { title: '6º de primaria', subjects: [] }
+const courses = [{
+        title: '1º de primaria',
+        subjects: []
+    },
+    {
+        title: '2º de primaria',
+        subjects: []
+    },
+    {
+        title: '3º de primaria',
+        subjects: []
+    },
+    {
+        title: '4º de primaria',
+        subjects: []
+    },
+    {
+        title: '5º de primaria',
+        subjects: []
+    },
+    {
+        title: '6º de primaria',
+        subjects: []
+    }
 ]
 
-const subjects = [
-  {
-    title: "Matemáticas",
-    teacher: "users.type.teacher.id",
-    description: "Matemáticas",
-  },
-  { title: "Lengua Castellana y Literatura", description: "Lengua Castellana y Literatura" },
-  { title: "Primera Lengua Extranjera", description: "Primera Lengua Extranjera" },
-  { title: "Ciencias Sociales", description: "Ciencias Sociales" },
-  { title: "Ciencias de la Naturaleza", description: "Ciencias de la Naturaleza" },
-  { title: "Educación Física", description: "Educación Física" },
-  { title: "Valores Sociales y Cívicos", description: "Valores Sociales y Cívicos" },
-  { title: "Educación Artística", description: "Educación Artística" },
-  { title: "Tecnología", description: "Tecnología" },
-  { title: "Segunda Lengua Extranjera", description: "Segunda Lengua Extranjera" },
-  { title: "Religión", description: "Religión" },
+const subjects = [{
+        title: "Matemáticas",
+        teacher: "users.type.teacher.id",
+        description: "Matemáticas",
+    },
+    {
+        title: "Lengua Castellana y Literatura",
+        description: "Lengua Castellana y Literatura"
+    },
+    {
+        title: "Primera Lengua Extranjera",
+        description: "Primera Lengua Extranjera"
+    },
+    {
+        title: "Ciencias Sociales",
+        description: "Ciencias Sociales"
+    },
+    {
+        title: "Ciencias de la Naturaleza",
+        description: "Ciencias de la Naturaleza"
+    },
+    {
+        title: "Educación Física",
+        description: "Educación Física"
+    },
+    {
+        title: "Valores Sociales y Cívicos",
+        description: "Valores Sociales y Cívicos"
+    },
+    {
+        title: "Educación Artística",
+        description: "Educación Artística"
+    },
+    {
+        title: "Tecnología",
+        description: "Tecnología"
+    },
+    {
+        title: "Segunda Lengua Extranjera",
+        description: "Segunda Lengua Extranjera"
+    },
+    {
+        title: "Religión",
+        description: "Religión"
+    },
 ];
 
 const users = [
