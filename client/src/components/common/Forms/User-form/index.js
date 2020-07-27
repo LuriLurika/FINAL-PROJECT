@@ -51,9 +51,11 @@ class UserForm extends Component {
     const { user, validated, role } = this.state;
     return (
       <>
-        <h3>{user.id ? "Editar Usuario" : "Nuevo usuario"}</h3>
+        <h3>{user.id ? "Editar Alumno" : "Nuevo Alumno"}</h3>
         <hr></hr>
         <Form noValidate validated={validated} onSubmit={this.handleSubmit}>
+          
+          
           <Form.Group>
             <Form.Label>Nombre</Form.Label>
             <Form.Control required onChange={event => this.handleInputChange(event)} value={user.name} name="name" type="text" />
@@ -71,15 +73,14 @@ class UserForm extends Component {
             <Form.Control onChange={event => this.handleInputChange(event)} value={user.profileImg} name="profileImg" type="text" />
           </Form.Group>
 
-          {role === "DIRECTOR" && (
+          {/* {role === "DIRECTOR" && (*/}
+
             <Form.Group>
               <Form.Label>Tipo</Form.Label>
-              <Form.Control as="select" required onChange={event => this.handleInputChange(event)} value={user.type} name="type" type="text" />
-              <option>{user.type}</option> 
-              <Form.Control.Feedback type="invalid"> Campo requerido </Form.Control.Feedback>
+            <Form.Control onChange={event => this.handleInputChange(event)} value={user.type} name="type" type="text" />
             </Form.Group>
 
-          )}
+          
 
           <Form.Group>
             <Form.Label>Madre / Padre</Form.Label>
@@ -114,6 +115,6 @@ class UserForm extends Component {
   }
 }
 
-UserForm.defaultProps = { profileImg: "https://res.cloudinary.com/dz0aow7wm/image/upload/v1595247178/School%20Hack/images_rtgo7j.jpg" }
+UserForm.defaultProps = { profileImg: "https://res.cloudinary.com/dz0aow7wm/image/upload/v1595247178/School%20Hack/images_rtgo7j.jpg", type: 'STUDENT' }
 
 export default UserForm;

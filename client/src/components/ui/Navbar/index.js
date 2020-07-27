@@ -15,6 +15,7 @@ class Navigation extends Component {
 			about: false,
 		}
 		this.AuthService = new AuthService()
+		
 		this.modalInfo = {
 			about: {
 				title: '¿Quiénes somos?',

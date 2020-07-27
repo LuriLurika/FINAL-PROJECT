@@ -5,13 +5,13 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      //required: true,
       set: text => text.charAt(0).toUpperCase() + text.substring(1)
     },
 
     lastname: {
       type: String,
-      required: true,
+      //required: true,
       set: text => text.charAt(0).toUpperCase() + text.substring(1)
     },
 
@@ -22,18 +22,18 @@ const userSchema = new Schema(
           return [/^[A-Z0-9.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/]
         },
         message: 'Please enter a valid email'
-        }
+      }
     },
 
     username: {
-       type: String,
-       //required: true, 
-       unique: true
+      type: String,
+      //required: true, 
+      unique: true
     },
 
     password: {
       type: String,
-      minlength: 8
+      minlength: 4
     },
 
     profileImg: {

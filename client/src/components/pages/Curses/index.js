@@ -2,9 +2,15 @@ import React, { Component } from 'react'
 
 import './index.css'
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faEdit } from "@fortawesome/free-solid-svg-icons"
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+
 import SchoolHackApi from '../../../service/SchoolHackApi'
 import Spinner from '../../ui/Spinner'
 import CustomTable from '../../common/Table'
+
+
 
 class Courses extends Component {
     constructor(props) {
@@ -19,7 +25,6 @@ class Courses extends Component {
     componentDidMount = () => {
         this.schoolHackApi
             .getAllCourses()
-            // .getAllSubjects()
             .then(response => {
                 const ord = response.data.sort()
                 
@@ -32,8 +37,7 @@ class Courses extends Component {
 
         const { courses } = this.state;
 
-        // console.log(courses)
-        
+              
 
         return (
             <>
@@ -52,9 +56,9 @@ class Courses extends Component {
                         )}
                         rowMap={elm =>
                             <tr>
-                                <td>{elm.title}</td>
+                                <td>{elm.title}   <button><FontAwesomeIcon icon={faEdit} /></button></td> 
                                 
-                                <td><ul>{elm.subjects.map(Element => <li>{Element.title}</li>)}</ul></td>                                
+                                <td><ul>{elm.subjects.map(Element => <li>{Element.title}  </li>)}</ul></td>                                
                             </tr>
                     }
                     />

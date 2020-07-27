@@ -5,6 +5,9 @@ const User = require("../models/User.model")
 const MaterialCourseSubjects = require("../models/Tables/Material-Course-Subject.table")
 const Course = require("../models/Course.model")
 const Subject = require("../models/Subject.model")
+const { Mongoose } = require("mongoose")
+
+var ObjectId = require('mongoose').Types.ObjectId; 
 
 /*const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.user.type) ? next() : res.json({
   message: "Area Restringida!"
@@ -12,7 +15,7 @@ const Subject = require("../models/Subject.model")
 
 //LISTADO DE TODOS LOS PROFESORES Y/O DIRECTORES
 router.get("/", (req, res, next) => {
-  User.find({ $or: [{ type: "DIRECTOR" }, { type: "TEACHER" }]})
+  User.find({ $or: [{ type: "DIRECTOR" }, { type: "TEACHER" }] })
     .then((response) => res.json(response))
     .catch((err) => next(err))
 })
@@ -24,11 +27,11 @@ router.get("/:id/users", (req, res, next) => {
     .then(subjects => {
       return subjects.length === 0 ? new Promise((resolve, reject) => resolve([]))
         : Course.find({ $or: subjects.map(elm => ({ subjects: elm.id })) }).populate('users')
-   
-    }) 
+
+    })
     .then(courses => {
       let acum = []
-      courses.forEach(elm => acum = [...acum, ...elm.users]) 
+      courses.forEach(elm => acum = [...acum, ...elm.users])
       res.json(acum)
     })
     .catch((err) => next(err))
@@ -36,12 +39,11 @@ router.get("/:id/users", (req, res, next) => {
 
 //LISTADO DE CURSOS EN LOS QUE IMPLANTE CLASES CADA PROFESOR
 router.get("/:id/courses", (req, res, next) => {
-  
-  Subject.find({ teacher: req.params.id }) 
+  Subject.find({ teacher: req.params.id }).populate('teacher')
     .then(subjects => {
       return subjects.length === 0 ? new Promise((resolve, reject) => resolve([]))
-        : Course.find({ $or: subjects.map(elm => ({ subjects: elm.id })) }).populate('users').populate('subjects')
-      
+        : Course.find({ $or: subjects.map(elm => ({ subjects: elm._id })) }).populate('users').populate('subjects')
+
     })
     .then(courses => {
       res.json(courses)
