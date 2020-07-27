@@ -5,6 +5,7 @@ import UserForm from '../../common/User-form'
 import HeaderProfile from './components/headerProfile'
 import Messages from './components/messages'
 import Events from './components/events'
+import { faExternalLinkSquareAlt } from "@fortawesome/free-solid-svg-icons";
 
 class ProfileEdit extends Component {
 
@@ -44,6 +45,11 @@ class ProfileEdit extends Component {
         )
     }
 }
-
+// UserForm.defaultProps = user = {
+//     name: 'Laura',
+//     lastname: 'Martínez',
+//     email: 'laura@gmail.com',
+//     profileImg:  "https://res.cloudinary.com/dz0aow7wm/image/upload/v1595247178/School%20Hack/images_rtgo7j.jpg"
+// };
 
 export default ProfileEdit

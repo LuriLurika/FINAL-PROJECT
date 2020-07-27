@@ -19,18 +19,22 @@ const courses = [
 ]
 
 const subjects = [
-    { title: 'Matemáticas', teacher: 'users.type.teacher.id' },
-    { title: 'Lengua Castellana y Literatura' },
-    { title: 'Primera Lengua Extranjera' },
-    { title: 'Ciencias Sociales' },
-    { title: 'Ciencias de la Naturaleza' },
-    { title: 'Educación Física' },
-    { title: 'Valores Sociales y Cívicos' },
-    { title: 'Educación Artística' },
-    { title: 'Tecnología' },
-    { title: 'Segunda Lengua Extranjera' },
-    { title: 'Religión' },
-]
+  {
+    title: "Matemáticas",
+    teacher: "users.type.teacher.id",
+    description: "Matemáticas",
+  },
+  { title: "Lengua Castellana y Literatura", description: "Lengua Castellana y Literatura" },
+  { title: "Primera Lengua Extranjera", description: "Primera Lengua Extranjera" },
+  { title: "Ciencias Sociales", description: "Ciencias Sociales" },
+  { title: "Ciencias de la Naturaleza", description: "Ciencias de la Naturaleza" },
+  { title: "Educación Física", description: "Educación Física" },
+  { title: "Valores Sociales y Cívicos", description: "Valores Sociales y Cívicos" },
+  { title: "Educación Artística", description: "Educación Artística" },
+  { title: "Tecnología", description: "Tecnología" },
+  { title: "Segunda Lengua Extranjera", description: "Segunda Lengua Extranjera" },
+  { title: "Religión", description: "Religión" },
+];
 
 const users = [
     { name: "Stephi", lastname: "Bloxholm", email: "sbloxholm0@admin.ch", profileImg: "https://robohash.org/doloressitmaiores.jpg?size=50x50&set=set1", type: "DIRECTOR" },
