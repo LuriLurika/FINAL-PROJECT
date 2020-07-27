@@ -26,18 +26,12 @@ router.put("/:id", (req, res, next) => {
 router.delete("/:id", (req, res, next) => {
  
   Subject.findByIdAndDelete(req.params.id)
-      
-    //MaterialCourseSubjects.findByIdAndDelete({
-      //Subjects: req.params.id,
-    //}),
-  
     .then((response) => res.json(response))
-    .catch((err) => console.log("BBDD error", err))
+    .catch((err) => next(err));
 })
 
 //CREAR ASIGNATURA
 router.post("/", (req, res, next) => {
-  console.log(req.body)
   Subject.create(req.body)
     .then((response) => res.json(response))
     .catch((err) => next(err))

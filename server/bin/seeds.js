@@ -56,7 +56,6 @@ const users = [
     { name: "Britt", lastname: "Sodory", email: "bsodoryg@bloglovin.com", profileImg: "https://robohash.org/quiaomnisautem.jpg?size=50x50&set=set1", type: "TEACHER" },
     { name: "Dennet", lastname: "Schiersch", email: "dschierschh@privacy.gov", profileImg: "https://robohash.org/dolorundeet.bmp?size=50x50&set=set1", type: "STUDENT" },
     { name: "Nicola", lastname: "Hawkslee", email: "nhawksleei@guardian.com", profileImg: "https://robohash.org/quosanimiomnis.jpg?size=50x50&set=set1", type: "TEACHER" },
-    { name: "Morgen", lastname: "Ince", email: "mincej@scientificamerican.com", profileImg: "https://robohash.org/siterrormaiores.bmp?size=50x50&set=set1", type: "TEACHER" },
     { name: "Roanne", lastname: "Orbon", email: "rorbon0@vistaprint.com", profileImg: "https://robohash.org/quisidoptio.jpg?size=50x50&set=set1", type: "STUDENT" },
     { name: "Eula", lastname: "Combes", email: "ecombes1@apache.org", profileImg: "https://robohash.org/ipsamquovoluptatem.bmp?size=50x50&set=set1", type: "STUDENT" },
     { name: "Otha", lastname: "Ponsford", email: "oponsford2@infoseek.co.jp", profileImg: "https://robohash.org/ametfaciliscorrupti.jpg?size=50x50&set=set1", type: "STUDENT" },
@@ -156,27 +155,35 @@ const users = [
     { name: "Ewen", lastname: "Kopfer", email: "ekopfer2o@miibeian.gov.cn", profileImg: "https://robohash.org/voluptasconsequatursaepe.png?size=50x50&set=set1", type: "STUDENT" },
     { name: "Luciana", lastname: "Viña", email: "lucianavina@lelschool.com", profileImg: "https://robohash.org/fugiatnostrumdistinctio.bmp?size=50x50&set=set1", type: "STUDENT" },
     { name: "Laura", lastname: "Martínez", email: "lurimartinez@lelschool.com", profileImg: "https://robohash.org/essedictaitaque.bmp?size=50x50&set=set1", type: "STUDENT" },
-    { name: "Escarlata", lastname: "Fdez", email: "escarlatafdez@lelschool.com", profileImg: "https://robohash.org/accusantiumdolorcorporis.jpg?size=50x50&set=set1", type: "STUDENT" }
+    { name: "Escarlata", lastname: "Fdez", email: "escarlatafdez@lelschool.com", profileImg: "https://robohash.org/accusantiumdolorcorporis.jpg?size=50x50&set=set1", type: "STUDENT" },
+    { name: "Morgen", lastname: "Ince", email: "mincej@scientificamerican.com", profileImg: "https://robohash.org/siterrormaiores.bmp?size=50x50&set=set1", type: "TEACHER" },
 ]
 
 let usersCreadted = []
 
-User
-    .create(users).then(users => {
-        console.log('Se han creado los usuarios')
-        const teacher = users[users.length - 1]
-        usersCreadted = [...users]
-        return Subject.create(subjects.map(elm => ({ ...elm, teacher: teacher.id })))
-    })
-    .then(subjects => {
-        console.log('Se han creado las asignaturas')
-        return Course.create(courses.map((elm, index) => ({
-            ...elm, subjects: subjects.map(subject => subject.id),
-            users: !index ? usersCreadted.filter(elm => elm.type === "STUDENT") : []
-        })))
-    })
-    .then(() => {
-        console.log('Se han creado los cursos')
-        mongoose.connection.close()
-    })
-    .catch(err => console.log(err))
+User.create(users)
+  .then((users) => {
+    console.log("Se han creado los usuarios");
+    const teacher = users[users.length - 1];
+    usersCreadted = [...users];
+    return Subject.create(
+      subjects.map((elm) => ({ ...elm, teacher: teacher.id }))
+    );
+  })
+  .then((subjects) => {
+    console.log("Se han creado las asignaturas");
+    return Course.create(
+      courses.map((elm, index) => ({
+        ...elm,
+        subjects: subjects.map((subject) => subject.id),
+        users: !index
+          ? usersCreadted.filter((elm) => elm.type === "STUDENT")
+          : [],
+      }))
+    );
+  })
+  .then(() => {
+    console.log("Se han creado los cursos");
+    mongoose.connection.close();
+  })
+  .catch((err) => next(err));

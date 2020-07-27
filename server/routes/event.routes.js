@@ -57,7 +57,7 @@ router.put("/:id", (req, res, next) => {
 router.delete("/:id", (req, res, next) => {
         Event.findByIdAndRemove(req.params.id)
         .then((response) => res.json(response))
-        .catch((err) => console.log("BBDD error", err))
+        .catch((err) => next(err))
 })
 
 module.exports = router

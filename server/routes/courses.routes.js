@@ -71,7 +71,7 @@ router.delete("/:id",  (req, res, next) => {
 
   Course.findByIdAndRemove(req.params.id)
     .then((response) => res.json(response)) 
-    .catch((err) => console.log("BBDD error", err))
+    .catch((err) => next(err))
 })
 
 module.exports = router
