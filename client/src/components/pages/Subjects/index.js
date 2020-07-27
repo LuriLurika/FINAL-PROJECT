@@ -81,14 +81,15 @@ class Subjects extends Component {
     const { subjects, description, showModal, selected, teachers } = this.state;
     return (
       <>
-        <h1>Subjects</h1>{" "}
+        <h1>Subjects</h1>
         <Button onClick={() => this.setState({selected: emptySubject, showModal: true})}>
           <FontAwesomeIcon icon={faBookMedical} />
         </Button>
         <div className="row">
           <div className="col-md-6">
+            
             {!subjects ? (
-              <p>CARGANDO</p>
+              <p><Spinner/></p>
             ) : (
               <CustomTable
                 data={subjects}
@@ -106,7 +107,7 @@ class Subjects extends Component {
                       <img
                         src={elm.teacher.profileImg}
                         alt={elm.teacher.name}
-                      />{" "}
+                      />
                       {elm.teacher.name} {elm.teacher.lastname}
                     </td>
                     <td>

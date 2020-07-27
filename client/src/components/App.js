@@ -13,7 +13,7 @@ import Login from './pages/Login'
 
 
 
-/***************PRUEBA RUTAS**************/
+
 import Courses from './pages/Curses'
 import Subjects from './pages/Subjects'
 import Teachers from './pages/Teacher'

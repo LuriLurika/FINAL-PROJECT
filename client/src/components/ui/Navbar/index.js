@@ -25,6 +25,7 @@ class Navigation extends Component {
 			about: false,
 		}
 		this.AuthService = new AuthService()
+		
 		this.modalInfo = {
 			about: {
 				title: '¿Quiénes somos?',
@@ -39,14 +40,8 @@ class Navigation extends Component {
 
 
 	handleModal(status, info) {
-				this.setState({ showModal: status, value: info })
-		//TODO No consigo que me lo pille como ternario
-				if (info == 'about') {
-					this.state.about = true
-				} else {
-					this.state.about = false
-		}
-	}
+      this.setState({ showModal: status, value: info, about: info === 'about' })
+   }
 
 	logout = () => {
 		this.AuthService

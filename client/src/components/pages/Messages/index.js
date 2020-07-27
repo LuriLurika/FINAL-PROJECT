@@ -6,15 +6,15 @@ import MessageForm from '../../common/Forms/Message-form'
 import Spinner from '../../ui/Spinner'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
+
 
 class Messages extends Component {
     constructor (props){
@@ -54,7 +54,7 @@ class Messages extends Component {
     }
 
     render() {
-        console.log(this.state.messages)
+      
         return (
             <>
                 

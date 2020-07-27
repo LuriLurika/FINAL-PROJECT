@@ -12,8 +12,7 @@ const CustomTable = ({ data, header, rowMap }) => {
                 </tr>
             </thead>
             <tbody>
-                {data.map(rowMap)}
-                
+                {data.map(rowMap)}                
             </tbody>
         </Table>
     )

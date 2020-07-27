@@ -45,7 +45,7 @@ class MessageForm extends Component {
 
     render() {
         const { message, validated } = this.state
-        console.log(message.receivedBy);
+       
         return (
             <>
                 <h3>Nuevo Mensaje</h3>
