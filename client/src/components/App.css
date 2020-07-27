@@ -17,7 +17,6 @@ font-family: 'Oswald', sans-serif;*/
   display: grid;
   height: 100vh;
   grid-template: auto 1fr auto / auto 1fr auto;
-
 }
 
 .amatic-letter {
@@ -80,11 +79,6 @@ footer {
 
 .rounded-circle {
   border-radius: 50%!important;
-  border: 100;
-}
-
-.rounded-circle img {
-  width: 100%;
+  width: 120%;
   border: 1px solid green;
-  /* border-radius: 50%; */
 }

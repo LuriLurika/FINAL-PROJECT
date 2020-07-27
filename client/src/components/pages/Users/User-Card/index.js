@@ -12,7 +12,7 @@ const UserCard = ({ _id, name, lastname, profileImg, email, deleteUser }) => {
 
     return (
         <Col md={3}>
-            <Card className="user-card rounded-circle">
+            <Card className="user-card">
                 <Card.Img variant="top" src={profileImg} />
                 <Card.Body>
                     <Card.Title>{lastname}, {name}</Card.Title>
