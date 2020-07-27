@@ -27,7 +27,7 @@ class SchoolHackApi {
   getOneEvent = (id) => this.service.get(`/events/${id}`);
   createEvents = (event) => this.service.post("/events", event);
   updateEvent = (event) => this.service.put(`/events/${event.id}`, event);
-  deleteUser = (id) => this.service.delete(`/events/${id}`)
+  deleteEvent = (id) => this.service.delete(`/events/${id}`)
 
   getAllMessages = () => this.service.get("/messages");
   createMessages = (message) => this.service.post("/messages", message);

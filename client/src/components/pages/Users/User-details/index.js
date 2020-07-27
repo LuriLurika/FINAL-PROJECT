@@ -36,7 +36,7 @@ class UserDetails extends Component {
             .getOneUser(id)        
             .then((response) => this.setState({ user: response.data})
             .catch((err) => console.log(err))
-    }
+    )}
 
     render() {
         const { user } = this.state;
