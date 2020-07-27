@@ -4,6 +4,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Maps from "../../Maps";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
+
 class EventForm extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +23,11 @@ class EventForm extends Component {
       participants: [],
       eventDate: props.eventDate,
       eventTime: props.eventTime,
+      placeId: props.placeId,
+      placeDescription: props.placeDescription,
+      id: props.id
     };
+    console.log(props)
   }
 
   handleInputChange = (e) => {
@@ -80,8 +87,7 @@ class EventForm extends Component {
               name="eventDate"
               type="text"
             />
-          </Form.Group>{" "}
-          {/* Ver cómo poner la opción de que despliegue un calendario y se pueda seleccionar */}
+          </Form.Group>
           <Form.Group>
             <Form.Label>Hora </Form.Label>
             <Form.Control
@@ -93,17 +99,25 @@ class EventForm extends Component {
             >
               {this.state.time.map((elm, inx) => (
                 <option key={elm} value={inx}>
-                  {" "}
-                  {elm}{" "}
+                  {elm}
                 </option>
               ))}
             </Form.Control>
           </Form.Group>
           <Form.Group>
-            <Maps />
+            <Maps
+              placeDescription={this.state.placeDescription}
+              placeId={this.state.placeId}
+              onPlaceChanged={(place) =>
+                this.setState({
+                  placeId: place.placeId,
+                  placeDescription: place.placeDescription,
+                })
+              }
+            />
           </Form.Group>
           <Button variant="dark" type="submit">
-            Submit
+            <FontAwesomeIcon icon={faSave} />
           </Button>
         </Form>
       </>

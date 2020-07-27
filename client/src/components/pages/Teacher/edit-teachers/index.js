@@ -47,7 +47,7 @@ class TeacherForm extends Component {
     }
 
     render() {
-        const { teachers, validated, role } = this.state;
+        const { teachers, validated } = this.state;
         return (
             <>
                 <h3>{teachers.id ? "Editar Profesor" : "Nuevo Profesor"}</h3>
