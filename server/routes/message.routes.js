@@ -11,11 +11,11 @@ router.post('/', (req, res) => {
     
     const { title, body, receivedBy } = req.body
 
-    User.find({ email: receivedBy })
+    // User.find({ email: receivedBy })
     
-        .then(() => {
+        // .then(() => {
             Message.create({title, body, receivedBy, sendedBy: req.user.id})
-    } )
+    // } )
         .then((response) => res.json(response))
         .catch((err) => next(err))
 })

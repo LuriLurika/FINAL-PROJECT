@@ -95,21 +95,21 @@ router.put("/:id", (req, res, next) => {
 
 //Eliminar un user(primero se eliminan las relaciones y después el usuario) ***ok***
 router.delete("/:id", (req, res, next) => {
-  Promise.all([
-    User.findByIdAndRemove(req.params.id),
-    MaterialCourseSubjects.findOneAndRemove({
-      user: req.params.id,
-    }),
-    ParentStudents.findOneAndRemove({
-      user: req.params.id,
-    }),
-    CourseSubjects.findOneAndRemove({
-      user: req.params.id,
-    }),
-    UserCourse.findOneAndRemove({
-      user: req.params.id,
-    }),
-  ])
+  // Promise.all([
+    User.findByIdAndDelete(req.params.id)
+  //   MaterialCourseSubjects.findOneAndRemove({
+  //     user: req.params.id,
+  //   }),
+  //   ParentStudents.findOneAndRemove({
+  //     user: req.params.id,
+  //   }),
+  //   CourseSubjects.findOneAndRemove({
+  //     user: req.params.id,
+  //   }),
+  //   UserCourse.findOneAndRemove({
+  //     user: req.params.id,
+  //   }),
+  // ])
     .then((response) => res.json(response))
     .catch((err) => next(err))
 })

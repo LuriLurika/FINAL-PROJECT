@@ -9,6 +9,7 @@ const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.
 
 router.get("/", (req, res, next) => {
   Course.find().sort({ title: 1 })
+    .populate('subjects')
     .then((response) => res.json(response))
     .catch((err) => next(err))
 })

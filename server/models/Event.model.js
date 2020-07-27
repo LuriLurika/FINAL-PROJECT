@@ -29,6 +29,11 @@ const eventSchema = new Schema(
             type: Date,
             default: Date.now
         },
+        eventTime: {
+            type: String,
+            enum: ['09:00 - 10:00', '10:00 - 11:00', '12:00 - 13:00', '14:30 - 15:30', '15:30 - 16:30'],
+            required: true,
+        },
         
     },{
         timestamps: true,
