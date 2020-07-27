@@ -37,7 +37,6 @@ router.delete("/:id", (req, res, next) => {
 
 //CREAR ASIGNATURA
 router.post("/", (req, res, next) => {
-  console.log(req.body)
   Subject.create(req.body)
     .then((response) => res.json(response))
     .catch((err) => next(err))

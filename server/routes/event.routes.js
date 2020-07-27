@@ -5,8 +5,6 @@ const Event = require("../models/Event.model")
 
 
 //CREAR EVENTO
-//checkRole(['DIRECTOR', 'TEACHER'])
-
 router.post('/', (req, res) => {
 
     const { title, description, participants, eventDate } = req.body
@@ -17,8 +15,6 @@ router.post('/', (req, res) => {
 })
 
 //RECUPERAR EVENTOS 
-//checkRole(['DIRECTOR', 'TEACHER', 'PARENT'])
-
 router.get("/", (req, res, next) => {
     Event
         .find()
@@ -29,8 +25,6 @@ router.get("/", (req, res, next) => {
 })
 
 //RECUPERAR UN SOLO EVENTO
-//checkRole(['DIRECTOR', 'TEACHER', 'PARENT'])
-
 router.get('/:id',(req, res) => {
     Event
         .findById(req.params.id)
@@ -41,8 +35,6 @@ router.get('/:id',(req, res) => {
 })
 
 //EDITAR EVENTO
-//checkRole(['DIRECTOR', 'TEACHER'])
-
 router.put("/:id", (req, res, next) => {
     Event
         .findByIdAndUpdate(req.params.id, req.body, { new: true })
@@ -51,8 +43,6 @@ router.put("/:id", (req, res, next) => {
 })
 
 //BORRAR EVENTO
-//checkRole(['DIRECTOR', 'TEACHER'])
-
 router.delete("/:id", (req, res, next) => {
         Event.findByIdAndRemove(req.params.id)
         .then((response) => res.json(response))

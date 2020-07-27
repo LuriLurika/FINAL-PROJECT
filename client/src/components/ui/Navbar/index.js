@@ -37,15 +37,8 @@ class Navigation extends Component {
 		}
 	}
 
-
 	handleModal(status, info) {
-				this.setState({ showModal: status, value: info })
-		//TODO No consigo que me lo pille como ternario
-				if (info == 'about') {
-					this.state.about = true
-				} else {
-					this.state.about = false
-		}
+		this.setState({ showModal: status, about: info === 'about' })
 	}
 
 	logout = () => {
@@ -110,8 +103,8 @@ class Navigation extends Component {
 
 					{this.state.about ? (<ModalLogin {...this.modalInfo.about} />) : (<ModalLogin {...this.modalInfo.contact} />)
 					}
-					
-                </Modal>
+
+				</Modal>
 
 			</>
 		)

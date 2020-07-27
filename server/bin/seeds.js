@@ -19,21 +19,21 @@ const courses = [
 ]
 
 const subjects = [
-  {
-    title: "Matemáticas",
-    teacher: "users.type.teacher.id",
-    description: "Matemáticas",
-  },
-  { title: "Lengua Castellana y Literatura", description: "Lengua Castellana y Literatura" },
-  { title: "Primera Lengua Extranjera", description: "Primera Lengua Extranjera" },
-  { title: "Ciencias Sociales", description: "Ciencias Sociales" },
-  { title: "Ciencias de la Naturaleza", description: "Ciencias de la Naturaleza" },
-  { title: "Educación Física", description: "Educación Física" },
-  { title: "Valores Sociales y Cívicos", description: "Valores Sociales y Cívicos" },
-  { title: "Educación Artística", description: "Educación Artística" },
-  { title: "Tecnología", description: "Tecnología" },
-  { title: "Segunda Lengua Extranjera", description: "Segunda Lengua Extranjera" },
-  { title: "Religión", description: "Religión" },
+    {
+        title: "Matemáticas",
+        teacher: "users.type.teacher.id",
+        description: "Matemáticas",
+    },
+    { title: "Lengua Castellana y Literatura", description: "Lengua Castellana y Literatura" },
+    { title: "Primera Lengua Extranjera", description: "Primera Lengua Extranjera" },
+    { title: "Ciencias Sociales", description: "Ciencias Sociales" },
+    { title: "Ciencias de la Naturaleza", description: "Ciencias de la Naturaleza" },
+    { title: "Educación Física", description: "Educación Física" },
+    { title: "Valores Sociales y Cívicos", description: "Valores Sociales y Cívicos" },
+    { title: "Educación Artística", description: "Educación Artística" },
+    { title: "Tecnología", description: "Tecnología" },
+    { title: "Segunda Lengua Extranjera", description: "Segunda Lengua Extranjera" },
+    { title: "Religión", description: "Religión" },
 ];
 
 const users = [
@@ -56,7 +56,6 @@ const users = [
     { name: "Britt", lastname: "Sodory", email: "bsodoryg@bloglovin.com", profileImg: "https://robohash.org/quiaomnisautem.jpg?size=50x50&set=set1", type: "TEACHER" },
     { name: "Dennet", lastname: "Schiersch", email: "dschierschh@privacy.gov", profileImg: "https://robohash.org/dolorundeet.bmp?size=50x50&set=set1", type: "STUDENT" },
     { name: "Nicola", lastname: "Hawkslee", email: "nhawksleei@guardian.com", profileImg: "https://robohash.org/quosanimiomnis.jpg?size=50x50&set=set1", type: "TEACHER" },
-    { name: "Morgen", lastname: "Ince", email: "mincej@scientificamerican.com", profileImg: "https://robohash.org/siterrormaiores.bmp?size=50x50&set=set1", type: "TEACHER" },
     { name: "Roanne", lastname: "Orbon", email: "rorbon0@vistaprint.com", profileImg: "https://robohash.org/quisidoptio.jpg?size=50x50&set=set1", type: "STUDENT" },
     { name: "Eula", lastname: "Combes", email: "ecombes1@apache.org", profileImg: "https://robohash.org/ipsamquovoluptatem.bmp?size=50x50&set=set1", type: "STUDENT" },
     { name: "Otha", lastname: "Ponsford", email: "oponsford2@infoseek.co.jp", profileImg: "https://robohash.org/ametfaciliscorrupti.jpg?size=50x50&set=set1", type: "STUDENT" },
@@ -156,7 +155,8 @@ const users = [
     { name: "Ewen", lastname: "Kopfer", email: "ekopfer2o@miibeian.gov.cn", profileImg: "https://robohash.org/voluptasconsequatursaepe.png?size=50x50&set=set1", type: "STUDENT" },
     { name: "Luciana", lastname: "Viña", email: "lucianavina@lelschool.com", profileImg: "https://robohash.org/fugiatnostrumdistinctio.bmp?size=50x50&set=set1", type: "STUDENT" },
     { name: "Laura", lastname: "Martínez", email: "lurimartinez@lelschool.com", profileImg: "https://robohash.org/essedictaitaque.bmp?size=50x50&set=set1", type: "STUDENT" },
-    { name: "Escarlata", lastname: "Fdez", email: "escarlatafdez@lelschool.com", profileImg: "https://robohash.org/accusantiumdolorcorporis.jpg?size=50x50&set=set1", type: "STUDENT" }
+    { name: "Escarlata", lastname: "Fdez", email: "escarlatafdez@lelschool.com", profileImg: "https://robohash.org/accusantiumdolorcorporis.jpg?size=50x50&set=set1", type: "STUDENT" },
+    { name: "Morgen", lastname: "Ince", email: "mincej@scientificamerican.com", profileImg: "https://robohash.org/siterrormaiores.bmp?size=50x50&set=set1", type: "TEACHER" },
 ]
 
 let usersCreadted = []
