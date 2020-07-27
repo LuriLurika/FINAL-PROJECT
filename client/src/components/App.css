@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Oswald:wght@300;400;700&display=swap');
 /* font-family: 'Amatic SC', cursive;
 font-family: 'Oswald', sans-serif;*/
+h3{
+  color: #008921;
+}
 
 :root {
   --main-color: #10bb4f;
@@ -77,6 +80,3 @@ footer {
 }
 
 
-.normalForm{
-  
-}

@@ -6,7 +6,7 @@ import SchoolHackApi from '../../../service/SchoolHackApi'
 import Button from 'react-bootstrap/Button'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus} from "@fortawesome/free-solid-svg-icons";
+import { faBookMedical} from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
@@ -16,7 +16,9 @@ const emptySubject = {
     id: '',
     title: '',
     description: '',
-    teacher: ''
+  teacher: {
+      _id: ''
+    }
 }
 
 class Subjects extends Component {
@@ -26,12 +28,16 @@ class Subjects extends Component {
       subjects: undefined,
       description: "",
       showModal: false,
+      teachers: [],
       selected: emptySubject,
     };
     this.schoolHackApi = new SchoolHackApi();
   }
 
-  componentDidMount = () => this.updatedSubjectList()
+  componentDidMount = () => {
+    this.updatedSubjectList()
+    this.getAllTeachers()
+  }
     
   updatedSubjectList = () => {
     this.schoolHackApi
@@ -41,6 +47,14 @@ class Subjects extends Component {
       })
       .catch((err) => console.log(err));
   };
+
+  getAllTeachers = () => {
+    this.schoolHackApi
+      .getAllTeachers()
+      .then((response) => {
+      this.setState({teachers: response.data})
+    })
+  }
 
   handleDelete = (id) => {
     this.schoolHackApi.deleteSubject(id).then(() => {
@@ -63,12 +77,12 @@ class Subjects extends Component {
   };
 
   render() {
-    const { subjects, description, showModal, selected } = this.state;
+    const { subjects, description, showModal, selected, teachers } = this.state;
     return (
       <>
         <h1>Subjects</h1>{" "}
         <Button onClick={() => this.setState({selected: emptySubject, showModal: true})}>
-          <FontAwesomeIcon icon={faPlus} />
+          <FontAwesomeIcon icon={faBookMedical} />
         </Button>
         <div className="row">
           <div className="col-md-6">
@@ -85,7 +99,7 @@ class Subjects extends Component {
                   </>
                 }
                 rowMap={(elm) => (
-                  <tr>
+                  <tr key={elm._id}>
                     <td>{elm.title}</td>
                     <td>
                       <img
@@ -141,6 +155,7 @@ class Subjects extends Component {
                 title={selected.title}
                 description={selected.description}
                 teacher={selected.teacher}
+                teachers = {teachers}
                 onSubjectChanged={this.handleSubjectSubmit}
               />
             </Modal.Body>

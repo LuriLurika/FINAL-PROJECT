@@ -17,6 +17,7 @@ class SubjectForm extends Component {
         description: props.description,
         teacher: props.teacher,
       },
+      teachers: props.teachers,
       validated: false,
     };
   }
@@ -30,7 +31,13 @@ class SubjectForm extends Component {
       },
     });
   };
-
+  handleSelectChange = e => {
+    this.setState({
+      subject: {
+        ...this.state.subject,
+        teacher: this.state.teachers.find(elm => elm._id === e.currentTarget.value)
+    }})
+  }
   handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -44,7 +51,7 @@ class SubjectForm extends Component {
   };
 
   render() {
-    const { subject, role, validated } = this.state;
+    const { subject, role, validated, teachers } = this.state;
     return (
       <>
         <h3>{subject.id ? "Editar Asignatura" : "Nueva Asignatura"}</h3>
@@ -76,8 +83,15 @@ class SubjectForm extends Component {
                 rows="6"
               />
               <Form.Control.Feedback type="invalid">
-                Profesor requerido.
+                Descripción requerida.
               </Form.Control.Feedback>
+            </Form.Group>
+
+              <Form.Group>
+              <Form.Control required as="select" onChange={this.handleSelectChange} value={subject.teacher._id}>
+                {teachers.map(elm => <option key={elm._id} value={elm._id}> {elm.name} </option> )}
+                
+              </Form.Control>
             </Form.Group>
 
             <Button type="submit">
