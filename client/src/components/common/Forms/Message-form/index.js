@@ -45,7 +45,6 @@ class MessageForm extends Component {
 
     render() {
         const { message, validated } = this.state
-       
         return (
             <>
                 <h3>Nuevo Mensaje</h3>

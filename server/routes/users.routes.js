@@ -5,7 +5,6 @@ const User = require("../models/User.model")
 const Course = require("../models/Course.model")
 const Subject = require("../models/Subject.model")
 
-
 //Devuelve un listado con los datos de todos los alumnos ----NUEVO!!!
 router.get("/", (req, res, next) => {
   User.find({ type: "STUDENT" })
@@ -14,7 +13,6 @@ router.get("/", (req, res, next) => {
 })
 
 //Devuelve el detalle de un alumno 
-
 router.get("/:id", (req, res, next) => {
   User.findById(req.params.id)
     .then((response) => res.json(response))

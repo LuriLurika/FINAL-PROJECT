@@ -7,7 +7,6 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 class SubjectForm extends Component {
   constructor(props) {
-
     super(props);
     this.state = {
       role: props.role,

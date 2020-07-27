@@ -1,23 +1,13 @@
 import React, { Component } from 'react'
-
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Modal from 'react-bootstrap/Modal'
-
 import ModalLogin from './components/modal'
-
 import Logo from './../../logoverde.png'
-
 import AuthService from './../../../service/AuthService'
-
 import { Link, NavLink } from 'react-router-dom'
-
-
-
 import './index.css'
-
 class Navigation extends Component {
-
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -37,12 +27,9 @@ class Navigation extends Component {
 			}
 		}
 	}
-
-
 	handleModal(status, info) {
-      this.setState({ showModal: status, value: info, about: info === 'about' })
-   }
-
+		this.setState({ showModal: status, about: info === 'about' })
+	}
 	logout = () => {
 		this.AuthService
 			.logout()
@@ -52,7 +39,6 @@ class Navigation extends Component {
 			})
 			.catch(err => console.log(err))
 	}
-
 	render() {
 		return (
 			<>
@@ -63,12 +49,9 @@ class Navigation extends Component {
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="ml-auto">
-
 							{/* <Nav.Link as="span">
                             <NavLink to="/courses">Courses routes</NavLink>
                         </Nav.Link> */}
-
-
 							{this.props.loggedInUser ?
 								(<>
 									<Nav.Link as="span">
@@ -90,27 +73,20 @@ class Navigation extends Component {
 									</>
 								)
 							}
-
 							<Nav.Link as="span">
 								<NavLink to="/login" >Hola, {this.props.loggedInUser ? this.props.loggedInUser.username : 'invitado'}</NavLink>
 								{/* cambiar link! */}
 							</Nav.Link>
-
 						</Nav>
-
 					</Navbar.Collapse>
 				</Navbar>
 				<Modal size="lg" aria-labelledby="contained-modal-title-vcenter"
 					centered show={this.state.showModal} onHide={() => this.handleModal(false)}>
-
 					{this.state.about ? (<ModalLogin {...this.modalInfo.about} />) : (<ModalLogin {...this.modalInfo.contact} />)
 					}
-					
-                </Modal>
-
+				</Modal>
 			</>
 		)
 	}
 }
-
 export default Navigation

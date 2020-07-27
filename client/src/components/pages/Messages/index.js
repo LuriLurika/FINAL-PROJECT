@@ -17,7 +17,7 @@ import Modal from 'react-bootstrap/Modal'
 
 
 class Messages extends Component {
-    constructor (props){
+    constructor(props) {
         super(props)
         this.state = {
             messages: undefined,
@@ -41,7 +41,7 @@ class Messages extends Component {
 
     }
 
-    
+
     handleModal = status => this.setState({ showModal: status })
 
     handleMessagesSubmit = newMessageInfo => {
@@ -54,18 +54,17 @@ class Messages extends Component {
     }
 
     render() {
-      
         return (
             <>
-                
+
                 <Container as="main">
                     <h3>Mensajes:</h3>
                     { /*this.props.loggedInUser && */}
                     <Button onClick={() => this.handleModal(true)} size="sm" ><FontAwesomeIcon icon={faEnvelope} /></Button>
-                    
+
 
                     {
-                        !this.state.messages ? <h3><Spinner/></h3> :
+                        !this.state.messages ? <h3><Spinner /></h3> :
 
                             <Row>
                                 {this.state.messages.map(elm => <MessageCard key={elm._id} {...elm} />)}
@@ -81,7 +80,7 @@ class Messages extends Component {
                             title=''
                             body=''
                             recievedBy=''
-                            onMessageChanged={this.handleMessagesSubmit}  />
+                            onMessageChanged={this.handleMessagesSubmit} />
                     </Modal.Body>
                 </Modal>
             </>

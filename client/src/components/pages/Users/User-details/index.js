@@ -31,21 +31,17 @@ class UserDetails extends Component {
     }
 
     componentDidMount = () => {
-
         const id = this.props.match.params.id
-
         this.SchoolHackApi
             .getOneUser(id)        
-            .then((response) => this.setState({ user: response.data}) )
-            .catch((err) => console.log(err));
+            .then((response) => this.setState({ user: response.data})
+            .catch((err) => console.log(err))
     }
 
     render() {
         const { user } = this.state;
 
         return (
-            
-
             !this.state.user ? <h3> <Spinner /> </h3> :
 
                 <Container as="main">
