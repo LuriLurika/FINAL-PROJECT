@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ProfileDetail from './components/profileDetail'
 import './index.css'
-import UserForm from '../../common/User-form'
+import UserForm from '../../common/Forms/User-form'
 import HeaderProfile from './components/headerProfile'
 import Messages from './components/messages'
 import Events from './components/events'

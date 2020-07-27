@@ -4,6 +4,7 @@ import SubjectForm from './edit-subjects'
 
 import SchoolHackApi from '../../../service/SchoolHackApi'
 import Button from 'react-bootstrap/Button'
+import Spinner from '../../ui/Spinner'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -37,7 +38,7 @@ class Subjects extends Component {
 
                 <div className="row">
                 <div className="col-md-6">
-                    {!subjects ? <p>CARGANDO</p> :
+                    {!subjects ? <p><Spinner /></p> :
                             <CustomTable
                                 data={subjects}
                                 header={(

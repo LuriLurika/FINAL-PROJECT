@@ -13,7 +13,7 @@ const Side = props => {
   
     return (
 
-        <div className="left-sidebar" contenteditable>
+        <div className="left-sidebar" contentEditable>
             <Nav className=" d-none d-md-block bg-light sidebar"
                 activeKey="/home"
                 onSelect={selectedKey => alert(`selected ${selectedKey}`)}>

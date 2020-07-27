@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import SchoolHackApi from '../../../service/SchoolHackApi'
 
 import MessageCard from './Message-card'
-import MessageForm from '../../common/Message-form'
+import MessageForm from '../../common/Forms/Message-form'
 import Spinner from '../../ui/Spinner'
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -55,7 +58,7 @@ class Messages extends Component {
                 <Container as="main">
                     <h3>Mensajes:</h3>
                     { /*this.props.loggedInUser && */}
-                        <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }}>Nuevo mesaje</Button>
+                        <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }}> <FontAwesomeIcon icon={faPlus}/></Button>
                     
 
                     {

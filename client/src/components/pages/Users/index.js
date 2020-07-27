@@ -2,11 +2,16 @@ import React, { Component } from 'react'
 import SchoolHackApi from '../../../service/SchoolHackApi'
 
 import UserCard from './User-Card'
-import UserForm from '../../common/User-form'
-import Spinner  from '../../ui/Spinner'
+import CustomTable from '../../common/Table'
+import UserForm from '../../common/Forms/User-form'
+import Spinner from '../../ui/Spinner'
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faEdit } from "@fortawesome/free-solid-svg-icons"
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
@@ -20,15 +25,6 @@ class Users extends Component {
         }
         this.schoolHackApi = new SchoolHackApi()
     }
-
-    // deleteUser = id => {
-    //     const UsersCopy = [...this.state.movies]
-    //     UsersCopy.splice(id, 1)
-    //     this.setState({
-    //         users: UsersCopy
-    //     })
-    // }
-
 
     componentDidMount = () => this.updatedUsersList()
     
@@ -47,6 +43,16 @@ class Users extends Component {
 
     handleModal = status => this.setState({ showModal: status })
 
+    handleUserDelete = (id) => {
+        this.schoolHackApi
+            .deleteUser(id)
+            .then(() => {
+            this.setState({users: this.state.users.filter((elm)=> elm._id !== id)})
+        })
+    }
+
+
+
     handleUsersSubmit = newUserInfo => {
        
         this.schoolHackApi.createUser(newUserInfo)
@@ -57,6 +63,9 @@ class Users extends Component {
     }
 
     render() {
+
+        const { users } = this.state;
+
         return (
             <>
                 
@@ -64,17 +73,55 @@ class Users extends Component {
                     <h3>Estudiantes:</h3>
                     
                     {/*this.props.loggedInUser && */}
-                    <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }} > Nuevo estudiante </Button>
+                    <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }} > <FontAwesomeIcon icon={faPlus}/> </Button>
                     
 
                     {
-                        !this.state.users ? <h3> <Spinner /></h3>:
-
-                            <Row>
-                                {this.state.users.map((elm,idx) => <UserCard  key={elm._id} {...elm} removeUser={() => this.deleteUser(idx)}/>)}
-                            </Row>
-
+                        !this.state.users ? <h3> <Spinner /></h3> :
+                            <CustomTable
+                                data={users}
+                                header={(
+                                    <>
+                                        <th>Nombre</th>
+                                        <th>Foto</th>
+                                        <th>Usuario</th>
+                                        <th>Email</th>
+                                        <th>tipo</th>
+                                        <th>Madre/Padre</th> {/*Si es profesor no necesitamos este campo*/}
+                                    </>
+                                )}
+                                rowMap={elm =>
+                                    
+                                    <tr>
+                                        <td>
+                                            {elm.lastname}, {elm.name}
+                                        </td>
+                                        <td>
+                                            <img src={elm.profileImg} alt={elm.username} />
+                                        </td>
+                                    
+                                        <td>
+                                            {elm.username}
+                                        </td>
+                                        <td>
+                                            {elm.email}
+                                        </td>
+                                        <td>
+                                            {elm.type}
+                                        </td>
+                                        <td>
+                                            {elm.parent}
+                                        </td>
+                                     
+                                        <td>
+                                            <Button><FontAwesomeIcon icon={faEdit} /></Button>
+                                            <Button onClick={() => this.handleUserDelete(elm._id)} ><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                                        </td>
+                                    </tr>
+                                }   
+                            />
                     }
+                    
                 </Container>
 
                 <Modal size="lg" show={this.state.showModal} onHide={() => this.handleModal(false)}>

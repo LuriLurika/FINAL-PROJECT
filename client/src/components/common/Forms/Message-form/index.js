@@ -45,6 +45,7 @@ class MessageForm extends Component {
 
     render() {
         const { message, validated } = this.state
+        console.log(message.receivedBy);
         return (
             <>
                 <h3>Nuevo Mensaje</h3>
@@ -62,11 +63,11 @@ class MessageForm extends Component {
                     
                     <Form.Group>
                         <Form.Label>Para</Form.Label>
-                        <Form.Control as='select' required onChange={event => this.handleInputChange(event)} name="receivedBy" type="text">
+                        <Form.Control as='select' required onChange={event => this.handleInputChange(event)} value={message.receivedBy }name="receivedBy" type="text">
                             
-                            <option>Hola!</option>
+                            <option>Hola</option>
                         
-                                {/* {message.map(elm => <option key={elm._id} {...elm}> {elm.username} </option>)} */}
+                                {/* {message.map(elm => <option> key={elm._id} {...elm} {elm.username} </option>)} */}
                                 
                         </Form.Control>   
                         

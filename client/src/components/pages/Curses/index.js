@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 
-import SchoolHackApi from '../../../service/SchoolHackApi'
 import './index.css'
+
+import SchoolHackApi from '../../../service/SchoolHackApi'
+import Spinner from '../../ui/Spinner'
+import CustomTable from '../../common/Table'
 
 class Courses extends Component {
     constructor(props) {
         super(props)
         this.state = {
             courses: undefined,
+           
         }
         this.schoolHackApi = new SchoolHackApi()
     }
@@ -15,6 +19,7 @@ class Courses extends Component {
     componentDidMount = () => {
         this.schoolHackApi
             .getAllCourses()
+            // .getAllSubjects()
             .then(response => {
                 const ord = response.data.sort()
                 
@@ -24,14 +29,35 @@ class Courses extends Component {
     }
 
     render() {
+
+        const { courses } = this.state;
+
+        // console.log(courses)
+        
+
         return (
             <>
                 <h1>Courses</h1>
 
-                {!this.state.courses ? <p>CARGANDO</p> :
-                    <ul>
-                        {this.state.courses.map(elm => <li key={elm._id} {...elm}>{elm.title}</li>)}
-                    </ul>
+                {!this.state.courses ? <p><Spinner /> </p> :
+                    
+                    <CustomTable
+                        data={courses}
+                        header={(
+                            <>
+                                <th>Nombre</th>
+                                <th>Asignaturas</th>
+
+                            </>
+                        )}
+                        rowMap={elm =>
+                            <tr>
+                                <td>{elm.title}</td>
+                                
+                                <td><ul>{elm.subjects.map(Element => <li>{Element.title}</li>)}</ul></td>                                
+                            </tr>
+                    }
+                    />
                 }
             </>
         )

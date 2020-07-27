@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'
 
+import './user-card.css'
+
 const UserCard = ({_id, name, lastname, profileImg,email, deleteUser }) => {
 
 
     return (
         <Col md={3}>
-            <Card className="user-card">
+            <Card className = "user-card rounded-circle " >
                 <Card.Img variant="top" src={profileImg} />
                 <Card.Body>
                     <Card.Title>{lastname}, {name}</Card.Title>
