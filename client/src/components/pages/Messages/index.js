@@ -5,8 +5,6 @@ import MessageCard from './Message-card'
 import MessageForm from '../../common/Forms/Message-form'
 import Spinner from '../../ui/Spinner'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'

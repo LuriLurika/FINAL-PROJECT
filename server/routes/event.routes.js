@@ -7,11 +7,12 @@ const Event = require("../models/Event.model")
 //CREAR EVENTO
 //checkRole(['DIRECTOR', 'TEACHER'])
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
 
-    const { title, description, participants, eventDate } = req.body
+    const { title, description, participants, eventDate, eventTime } = req.body
+    
     Event
-        .create({title, description, participants, eventDate, creator: req.user.id})
+        .create({title, description, participants, eventDate, eventTime})
         .then((response) => res.json(response))
         .catch((err) => next(err))
 })
