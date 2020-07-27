@@ -5,11 +5,14 @@ const Event = require("../models/Event.model")
 
 
 //CREAR EVENTO
-router.post('/', (req, res) => {
+//checkRole(['DIRECTOR', 'TEACHER'])
 
-    const { title, description, participants, eventDate } = req.body
+router.post('/', (req, res, next) => {
+
+    const { title, description, participants, eventDate, eventTime } = req.body
+    
     Event
-        .create({title, description, participants, eventDate, creator: req.user.id})
+        .create({title, description, participants, eventDate, eventTime})
         .then((response) => res.json(response))
         .catch((err) => next(err))
 })
@@ -46,7 +49,7 @@ router.put("/:id", (req, res, next) => {
 router.delete("/:id", (req, res, next) => {
         Event.findByIdAndRemove(req.params.id)
         .then((response) => res.json(response))
-        .catch((err) => console.log("BBDD error", err))
+        .catch((err) => next(err))
 })
 
 module.exports = router

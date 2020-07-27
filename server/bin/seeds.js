@@ -5,21 +5,40 @@ const Course = require('../models/Course.model')
 const Subject = require('../models/Subject.model')
 const User = require('../models/User.model')
 
-mongoose.connect(`mongodb://localhost/${process.env.DB}`, { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect(`mongodb://localhost/${process.env.DB}`, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+})
 
 // mongoose.connect(`mongodb+srv://EFdez:1234@cluster0.umhf5.mongodb.net/SchoolHack?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
 
-const courses = [
-    { title: '1º de primaria', subjects: [] },
-    { title: '2º de primaria', subjects: [] },
-    { title: '3º de primaria', subjects: [] },
-    { title: '4º de primaria', subjects: [] },
-    { title: '5º de primaria', subjects: [] },
-    { title: '6º de primaria', subjects: [] }
+const courses = [{
+        title: '1º de primaria',
+        subjects: []
+    },
+    {
+        title: '2º de primaria',
+        subjects: []
+    },
+    {
+        title: '3º de primaria',
+        subjects: []
+    },
+    {
+        title: '4º de primaria',
+        subjects: []
+    },
+    {
+        title: '5º de primaria',
+        subjects: []
+    },
+    {
+        title: '6º de primaria',
+        subjects: []
+    }
 ]
 
-const subjects = [
-    {
+const subjects = [{
         title: "Matemáticas",
         teacher: "users.type.teacher.id",
         description: "Matemáticas",
@@ -161,22 +180,29 @@ const users = [
 
 let usersCreadted = []
 
-User
-    .create(users).then(users => {
-        console.log('Se han creado los usuarios')
-        const teacher = users[users.length - 1]
-        usersCreadted = [...users]
-        return Subject.create(subjects.map(elm => ({ ...elm, teacher: teacher.id })))
-    })
-    .then(subjects => {
-        console.log('Se han creado las asignaturas')
-        return Course.create(courses.map((elm, index) => ({
-            ...elm, subjects: subjects.map(subject => subject.id),
-            users: !index ? usersCreadted.filter(elm => elm.type === "STUDENT") : []
-        })))
-    })
-    .then(() => {
-        console.log('Se han creado los cursos')
-        mongoose.connection.close()
-    })
-    .catch(err => console.log(err))
+User.create(users)
+  .then((users) => {
+    console.log("Se han creado los usuarios");
+    const teacher = users[users.length - 1];
+    usersCreadted = [...users];
+    return Subject.create(
+      subjects.map((elm) => ({ ...elm, teacher: teacher.id }))
+    );
+  })
+  .then((subjects) => {
+    console.log("Se han creado las asignaturas");
+    return Course.create(
+      courses.map((elm, index) => ({
+        ...elm,
+        subjects: subjects.map((subject) => subject.id),
+        users: !index
+          ? usersCreadted.filter((elm) => elm.type === "STUDENT")
+          : [],
+      }))
+    );
+  })
+  .then(() => {
+    console.log("Se han creado los cursos");
+    mongoose.connection.close();
+  })
+  .catch((err) => next(err));

@@ -51,7 +51,6 @@ class Messages extends Component {
     }
 
     render() {
-        console.log(this.state.messages)
         return (
             <>
 

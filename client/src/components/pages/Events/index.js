@@ -13,12 +13,21 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Spinner from '../../ui/Spinner'
 
+const emptyEvent = {
+    id: '',
+    title: '',
+    description: '',
+    eventDate: '',
+    eventTime: ''
+}
+
 class Events extends Component {
     constructor (props){
         super(props)
         this.state = {
             events: undefined,
-            showModal: false
+            showModal: false,
+            selected: emptyEvent
         }
 
         this.schoolHackApi = new SchoolHackApi()
@@ -36,12 +45,20 @@ class Events extends Component {
 
     handleModal = status => this.setState({ showModal: status })
 
-    handleEventsSubmit = () => {
-        this.handleModal(false)
-        this.updatedEventsList()
-    }
+    handleEventSubmit = (eventInfo) => {
+        const action = eventInfo.id
+            ? this.schoolHackApi.updateEvent(eventInfo)
+            : this.schoolHackApi.createEvents(eventInfo)
+        action
+            .then(() => {
+                this.updatedEventsList();
+                this.setState({ showModal: false });
+            })
+            .catch((err) => console.log("error en create Subject", err));
+    };
 
-    render () {
+    render() {
+        const {events, showModal, selected}=this.state
         return (
             <>
                 
@@ -49,7 +66,7 @@ class Events extends Component {
                     <h3>Eventos:</h3>
                     {/*this.props.loggedInUser && */}
                     
-                    <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }}><FontAwesomeIcon icon={faPlus}/></Button>
+                    <Button onClick={() => this.setState({ selected: emptyEvent, showModal: true })}><FontAwesomeIcon icon={faPlus}/></Button>
                     
 
                     {
@@ -64,7 +81,15 @@ class Events extends Component {
 
                 <Modal size="lg" show={this.state.showModal} onHide={() => this.handleModal(false)}>
                     <Modal.Body>
-                        <EventForm handleEventsSubmit={this.handleEventsSubmit} />
+                        <EventForm
+                          role="DIRECTOR, TEACHER"  
+                          title= {selected.title}
+                          description= {selected.description}
+                          participants= {selected.participants}
+                          eventDate={selected.eventDate}
+                          eventTime={selected.eventTime}
+                          onEventChanged={this.handleEventSubmit}
+                        />
                     </Modal.Body>
                 </Modal>
             </>

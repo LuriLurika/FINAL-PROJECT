@@ -45,6 +45,7 @@ img {
 .left-sidebar {
   grid-column: 1 / 2;
   padding: 1rem;
+  background-color: lightgreen;
 }
 
 main {
@@ -84,4 +85,21 @@ footer {
   border-radius: 50%!important;
   width: 120%;
   border: 1px solid green;
+}
+
+/***************sidebar**********************/
+
+a {
+    color: #10bb4f;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 40px;
+}
+
+.nav-item{
+  margin-bottom: 50px;
+}
+
+.myIcon{
+  margin-right: 10px;
 }
