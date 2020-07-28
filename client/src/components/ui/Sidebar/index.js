@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from 'react-router'
 import { Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +13,7 @@ import { faChalkboard } from "@fortawesome/free-solid-svg-icons";
 
 import "./../../App.css";
 
-const Sidebar = () => {
+const Side = () => {
   if (window.location.pathname.match(/login/)) {
     return null;
   }
@@ -65,4 +66,6 @@ const Sidebar = () => {
     </div>
   );
 };
-export default Sidebar;
+const Sidebar = withRouter(Side);
+
+export default Sidebar

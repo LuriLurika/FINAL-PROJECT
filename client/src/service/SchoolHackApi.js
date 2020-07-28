@@ -15,7 +15,7 @@ class SchoolHackApi {
 
   getAllUsers = () => this.service.get("/users");
   getOneUser = (id) => this.service.get(`/users/${id}`);
-  createUser = (user) => this.service.post("/users/new", user);
+  createUser = (user) => this.service.post("/signup", user);
   updateUser = (user) => this.service.put(`/users/${user.id}`, user);
   deleteUser = (id) => this.service.delete(`/users/${id}`);
 
@@ -23,7 +23,7 @@ class SchoolHackApi {
   getUsersTeacher = (id) => this.service.get(`/teachers/${id}/users`);
   getCoursesTeacher = (id) => this.service.get(`/teachers/${id}/courses`);
   deleteTeacher = (id) => this.service.delete(`/teachers/${id}`);
-  createTeacher = (teacher) => this.service.post('/teachers/new', teacher)
+  createTeacher = (teacher) => this.service.post('/signup', teacher)
   updateTeacher = (teacher) => this.service.put(`/teachers/${teacher.id}`, teacher);
 
 
