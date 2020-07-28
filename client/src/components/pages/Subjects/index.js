@@ -4,6 +4,8 @@ import SubjectForm from "./edit-subjects";
 
 import SchoolHackApi from "../../../service/SchoolHackApi";
 import Button from "react-bootstrap/Button";
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Spinner from "../../ui/Spinner";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -45,6 +47,7 @@ class Subjects extends Component {
       .getAllSubjects()
       .then((response) => {
         this.setState({ subjects: response.data });
+        this.props.handleToast(true, "LISTA DE USUARIOS!");
       })
       .catch((err) => console.log(err));
   };
@@ -87,8 +90,8 @@ class Subjects extends Component {
         >
           <FontAwesomeIcon icon={faBookMedical} />
         </Button>
-        <div className="row">
-          <div className="col-md-6">
+        <Row>
+          <Col md={6}>
             {!subjects ? (
               <Spinner />
             ) : (
@@ -142,10 +145,10 @@ class Subjects extends Component {
                 )}
               />
             )}
-          </div>
-          <div className="col-md-6">
+          </Col>
+          <Col md={6}>
             <p>{description}</p>
-          </div>
+          </Col>
           <Modal
             size="lg"
             show={showModal}
@@ -163,7 +166,7 @@ class Subjects extends Component {
               />
             </Modal.Body>
           </Modal>
-        </div>
+        </Row>
       </>
     );
   }

@@ -1,10 +1,10 @@
 import React from 'react'
-
+import Col from 'react-bootstrap/Col'
 
 const Events = ({title, description, creator, participants, eventDate, location}) => {
 
     return (
-        <div className="pink">
+        <Col className="pink">
 
             <h3>Events</h3>
             <p>{title}</p>
@@ -16,7 +16,7 @@ const Events = ({title, description, creator, participants, eventDate, location}
 
 
 
-        </div>
+        </Col>
 
     )
 }

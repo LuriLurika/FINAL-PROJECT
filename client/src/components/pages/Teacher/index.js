@@ -4,6 +4,8 @@ import TeacherForm from "./edit-teachers/";
 
 import SchoolHackApi from "../../../service/SchoolHackApi";
 import Button from "react-bootstrap/Button";
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -87,69 +89,68 @@ class Teacher extends Component {
         >
           <FontAwesomeIcon icon={faPlus} />
         </Button>
-        <div className="row">
-          <div className="col-md-6">
+        <Row>
+          <Col md={6}>
             {!teachers ? (
               <Spinner />
             ) : (
-              <CustomTable
-                data={teachers}
-                header={
-                  <>
-                    <th>Nombre</th>
-                    <th>Foto</th>
-                    <th>Email</th>
-                    <th>Acciones</th>
-                  </>
-                }
-                rowMap={(elm) => (
-                  <tr key={elm._id}>
-                    <td>
-                      {elm.lastname}, {elm.name}
-                    </td>
-                    <td>
-                      <img src={elm.profileImg} alt={elm.username} />
-                    </td>
-                    <td>{elm.email}</td>
-                    <td>
-                      <Button
-                        onClick={() =>
-                          this.setState({
-                            selected: {
-                              id: elm._id,
-                              name: elm.name,
-                              lastname: elm.lastname,
-                              email: elm.email,
-                              username: elm.username,
-                              password: elm.password,
-                              type: "TEACHER",
-                            },
-                            showModal: true,
-                          })
-                        }
-                      >
-                        <FontAwesomeIcon icon={faEdit} />
-                      </Button>
-                      <Button onClick={() => this.handleDelete(elm._id)}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                      </Button>
-                      <Button onClick={() => this.handleInfo(elm._id)}>
-                        <FontAwesomeIcon icon={faInfo} />
-                      </Button>
-                    </td>
-                  </tr>
-                )}
-              />
-            )}
-          </div>
+                <CustomTable
+                  data={teachers}
+                  header={
+                    <>
+                      <th>Nombre</th>
+                      <th>Foto</th>
+                      <th>Email</th>
+                      <th>Acciones</th>
+                    </>
+                  }
+                  rowMap={(elm) => (
+                    <tr key={elm._id}>
+                      <td>
+                        {elm.lastname}, {elm.name}
+                      </td>
+                      <td>
+                        <img src={elm.profileImg} alt={elm.username} />
+                      </td>
+                      <td>{elm.email}</td>
+                      <td>
+                        <Button
+                          onClick={() =>
+                            this.setState({
+                              selected: {
+                                id: elm._id,
+                                name: elm.name,
+                                lastname: elm.lastname,
+                                email: elm.email,
+                                username: elm.username,
+                                password: elm.password,
+                                type: "TEACHER",
+                              },
+                              showModal: true,
+                            })
+                          }
+                        >
+                          <FontAwesomeIcon icon={faEdit} />
+                        </Button>
+                        <Button onClick={() => this.handleDelete(elm._id)}>
+                          <FontAwesomeIcon icon={faTrashAlt} />
+                        </Button>
+                        <Button onClick={() => this.handleInfo(elm._id)}>
+                          <FontAwesomeIcon icon={faInfo} />
+                        </Button>
+                      </td>
+                    </tr>
+                  )}
+                />
+              )}
+          </Col>
 
-          <div
-            className="col-md-6"
+          <Col md={6}
             show={this.state.showModal}
             onHide={() => this.setState({ showModal: false })}
           >
             <p>Datos de profe (name) y de curso, alummo</p>
-          </div>
+          </Col>
 
           <Modal
             size="lg"
@@ -170,7 +171,7 @@ class Teacher extends Component {
               />
             </Modal.Body>
           </Modal>
-        </div>
+        </Row>
       </>
     );
   }

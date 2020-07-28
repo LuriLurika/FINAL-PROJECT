@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router'
 import { Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,7 +11,6 @@ import { faUserGraduate } from "@fortawesome/free-solid-svg-icons";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { faChalkboard } from "@fortawesome/free-solid-svg-icons";
 import "./../../App.css";
-
 
 const Side = () => {
   if (window.location.pathname.match(/login/)) {
@@ -65,6 +64,5 @@ const Side = () => {
     </div>
   );
 };
-
 const Sidebar = withRouter(Side);
-export default Sidebar;
+export default Sidebar

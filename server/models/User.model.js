@@ -5,13 +5,13 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      //required: true,
+      required: true,
       set: text => text.charAt(0).toUpperCase() + text.substring(1)
     },
 
     lastname: {
       type: String,
-      //required: true,
+      required: true,
       set: text => text.charAt(0).toUpperCase() + text.substring(1)
     },
 
@@ -27,7 +27,7 @@ const userSchema = new Schema(
 
     username: {
       type: String,
-      //required: true, 
+      required: true, 
       unique: true
     },
 

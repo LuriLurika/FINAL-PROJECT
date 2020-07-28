@@ -3,7 +3,8 @@
     justify-content: center;
     align-items: center;
     background-color: white;
-    margin-top: -130px;
+    margin-top: -129px;
+    width: 97%;
 }
 
 .lft-box {
@@ -140,7 +141,7 @@
 }
 
 .btn-line:hover span {
-    letter-spacing: 2px;
+    letter-spacing: 5px;
     color: var(--dark-color);
 }
 
@@ -158,7 +159,6 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
     height: 100%;
     z-index: 1;
     transition: all 0.3s;

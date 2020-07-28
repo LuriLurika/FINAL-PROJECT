@@ -2,12 +2,14 @@ const express = require("express")
 const router = express.Router()
 
 const Event = require("../models/Event.model")
-
+const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.user.type) ? next() : res.json({
+    message: "Area Restringida!"
+})
 
 //CREATE
-//checkRole(['DIRECTOR', 'TEACHER'])
 
-router.post('/', (req, res, next) => {
+
+router.post('/', checkRole(['DIRECTOR', 'TEACHER']),(req, res, next) => {
 
     const { title, description, participants, eventDate, eventTime, placeId, placeDescription } = req.body
     
@@ -18,6 +20,7 @@ router.post('/', (req, res, next) => {
 })
 
 //ALL 
+
 router.get("/", (req, res, next) => {
     Event
         .find()
@@ -38,7 +41,7 @@ router.get('/:id',(req, res) => {
 })
 
 //UPDATE
-router.put("/:id", (req, res, next) => {
+router.put("/:id", checkRole(['DIRECTOR', 'TEACHER']), (req, res, next) => {
     Event
         .findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((response) => res.json(response), req.body)
@@ -46,7 +49,7 @@ router.put("/:id", (req, res, next) => {
 })
 
 //DELETE
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", checkRole(['DIRECTOR', 'TEACHER']), (req, res, next) => {
         Event.findByIdAndRemove(req.params.id)
         .then((response) => res.json(response))
         .catch((err) => next(err))

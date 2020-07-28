@@ -5,6 +5,11 @@ import HeaderProfile from './components/headerProfile'
 import Messages from './components/messages'
 import Events from './components/events'
 
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
+
 class Profile extends Component {
 
     constructor() {
@@ -21,19 +26,19 @@ class Profile extends Component {
 
     render() {
         return (
-            <div className="container">
+            <Container>
                 <HeaderProfile />
-                <section className="row">
-                    <div className="col-md-6">
+                <Row as="section">
+                    <Col md={6}>
                         <ProfileDetail name='NOMBRE' lastname='APELLIDO' email='EA@GMAIL.COM' />
 
-                    </div>
-                    <div className="col-md-6">
+                    </Col>
+                    <Col md={6}>
                         <Messages />
                         <Events />
-                    </div>
-                </section>
-            </div>
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }

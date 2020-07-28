@@ -1,10 +1,11 @@
 import React from 'react'
 
+import Col from 'react-bootstrap/Col'
 
 const Messages = ({title, body, sendedBy}) => {
 
     return (
-        <div className="green">
+        <Col className="green">
 
 
             <h3>Messages</h3>
@@ -13,7 +14,7 @@ const Messages = ({title, body, sendedBy}) => {
             <p>{body}</p>
 
 
-        </div>
+        </Col>
 
     )
 }
