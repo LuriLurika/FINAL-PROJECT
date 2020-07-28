@@ -34,7 +34,7 @@ class UserDetails extends Component {
         const id = this.props.match.params.id
         this.SchoolHackApi
             .getOneUser(id)        
-            .then((response) => this.setState({ user: response.data})
+            .then((response) => this.setState({ user: response.data}))
             .catch((err) => console.log(err))
     }
 
