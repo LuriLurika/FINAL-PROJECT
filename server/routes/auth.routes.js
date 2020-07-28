@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt")
 
 
 router.post("/signup", (req, res, next) => {
-  const { username, password } = req.body
+  const { username, password,name, lastname, email, profileImg, type, parent} = req.body
   
   if (!username || !password) {
     res.status(400).json({ message: "Provide username and password" })
@@ -41,6 +41,12 @@ router.post("/signup", (req, res, next) => {
     const aNewUser = new User({
       username: username,
       password: hashPass,
+      name: name,
+      lastname: lastname,
+      email: email,
+      profileImg: profileImg,
+      type: type,
+      parent: parent
     })
 
     aNewUser.save((err) => {
@@ -51,14 +57,14 @@ router.post("/signup", (req, res, next) => {
         return
       }
 
-      req.login(aNewUser, (err) => {
-        if (err) {
-          res.status(500).json({ message: "Login after signup went bad." })
-          return
-        }
+      // req.login(aNewUser, (err) => {
+      //   if (err) {
+      //     res.status(500).json({ message: "Login after signup went bad." })
+      //     return
+      //   }
 
         res.status(200).json(aNewUser)
-      })
+      // })
     })
   })
 })
