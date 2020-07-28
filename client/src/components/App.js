@@ -48,13 +48,13 @@ class App extends Component {
     this.setState({ toast: toastCopy })
   }
 
-  handlerUserChange = (newUserInfor) => {
-    this.userServive
-      .updateUSer(newUserInfor)
-      .then((userSavedFromAPI) =>
-        this.setState({ loggedInUser: userSavedFromAPI })
-      );
-  };
+  // handlerUserChange = (newUserInfor) => {
+  //   this.userServive
+  //     .updateUSer(newUserInfor)
+  //     .then((userSavedFromAPI) =>
+  //       this.setState({ loggedInUser: userSavedFromAPI })
+  //     );
+  // };
   render() {
     this.fetchUser()
     return (
@@ -69,27 +69,11 @@ class App extends Component {
               this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to='/login' />}
             />
 
-            <Route
-              exact
-              path="/login"
-              render={() => (
-                <Login
-                  onLoginSuccess={(userLogged) => {
-                    this.setState({
-                      loggedInUser: userLogged,
-                      toast: {
-                        visible: true,
-                        text: `Bienvenido ${userLogged.name}`,
-                      },
-                    });
-                  }}
-                />
-              )}
-            />
-            <Route path="/courses" render={() => <Courses />} />
-            <Route path="/subjects" render={() => <Subjects />} />
-            <Route path="/teachers" render={() => <Teachers />} />
-            <Route exact path="/users" render={() => <Users />} />
+            <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
+            <Route path="/courses" render={props => <Courses {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
+            <Route path="/subjects" render={props => <Subjects {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
+            <Route path="/teachers" render={props => <Teachers {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
+            <Route exact path="/users" render={props => <Users {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
             <Route
               path="/users/:id"
               render={(props) => <UserDetails {...props} />}
@@ -106,8 +90,8 @@ class App extends Component {
                 />
               )}
             /> */}
-            <Route path="/messages" render={() => <Messages />} />
-            <Route path="/events" render={() => <Events />} />
+            <Route path="/messages" render={props => <Messages {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />}/>
+            <Route path="/events" render={props => <Events {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
           </Switch>
         </main>
       </>

@@ -87,7 +87,7 @@ class Navigation extends Component {
                 </>
               )}
               <Nav.Link as="span">
-                <NavLink to="/login">
+                <NavLink to="/profile">
                   Hola,
                   {this.props.loggedInUser
                     ? this.props.loggedInUser.username
