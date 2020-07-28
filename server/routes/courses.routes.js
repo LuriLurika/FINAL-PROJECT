@@ -2,12 +2,13 @@ const express = require("express")
 const router = express.Router()
 
 const Course = require("../models/Course.model")
-const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.user.type) ? next() : res.json ({message: "Area Restringida!"})
+const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.user.type) ? next() : res.json({
+  message: "Area Restringida!"
+})
 
 //  ALL
-// checkRole(['DIRECTOR'])
 
-router.get("/", (req, res, next) => {
+router.get("/", checkRole(['DIRECTOR']),(req, res, next) => {
   Course.find().sort({ title: 1 })
     .populate('subjects')
     .then((response) => res.json(response))
@@ -15,7 +16,7 @@ router.get("/", (req, res, next) => {
 })
 
 // COURSE-SUBJECTS
-// checkRole(['ALL'])
+
 
 router.get("/:id/subjects", (req, res, next) => {
   Course
@@ -26,9 +27,9 @@ router.get("/:id/subjects", (req, res, next) => {
 })
 
 // STUDENT-COURSE
-// checkRole(['DIRECTOR', 'TEACHER']),
 
-router.get("/:id/users", (req, res, next) => {
+
+router.get("/:id/users", checkRole(['DIRECTOR', 'TEACHER']), (req, res, next) => {
   Course
     .findById(req.params.id)
     .populate('users')
@@ -37,9 +38,9 @@ router.get("/:id/users", (req, res, next) => {
 })
 
 // CREATE
-// checkRole(['DIRECTOR'])
 
-router.post("/", (req, res, next) => {
+
+router.post("/", checkRole(['DIRECTOR']),(req, res, next) => {
 
 const {title, subjects, user} = req.body
 
@@ -50,9 +51,9 @@ const {title, subjects, user} = req.body
 })
 
 // UPDATE
-// checkRole(['DIRECTOR'])
+ 
 
-router.put("/:id", (req, res, next) => {
+router.put("/:id", checkRole(['DIRECTOR']),(req, res, next) => {
   const { title, subjects, users } = req.body
 
   Course.findByIdAndUpdate(
@@ -65,9 +66,9 @@ router.put("/:id", (req, res, next) => {
 })
 
 //DELETE
-// checkRole(['DIRECTOR'])
 
-router.delete("/:id",  (req, res, next) => {
+
+router.delete("/:id", checkRole(['DIRECTOR']),(req, res, next) => {
 
   Course.findByIdAndRemove(req.params.id)
     .then((response) => res.json(response)) 

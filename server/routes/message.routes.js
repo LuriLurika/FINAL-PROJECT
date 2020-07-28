@@ -7,7 +7,7 @@ const User = require("../models/User.model")
 
 
 //CREATE
-//checkRole(['DIRECTOR', 'TEACHER', 'PARENT']),
+
 router.post('/', (req, res) => {
     
     const { title, body, receivedBy } = req.body
@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
 })
 
 //FETCH MESSAGES
-//checkRole(['DIRECTOR', 'TEACHER', 'PARENT']),
+
 router.get("/", (req, res, next) => {
 
 
@@ -35,7 +35,7 @@ router.get("/", (req, res, next) => {
 })
 
 //FETCH ONE MESSAGE
-//checkRole(['DIRECTOR', 'TEACHER', 'PARENT']), 
+
 router.get('/:id', (req, res) => {
     Message
         .findById(req.params.id)
@@ -46,7 +46,7 @@ router.get('/:id', (req, res) => {
 })
 
 //DELETE
-//checkRole(['DIRECTOR', 'TEACHER', 'PARENT']), 
+
 router.delete("/:id",(req, res, next) => {
     Message.findByIdAndRemove(req.params.id)
         .then((response) => res.json(response))
