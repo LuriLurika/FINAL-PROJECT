@@ -57,7 +57,7 @@ class Maps extends Component {
       })
       .catch((err) => console.log(err));
   };
-    
+
   render() {
     return (
       <div>
@@ -70,7 +70,7 @@ class Maps extends Component {
         <CustomMap
           markers={this.state.markers}
           isMarkerShown
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=*****************Key*******************&libraries=geometry,drawing,places"
+          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyA2ccMln2aPW0DPoNiaRV5cNj7kTMyu6hE&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `400px` }} />}
           mapElement={<div style={{ height: `100%` }} />}

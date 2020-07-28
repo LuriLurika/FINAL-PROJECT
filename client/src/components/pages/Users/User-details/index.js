@@ -14,17 +14,17 @@ class UserDetails extends Component {
         super(props)
         this.state = {
 
-          user: {
-            id: props.id,
-            name: props.name,
-            lastname: props.lastname,
-            email: props.email,
-            username: props.username,
-            password: props.password,
-            profileImg: props.profileImg,
-            type: props.type,
-            parent: props.parent,
-          },
+            user: {
+                id: props.id,
+                name: props.name,
+                lastname: props.lastname,
+                email: props.email,
+                username: props.username,
+                password: props.password,
+                profileImg: props.profileImg,
+                type: props.type,
+                parent: props.parent,
+            },
         }
 
         this.SchoolHackApi = new SchoolHackApi()
@@ -33,10 +33,11 @@ class UserDetails extends Component {
     componentDidMount = () => {
         const id = this.props.match.params.id
         this.SchoolHackApi
-            .getOneUser(id)        
-            .then((response) => this.setState({ user: response.data})
+            .getOneUser(id)
+            .then((response) => this.setState({ user: response.data }))
             .catch((err) => console.log(err))
     }
+
 
     render() {
         const { user } = this.state;

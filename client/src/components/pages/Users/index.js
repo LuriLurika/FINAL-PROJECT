@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SchoolHackApi from '../../../service/SchoolHackApi'
 
-import UserCard from './User-Card'
+
 import CustomTable from '../../common/Table'
 import UserForm from '../../common/Forms/User-form'
 import Spinner from '../../ui/Spinner'
@@ -27,7 +27,7 @@ class Users extends Component {
     }
 
     componentDidMount = () => this.updatedUsersList()
-    
+
 
     updatedUsersList = () => {
         this.schoolHackApi
@@ -39,7 +39,7 @@ class Users extends Component {
     saveUserInfo = () => {
 
     }
-    
+
 
     handleModal = status => this.setState({ showModal: status })
 
@@ -47,14 +47,14 @@ class Users extends Component {
         this.schoolHackApi
             .deleteUser(id)
             .then(() => {
-            this.setState({users: this.state.users.filter((elm)=> elm._id !== id)})
-        })
+                this.setState({ users: this.state.users.filter((elm) => elm._id !== id) })
+            })
     }
 
 
 
     handleUsersSubmit = newUserInfo => {
-       
+
         this.schoolHackApi.createUser(newUserInfo)
             .then(() => {
                 this.updatedUsersList()
@@ -68,13 +68,13 @@ class Users extends Component {
 
         return (
             <>
-                
+
                 <Container as="main">
                     <h3>Estudiantes:</h3>
-                    
+
                     {/*this.props.loggedInUser && */}
-                    <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }} > <FontAwesomeIcon icon={faPlus}/> </Button>
-                    
+                    <Button onClick={() => this.handleModal(true)} variant="dark" size="sm" style={{ marginBottom: '20px' }} > <FontAwesomeIcon icon={faPlus} /> </Button>
+
 
                     {
                         !this.state.users ? <h3> <Spinner /></h3> :
@@ -91,7 +91,7 @@ class Users extends Component {
                                     </>
                                 )}
                                 rowMap={elm =>
-                                    
+
                                     <tr>
                                         <td>
                                             {elm.lastname}, {elm.name}
@@ -99,7 +99,7 @@ class Users extends Component {
                                         <td>
                                             <img src={elm.profileImg} alt={elm.username} />
                                         </td>
-                                    
+
                                         <td>
                                             {elm.username}
                                         </td>
@@ -112,16 +112,16 @@ class Users extends Component {
                                         <td>
                                             {elm.parent}
                                         </td>
-                                     
+
                                         <td>
                                             <Button><FontAwesomeIcon icon={faEdit} /></Button>
                                             <Button onClick={() => this.handleUserDelete(elm._id)} ><FontAwesomeIcon icon={faTrashAlt} /></Button>
                                         </td>
                                     </tr>
-                                }   
+                                }
                             />
                     }
-                    
+
                 </Container>
 
                 <Modal size="lg" show={this.state.showModal} onHide={() => this.handleModal(false)}>
