@@ -1,29 +1,13 @@
-import React from 'react'
+import React from "react";
 
-import Col from 'react-bootstrap/Col'
+import Col from "react-bootstrap/Col";
 
-const Messages = ({title, body, sendedBy}) => {
+const Messages = ({ title, body, sendedBy, unreadMessages }) => {
+  return (
+    <Col className="green">
+      <h3>Tienes {unreadMessages} sin leer</h3>
+    </Col>
+  );
+};
 
-    return (
-        <Col className="green">
-
-
-            <h3>Messages</h3>
-            <p>Recibido por {sendedBy}</p>
-            <p>{title}</p>
-            <p>{body}</p>
-
-
-        </Col>
-
-    )
-}
-
-Messages.defaultProps = {
-    title: 'Tarea Jueves 3 de septiembre',
-    body: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim reiciendis tenetur vero dignissimos, architecto non neque accusantium fuga mollitia, veritatis reprehenderit quisquam sint consequuntur quis consectetur nulla perspiciatis quo odit.',
-    sendedBy: 'Angel',
-
-
-}
-export default Messages
+export default Messages;
