@@ -59,10 +59,7 @@ class Messages extends Component {
 
                 <Container as="main">
                     <h3>Mensajes:</h3>
-                    { /*this.props.loggedInUser && */}
                     <Button onClick={() => this.handleModal(true)} size="sm" ><FontAwesomeIcon icon={faEnvelope} /></Button>
-
-
                     {
                         !this.state.messages ? <h3><Spinner /></h3> :
 

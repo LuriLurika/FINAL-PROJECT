@@ -5,22 +5,15 @@ const User = require("../models/User.model")
 const MaterialCourseSubjects = require("../models/Tables/Material-Course-Subject.table")
 const Course = require("../models/Course.model")
 const Subject = require("../models/Subject.model")
-const { Mongoose } = require("mongoose")
 
-var ObjectId = require('mongoose').Types.ObjectId; 
-
-/*const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.user.type) ? next() : res.json({
-  message: "Area Restringida!"
-})*/
-
-//LISTADO DE TODOS LOS PROFESORES Y/O DIRECTORES
+//ALL
 router.get("/", (req, res, next) => {
   User.find({ $or: [{ type: "DIRECTOR" }, { type: "TEACHER" }] })
     .then((response) => res.json(response))
     .catch((err) => next(err))
 })
 
-//LISTADO DE LOS ALUMNOS DE CADA PROFESOR 
+//TEACHER-STUDENTS
 router.get("/:id/users", (req, res, next) => {
   
   Subject.find({ teacher: req.params.id }) 
@@ -37,7 +30,7 @@ router.get("/:id/users", (req, res, next) => {
     .catch((err) => next(err))
 })
 
-//LISTADO DE CURSOS EN LOS QUE IMPLANTE CLASES CADA PROFESOR
+//TEACHER-COURSES
 router.get("/:id/courses", (req, res, next) => {
   Subject.find({ teacher: req.params.id }).populate('teacher')
     .then(subjects => {
@@ -51,7 +44,7 @@ router.get("/:id/courses", (req, res, next) => {
     .catch((err) => next(err))
 })
 
-//MODIFICAR PERFIL
+//UPDATE PROFILE
 
 router.put("/:id", (req, res, next) => {
 
@@ -70,7 +63,7 @@ router.post("/new", (req, res, next) => {
     .catch((err) => next(err))
 })
 
-//ELIMINAR PROFESOR (SOLO EL DIRECTOR)
+//DELETE
 
 router.delete("/:id", (req, res, next) => {
   Promise.all([

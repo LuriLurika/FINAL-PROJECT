@@ -1,34 +1,42 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-import SchoolHackApi from '../../../../service/SchoolHackApi'
+import SchoolHackApi from "../../../../service/SchoolHackApi";
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import { Link } from 'react-router-dom'
-import Spinner from '../../../ui/Spinner'
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { Link } from "react-router-dom";
+import Spinner from "../../../ui/Spinner";
 
 class UserDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {
+        id: props.id,
+        name: props.name,
+        lastname: props.lastname,
+        email: props.email,
+        username: props.username,
+        password: props.password,
+        profileImg: props.profileImg,
+        type: props.type,
+        parent: props.parent,
+      },
+    };
 
-    constructor(props) {
-        super(props)
-        this.state = {
+    this.SchoolHackApi = new SchoolHackApi();
+  }
 
-          user: {
-            id: props.id,
-            name: props.name,
-            lastname: props.lastname,
-            email: props.email,
-            username: props.username,
-            password: props.password,
-            profileImg: props.profileImg,
-            type: props.type,
-            parent: props.parent,
-          },
-        }
+  componentDidMount = () => {
+    const id = this.props.match.params.id;
+    this.SchoolHackApi.getOneUser(id)
+      .then((response) => this.setState({ user: response.data }))
+      .catch((err) => console.log(err));
+  };
 
-        this.SchoolHackApi = new SchoolHackApi()
-    }
+  render() {
+    const { user } = this.state;
 
     componentDidMount = () => {
         const id = this.props.match.params.id
@@ -70,5 +78,4 @@ class UserDetails extends Component {
     }
 }
 
-
-   export default UserDetails
+export default UserDetails;

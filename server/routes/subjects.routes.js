@@ -5,7 +5,7 @@ const Subject = require("../models/Subject.model")
 const MaterialCourseSubjects = require("../models/Tables/Material-Course-Subject.table")
 
 
-//VER TODAS LAS ASIGNATURAS
+//ALL
 router.get("/", (req, res, next) => {
   Subject.find()
     .populate('teacher')
@@ -13,7 +13,7 @@ router.get("/", (req, res, next) => {
     .catch((err) => next(err))
 })
 
-//MODIFICAR UNA ASIGNATURA
+//UPDATE
 router.put("/:id", (req, res, next) => {
    const { title, teacher, description, subjectsMaterials } = req.body
 
@@ -22,7 +22,7 @@ router.put("/:id", (req, res, next) => {
     .catch((err) => next(err))
 })
 
-//ELIMINAR UNA ASIGNATURA
+//DELETE
 router.delete("/:id", (req, res, next) => {
  
   Subject.findByIdAndDelete(req.params.id)
@@ -30,7 +30,7 @@ router.delete("/:id", (req, res, next) => {
     .catch((err) => next(err))
 })
 
-//CREAR ASIGNATURA
+//CREATE
 router.post("/", (req, res, next) => {
   Subject.create(req.body)
     .then((response) => res.json(response))

@@ -57,8 +57,6 @@ router.post("/signup", (req, res, next) => {
           return
         }
 
-        // Send the user's information to the frontend
-        // We can use also: res.status(200).json(req.user)
         res.status(200).json(aNewUser)
       })
     })
@@ -75,8 +73,7 @@ router.post("/login", (req, res, next) => {
     }
 
     if (!theUser) {
-      // "failureDetails" contains the error messages
-      // from our logic in "LocalStrategy" { message: '...' }.
+
       res.status(401).json(failureDetails)
       return
     }
@@ -88,7 +85,6 @@ router.post("/login", (req, res, next) => {
         return
       }
 
-      // We are now logged in (that's why we can also send req.user)
       res.status(200).json(theUser)
     })
   })(req, res, next)
@@ -96,7 +92,6 @@ router.post("/login", (req, res, next) => {
 
 
 router.post("/logout", (req, res, next) => {
-  // req.logout() is defined by passport
   req.logout()
   res.status(200).json({ message: "Log out success!" })
 })
