@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Table from 'react-bootstrap/Table'
 
@@ -12,8 +12,7 @@ const CustomTable = ({ data, header, rowMap }) => {
                 </tr>
             </thead>
             <tbody>
-                {data.map(rowMap)}
-                
+                {data.map(rowMap)}                
             </tbody>
         </Table>
     )

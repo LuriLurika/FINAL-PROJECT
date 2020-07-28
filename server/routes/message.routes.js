@@ -6,7 +6,8 @@ const User = require("../models/User.model")
 
 
 
-//Crear mensaje ( todos menos el Student puede crear un msj) checkRole(['DIRECTOR', 'TEACHER', 'PARENT']),
+//CREATE
+//checkRole(['DIRECTOR', 'TEACHER', 'PARENT']),
 router.post('/', (req, res) => {
     
     const { title, body, receivedBy } = req.body
@@ -20,7 +21,7 @@ router.post('/', (req, res) => {
         .catch((err) => next(err))
 })
 
-//VER MENSAJES
+//FETCH MESSAGES
 //checkRole(['DIRECTOR', 'TEACHER', 'PARENT']),
 router.get("/", (req, res, next) => {
 
@@ -33,7 +34,7 @@ router.get("/", (req, res, next) => {
         .catch((err) => next(err))
 })
 
-//VER UN MENSAJE
+//FETCH ONE MESSAGE
 //checkRole(['DIRECTOR', 'TEACHER', 'PARENT']), 
 router.get('/:id', (req, res) => {
     Message
@@ -44,7 +45,7 @@ router.get('/:id', (req, res) => {
         .catch((err) => next(err))
 })
 
-//BORRAR MENSAJE
+//DELETE
 //checkRole(['DIRECTOR', 'TEACHER', 'PARENT']), 
 router.delete("/:id",(req, res, next) => {
     Message.findByIdAndRemove(req.params.id)

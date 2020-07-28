@@ -29,8 +29,8 @@ const CustomMap = withScriptjs(
               : { lat: 37.350923, lng: -6.0520363 }
           }
         >
-          {markers.map((elm) => {
-            return <Marker position={elm} />;
+          {markers.map((elm, idx) => {
+            return <Marker key={`marker_${idx}`} position={elm} />;
           })}
         </GoogleMap>
       </div>
@@ -43,7 +43,9 @@ class Maps extends Component {
     super(props);
     this.state = {
       placeId: props.placeId,
+      placeDescription: props.placeDescription,
       markers: [],
+      visibleAddress: props.visibleAddress
     };
   }
   componentDidMount = () => this.searchLocationByPlaceId(this.state.placeId);
@@ -61,12 +63,15 @@ class Maps extends Component {
   render() {
     return (
       <div>
-        <GooglePlacesAutocomplete
+        {this.state.visibleAddress && <GooglePlacesAutocomplete
+          placeholder={this.state.placeDescription}
           onSelect={(place) => {
-            this.setState({ placeId: place.place_id });
+            console.log(place)
+            this.setState({ placeId: place.place_id, placeDescription: place.description });
             this.searchLocationByPlaceId(place.place_id);
+            this.props.onPlaceChanged({ placeId: place.place_id, placeDescription: place.description })
           }}
-        />
+        />}
         <CustomMap
           markers={this.state.markers}
           isMarkerShown
@@ -80,4 +85,7 @@ class Maps extends Component {
   }
 }
 
+Maps.defaultProps = {
+  visibleAddress: true
+}
 export default Maps;
