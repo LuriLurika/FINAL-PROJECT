@@ -4,7 +4,7 @@ import "./App.css";
 
 import AuthService from "./../service/AuthService";
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import Index from "./pages/Index";
 import Navigation from "./ui/Navbar";
@@ -33,6 +33,21 @@ class App extends Component {
     this.AuthService = new AuthService();
   }
 
+  setTheUser = user => this.setState({ loggedInUser: user }, () => console.log("El estado de App ha cambiado:", this.state))
+
+  fetchUser = () => {
+    this.AuthService
+      .isLoggedIn()
+      .then(response => this.state.loggedInUser === null && this.setState({ loggedInUser: response.data }))
+      .catch(err => console.log({ err }))
+  }
+
+  handleToast = (visible, text = '') => {
+    let toastCopy = { ...this.state.toast }
+    toastCopy = { visible, text }
+    this.setState({ toast: toastCopy })
+  }
+
   handlerUserChange = (newUserInfor) => {
     this.userServive
       .updateUSer(newUserInfor)
@@ -41,13 +56,19 @@ class App extends Component {
       );
   };
   render() {
+    this.fetchUser()
     return (
       <>
-        <Navigation />
+        <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} handleToast={this.handleToast} />
         <Sidebar />
         <main>
           <Switch>
             <Route exact path="/" render={() => <Index />} />
+
+            <Route path="/profile" render={() =>
+              this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to='/login' />}
+            />
+
             <Route
               exact
               path="/login"
@@ -74,7 +95,7 @@ class App extends Component {
               render={(props) => <UserDetails {...props} />}
             />
 
-            <Route
+            {/* <Route
               path="/profile"
               render={() => (
                 <Profile
@@ -84,7 +105,7 @@ class App extends Component {
                   }
                 />
               )}
-            />
+            /> */}
             <Route path="/messages" render={() => <Messages />} />
             <Route path="/events" render={() => <Events />} />
           </Switch>

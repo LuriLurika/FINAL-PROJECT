@@ -45,6 +45,7 @@ class Subjects extends Component {
       .getAllSubjects()
       .then((response) => {
         this.setState({ subjects: response.data });
+        this.props.handleToast(true, "LISTA DE USUARIOS!");
       })
       .catch((err) => console.log(err));
   };
