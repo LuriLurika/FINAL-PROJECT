@@ -4,7 +4,7 @@ import "./App.css";
 
 import AuthService from "./../service/AuthService";
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import Index from "./pages/Index";
 import Navigation from "./ui/Navbar";
@@ -33,48 +33,53 @@ class App extends Component {
     this.AuthService = new AuthService();
   }
 
-  handlerUserChange = (newUserInfor) => {
-    this.userServive
-      .updateUSer(newUserInfor)
-      .then((userSavedFromAPI) =>
-        this.setState({ loggedInUser: userSavedFromAPI })
-      );
-  };
+  setTheUser = user => this.setState({ loggedInUser: user }, () => console.log("El estado de App ha cambiado:", this.state))
+
+  fetchUser = () => {
+    this.AuthService
+      .isLoggedIn()
+      .then(response => this.state.loggedInUser === null && this.setState({ loggedInUser: response.data }))
+      .catch(err => console.log({ err }))
+  }
+
+  handleToast = (visible, text = '') => {
+    let toastCopy = { ...this.state.toast }
+    toastCopy = { visible, text }
+    this.setState({ toast: toastCopy })
+  }
+
+  // handlerUserChange = (newUserInfor) => {
+  //   this.userServive
+  //     .updateUSer(newUserInfor)
+  //     .then((userSavedFromAPI) =>
+  //       this.setState({ loggedInUser: userSavedFromAPI })
+  //     );
+  // };
   render() {
+    this.fetchUser()
     return (
       <>
-        <Navigation />
+        <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} handleToast={this.handleToast} />
         <Sidebar />
         <main>
           <Switch>
             <Route exact path="/" render={() => <Index />} />
-            <Route
-              exact
-              path="/login"
-              render={() => (
-                <Login
-                  onLoginSuccess={(userLogged) => {
-                    this.setState({
-                      loggedInUser: userLogged,
-                      toast: {
-                        visible: true,
-                        text: `Bienvenido ${userLogged.name}`,
-                      },
-                    });
-                  }}
-                />
-              )}
+
+            <Route path="/profile" render={() =>
+              this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to='/login' />}
             />
-            <Route path="/courses" render={() => <Courses />} />
-            <Route path="/subjects" render={() => <Subjects />} />
-            <Route path="/teachers" render={() => <Teachers />} />
-            <Route exact path="/users" render={() => <Users />} />
+
+            <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
+            <Route path="/courses" render={props => <Courses {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
+            <Route path="/subjects" render={props => <Subjects {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
+            <Route path="/teachers" render={props => <Teachers {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
+            <Route exact path="/users" render={props => <Users {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
             <Route
               path="/users/:id"
               render={(props) => <UserDetails {...props} />}
             />
 
-            <Route
+            {/* <Route
               path="/profile"
               render={() => (
                 <Profile
@@ -84,9 +89,9 @@ class App extends Component {
                   }
                 />
               )}
-            />
-            <Route path="/messages" render={() => <Messages />} />
-            <Route path="/events" render={() => <Events />} />
+            /> */}
+            <Route path="/messages" render={props => <Messages {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />}/>
+            <Route path="/events" render={props => <Events {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
           </Switch>
         </main>
       </>

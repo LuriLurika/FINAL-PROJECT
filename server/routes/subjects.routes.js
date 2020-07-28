@@ -5,6 +5,7 @@ const Subject = require("../models/Subject.model")
 const MaterialCourseSubjects = require("../models/Tables/Material-Course-Subject.table")
 
 
+
 //ALL
 router.get("/", (req, res, next) => {
   Subject.find()

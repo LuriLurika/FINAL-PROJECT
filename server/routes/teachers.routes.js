@@ -6,15 +6,20 @@ const MaterialCourseSubjects = require("../models/Tables/Material-Course-Subject
 const Course = require("../models/Course.model")
 const Subject = require("../models/Subject.model")
 
+
+const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.user.type) ? next() : res.json({
+  message: "Area Restringida!"
+})
+
 //ALL
-router.get("/", (req, res, next) => {
+router.get("/", checkRole(['DIRECTOR']), (req, res, next) => {
   User.find({ $or: [{ type: "DIRECTOR" }, { type: "TEACHER" }] })
     .then((response) => res.json(response))
     .catch((err) => next(err))
 })
 
 //TEACHER-STUDENTS
-router.get("/:id/users", (req, res, next) => {
+router.get("/:id/users", checkRole(['DIRECTOR', 'TEACHER']), (req, res, next) => {
   
   Subject.find({ teacher: req.params.id }) 
     .then(subjects => {
@@ -31,7 +36,7 @@ router.get("/:id/users", (req, res, next) => {
 })
 
 //TEACHER-COURSES
-router.get("/:id/courses", (req, res, next) => {
+router.get("/:id/courses", checkRole(['DIRECTOR', 'TEACHER']), (req, res, next) => {
   Subject.find({ teacher: req.params.id }).populate('teacher')
     .then(subjects => {
       return subjects.length === 0 ? new Promise((resolve, reject) => resolve([]))
@@ -46,7 +51,7 @@ router.get("/:id/courses", (req, res, next) => {
 
 //UPDATE PROFILE
 
-router.put("/:id", (req, res, next) => {
+router.put("/:id", checkRole(['DIRECTOR', 'TEACHER']), (req, res, next) => {
 
   User
     .findByIdAndUpdate(req.params.id, req.body, { new: true })
@@ -54,9 +59,9 @@ router.put("/:id", (req, res, next) => {
     .catch((err) => next(err))
 })
 
-//CREAR NUEVO PROFESOR (SOLO EL DIRECTOR)
+//CREATE NEW THEACHER
 
-router.post("/new", (req, res, next) => {
+router.post("/new", checkRole(['DIRECTOR']), (req, res, next) => {
   User
     .create(req.body)
     .then((response) => res.json(response), req.body)
@@ -65,7 +70,7 @@ router.post("/new", (req, res, next) => {
 
 //DELETE
 
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", checkRole(['DIRECTOR']), (req, res, next) => {
   Promise.all([
     User.findByIdAndRemove(req.params.id),
     MaterialCourseSubjects.findOneAndRemove({
