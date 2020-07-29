@@ -56,15 +56,12 @@ class TeacherForm extends Component {
         uploadData.append("profileImg", e.target.files[0])
         this.fileService.handleUpload(uploadData)
             .then(response => {
-                console.log('Subida de archivo finalizada! La URL de Cloudinray es: ', response.data.secure_url)
                 this.setState({
                     teachers: {
                         ...this.state.teachers,
                         profileImg: response.data.secure_url
                     }
                 })
-                console.log('nueva imagen subida', this.state.teachers)
-
             })
             .catch(err => console.log(err))
     }

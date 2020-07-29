@@ -102,10 +102,10 @@ class Navigation extends Component {
                 )}
               <Nav.Link as="span">
                 <NavLink to="/profile">
-                  Hola,
+                  Hola,  
                   {this.props.loggedInUser
-                    ? this.props.loggedInUser.username
-                    : "invitado"}
+                    ? " " + this.props.loggedInUser.username
+                    : " invitado"}
                 </NavLink>
               </Nav.Link>
             </Nav>

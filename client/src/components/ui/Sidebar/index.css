@@ -1,0 +1,26 @@
+.left-sidebar {
+    align-self: center;
+}
+
+.left-sidebar a {
+    color: var(--main-color);
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    margin-bottom: 10px;
+    width: 150px;
+    background-color: cornflowerblue;
+    align-content: space-between;
+}
+
+.myIcon {
+    width: 60px;
+    color: pink;
+    text-align: right;
+    margin-right: auto;
+}

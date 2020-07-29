@@ -13,7 +13,7 @@ import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { faChalkboard } from "@fortawesome/free-solid-svg-icons";
 
 import AuthService from "./../../../service/AuthService"
-import "./../../App.css";
+import "./index.css";
 
 
 class Side extends Component {
@@ -35,7 +35,7 @@ class Side extends Component {
       return null
     }
 
-      // console.log(this.props.loggedInUser, 'abajo')
+    // console.log(this.props.loggedInUser, 'abajo')
     return (
       <div className="left-sidebar">
         <Nav
@@ -45,79 +45,92 @@ class Side extends Component {
         >
           <Nav.Item>
             <NavLink to="/messages">
-              <FontAwesomeIcon className="myIcon" icon={faEnvelope} /> Mensajes
+              Mensajes
+               <span className="myIcon">
+              <FontAwesomeIcon icon={faEnvelope} fixedWidth />
+              </span>
             </NavLink>
           </Nav.Item>
           <Nav.Item>
             <NavLink to="/events">
-              <FontAwesomeIcon className="myIcon" icon={faCalendarWeek} />{" "}
               Eventos
+               <span className="myIcon">
+                <FontAwesomeIcon icon={faCalendarWeek} fixedWidth />
+              </span>
             </NavLink>
           </Nav.Item>
 
           <Nav.Item>
             <NavLink to="/profile">
-              <FontAwesomeIcon className="myIcon" icon={faUser} /> Perfil
+              Perfil
+                 <span className="myIcon">
+                <FontAwesomeIcon icon={faUser} fixedWidth />
+              </span>
             </NavLink>
           </Nav.Item>
 
           {this.props.loggedInUser !== null &&
-          this.props.loggedInUser.type === "DIRECTOR" ? (
-            <>
-              {" "}
-              <Nav.Item>
-                <NavLink to="/courses">
-                  <FontAwesomeIcon className="myIcon" icon={faChalkboard} />{" "}
-                  Cursos
-                </NavLink>
-              </Nav.Item>
-              <Nav.Item>
-                <NavLink to="/subjects">
-                  <FontAwesomeIcon className="myIcon" icon={faBook} />{" "}
-                  Asignaturas
-                </NavLink>
-              </Nav.Item>
-            </>
-          ) : null}
+            this.props.loggedInUser.type === "DIRECTOR" ? (
+              <>
+
+                <Nav.Item>
+                  <NavLink to="/courses">
+                    Cursos
+                       <span className="myIcon">
+                  <FontAwesomeIcon  icon={faChalkboard} fixedWidth />
+                    </span>
+                  </NavLink>
+                </Nav.Item>
+                <Nav.Item>
+                  <NavLink to="/subjects">
+                    Asignaturas
+                       <span className="myIcon">
+                  <FontAwesomeIcon  icon={faBook} fixedWidth />
+                    </span>
+                  </NavLink>
+                </Nav.Item>
+              </>
+            ) : null}
           {this.props.loggedInUser !== null &&
-          this.props.loggedInUser.type === "TEACHER" ? (
-            <>
-              {" "}
-              <Nav.Item>
-                <NavLink to="/courses">
-                  <FontAwesomeIcon className="myIcon" icon={faChalkboard} />{" "}
-                  Cursos
-                </NavLink>
-              </Nav.Item>
-              <Nav.Item>
-                <NavLink to="/subjects">
-                  <FontAwesomeIcon className="myIcon" icon={faBook} />{" "}
-                  Asignaturas
-                </NavLink>
-              </Nav.Item>
-            </>
-          ) : null}
+            this.props.loggedInUser.type === "TEACHER" ? (
+              <>
+
+                <Nav.Item>
+                  <NavLink to="/courses">
+                    Cursos
+                    <span className="myIcon">
+                      <FontAwesomeIcon icon={faChalkboard} fixedWidth />
+                    </span>
+                  </NavLink>
+                </Nav.Item>
+                <Nav.Item>
+                  <NavLink to="/subjects">
+                    Asignaturas
+                    <span className="myIcon">
+                      <FontAwesomeIcon icon={faBook} fixedWidth />
+                    </span>
+                  </NavLink>
+                </Nav.Item>
+              </>
+            ) : null}
 
           {this.props.loggedInUser !== null &&
-          this.props.loggedInUser.type === "DIRECTOR" ? (
-            <>
-              <Nav.Item>
-                <NavLink to="/users">
-                  <FontAwesomeIcon className="myIcon" icon={faUserGraduate} />
-                  Estudiantes
-                </NavLink>
-              </Nav.Item>
-              <Nav.Item>
-                <NavLink to="/teachers">
-                  <FontAwesomeIcon
-                    className="myIcon"
-                    icon={faChalkboardTeacher}
-                  />
-                  Profesores
-                </NavLink>
-              </Nav.Item>
-            </>
-          ) : null}
+            this.props.loggedInUser.type === "DIRECTOR" ? (
+              <>
+                <Nav.Item>
+                  <NavLink to="/users">
+                    Estudiantes
+                  <FontAwesomeIcon className="myIcon" icon={faUserGraduate} fixedWidth />
+                  </NavLink>
+                </Nav.Item>
+                <Nav.Item>
+                  <NavLink to="/teachers">
+                    Profesores
+                  <FontAwesomeIcon className="myIcon" icon={faChalkboardTeacher} fixedWidth />
+                  </NavLink>
+                </Nav.Item>
+              </>
+            ) : null}
         </Nav>
       </div>
     );

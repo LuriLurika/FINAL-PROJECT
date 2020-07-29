@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
+import FileService from '../../../../service/FileService'
+
 class UserForm extends Component {
   constructor(props) {
     super(props);
@@ -17,9 +19,13 @@ class UserForm extends Component {
         profileImg: props.profileImg,
         type: props.type,
         parent: props.parent,
+        profileImg: props.profileImg,
+
       },
       validated: false,
-    };
+    }
+    this.fileService = new FileService();
+
   }
 
   handleInputChange = (e) => {
@@ -42,7 +48,25 @@ class UserForm extends Component {
       this.props.onUserChanged(user);
     }
     this.setState({ validated: true });
-  };
+  }
+
+  handleFileUpload = e => {
+    const uploadData = new FormData()
+    uploadData.append("profileImg", e.target.files[0])
+    this.fileService.handleUpload(uploadData)
+      .then(response => {
+        console.log('Subida de archivo finalizada! La URL de Cloudinray es: ', response.data.secure_url)
+        this.setState({
+          user: {
+            ...this.state.user,
+            profileImg: response.data.secure_url
+          }
+        })
+        console.log('nueva imagen subida', this.state.user)
+
+      })
+      .catch(err => console.log(err))
+  }
 
   render() {
     const { user, validated } = this.state;
@@ -81,11 +105,11 @@ class UserForm extends Component {
 
           <Form.Group>
             <Form.Label>Imagen (URL)</Form.Label>
-            <Form.Control
-              onChange={(event) => this.handleInputChange(event)}
-              value={user.profileImg}
+            <Form.Control as="input"
+              onChange={this.handleFileUpload}
+
               name="profileImg"
-              type="text"
+              type="file"
             />
           </Form.Group>
 

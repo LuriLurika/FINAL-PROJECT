@@ -39,6 +39,7 @@ class Teacher extends Component {
       selected: emptyTeacher,
       courses: undefined,
       students: null,
+      mount : false,
     };
     this.schoolHackApi = new SchoolHackApi();
   }
@@ -151,7 +152,7 @@ class Teacher extends Component {
                                 username: elm.username,
                                 password: elm.password,
                                 type: "TEACHER",
-                                profileImg: elm.password,
+                                profileImg: elm.profileImg,
 
                               },
                               showModal: true,
@@ -180,7 +181,7 @@ class Teacher extends Component {
 
 
             {!courses ? (
-              <Spinner />
+              null
             ) : (
                 <>
                   <p>Actualmente el profesor !!!sacar name!! da clase a {students.length} alumnos en {courses.length} cursos de las siguientes asignaturas:</p>,
