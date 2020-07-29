@@ -18,8 +18,10 @@ import Messages from "./pages/Messages";
 import Events from "./pages/Events";
 import Sidebar from "./ui/Sidebar";
 import Profile from "./pages/Profile/index";
-import UserDetails from "./pages/Users/User-details";
+
 import MessageDetail from "./pages/MessageDetail";
+
+import CustomToast from './ui/Toast'
 
 class App extends Component {
   constructor() {
@@ -28,8 +30,10 @@ class App extends Component {
       loggedInUser: null,
       toast: {
         visible: false,
-        text: "",
+        text: '',
       },
+
+
     };
     this.AuthService = new AuthService();
   }
@@ -54,138 +58,32 @@ class App extends Component {
     toastCopy = { visible, text };
     this.setState({ toast: toastCopy });
   };
-
-  // handlerUserChange = (newUserInfor) => {
-  //   this.userServive
-  //     .updateUSer(newUserInfor)
-  //     .then((userSavedFromAPI) =>
-  //       this.setState({ loggedInUser: userSavedFromAPI })
-  //     );
-  // };
+  
+ 
   render() {
-    this.fetchUser();
+    this.fetchUser()
+
     return (
       <>
-        <Navigation
-          setTheUser={this.setTheUser}
-          loggedInUser={this.state.loggedInUser}
-          handleToast={this.handleToast}
-        />
-        <Sidebar />
+        <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} handleToast={this.handleToast} />
+        <Sidebar loggedInUser={this.state.loggedInUser} />
         <main>
           <Switch>
             <Route exact path="/" render={() => <Index />} />
-
-            <Route
-              path="/profile"
-              render={() =>
-                this.state.loggedInUser ? (
-                  <Profile loggedInUser={this.state.loggedInUser} />
-                ) : (
-                  <Redirect to="/login" />
-                )
-              }
-            />
-
-            <Route
-              path="/login"
-              render={(props) => (
-                <Login
-                  {...props}
-                  setTheUser={this.setTheUser}
-                  handleToast={this.handleToast}
-                />
-              )}
-            />
-            <Route
-              path="/courses"
-              render={(props) => (
-                <Courses
-                  {...props}
-                  setTheUser={this.setTheUser}
-                  handleToast={this.handleToast}
-                />
-              )}
-            />
-            <Route
-              path="/subjects"
-              render={(props) => (
-                <Subjects
-                  {...props}
-                  setTheUser={this.setTheUser}
-                  handleToast={this.handleToast}
-                />
-              )}
-            />
-            <Route
-              path="/teachers"
-              render={(props) => (
-                <Teachers
-                  {...props}
-                  setTheUser={this.setTheUser}
-                  handleToast={this.handleToast}
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/users"
-              render={(props) => (
-                <Users
-                  {...props}
-                  setTheUser={this.setTheUser}
-                  handleToast={this.handleToast}
-                />
-              )}
-            />
-            <Route
-              path="/users/:id"
-              render={(props) => <UserDetails {...props} />}
-            />
-
-            {/* <Route
-              path="/profile"
-              render={() => (
-                <Profile
-                  user={this.state.loggedInUser}
-                  onUserChange={(newUserInfor) =>
-                    this.handlerUserChange(newUserInfor)
-                  }
-                />
-              )}
-            /> */}
-            <Route
-              path="/messages/:id"
-              render={(props) => (
-                <MessageDetail
-                  {...props}
-                  setTheUser={this.setTheUser}
-                  handleToast={this.handleToast}
-                />
-              )}
-            />
-            <Route
-              path="/messages"
-              render={(props) => (
-                <Messages
-                  {...props}
-                  loggedInUser={this.state.loggedInUser}
-                  handleToast={this.handleToast}
-                />
-              )}
-            />
-            <Route
-              path="/events"
-              render={(props) => (
-                <Events
-                  {...props}
-                  loggedInUser={this.state.loggedInUser}
-                  handleToast={this.handleToast}
-                />
-              )}
-            />
+            <Route path="/profile" render={() => this.state.loggedInUser ? ( <Profile loggedInUser={this.state.loggedInUser} />) : ( <Redirect to="/login" /> )} />
+            <Route path="/login" render={(props) => ( <Login {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} /> )} />
+            <Route path="/courses" render={(props) => (  <Courses {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />  )}/>
+            <Route path="/subjects"  render={(props) => ( <Subjects  {...props}  setTheUser={this.setTheUser}  handleToast={this.handleToast}  /> )}  />
+            <Route path="/teachers"  render={(props) => (  <Teachers  {...props}  setTheUser={this.setTheUser}  handleToast={this.handleToast}   />  )} />
+            <Route exact path="/users" render={(props) => ( <Users  {...props}  setTheUser={this.setTheUser}  handleToast={this.handleToast}  />  )}  />
+            
+            <Route path="/messages/:id" render={(props) => ( <MessageDetail {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />)}/>
+            <Route path="/messages" render={(props) => ( <Messages {...props} loggedInUser={this.state.loggedInUser} handleToast={this.handleToast}  />)}/>
+            <Route path="/events" render={(props) => ( <Events {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} /> )}/>
           </Switch>
         </main>
+        <CustomToast {...this.state.toast} handleToast={this.handleToast} />
+
       </>
     );
   }

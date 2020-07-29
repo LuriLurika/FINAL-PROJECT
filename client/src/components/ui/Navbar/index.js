@@ -1,19 +1,29 @@
 import React, { Component } from "react";
+
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Modal from "react-bootstrap/Modal";
+
 import ModalLogin from "./components/modal";
 import Logo from "./../../logoverde.png";
 import AuthService from "./../../../service/AuthService";
+
 import { Link, NavLink } from "react-router-dom";
+
 import "./index.css";
+
+
 class Navigation extends Component {
+
   constructor(props) {
+    
     super(props);
     this.state = {
       showModal: false,
       about: false,
     };
+
+
     this.AuthService = new AuthService();
 
     this.modalInfo = {
@@ -59,33 +69,37 @@ class Navigation extends Component {
                     </NavLink>
                   </Nav.Link>
                   <Nav.Link as="span">
-                    <span onClick={this.logout}>Cerrar sesión</span>
+                         <NavLink
+                      to="/login"
+                      onClick={this.logout}>
+                      Cerrar sesión
+                    </NavLink>
                   </Nav.Link>
                 </>
               ) : (
-                <>
-                  <Nav.Link as="span">
-                    <NavLink
-                      to="#"
-                      onClick={() => {
-                        this.handleModal(true, "about");
-                      }}
-                    >
-                      ¿Quiénes somos?
+                  <>
+                    <Nav.Link as="span">
+                      <NavLink
+                        to="#"
+                        onClick={() => {
+                          this.handleModal(true, "about");
+                        }}
+                      >
+                        ¿Quiénes somos?
                     </NavLink>
-                  </Nav.Link>
-                  <Nav.Link as="span">
-                    <NavLink
-                      to="#"
-                      onClick={() => {
-                        this.handleModal(true, "contact");
-                      }}
-                    >
-                      Contacta con nosotros
+                    </Nav.Link>
+                    <Nav.Link as="span">
+                      <NavLink
+                        to="#"
+                        onClick={() => {
+                          this.handleModal(true, "contact");
+                        }}
+                      >
+                        Contacta con nosotros
                     </NavLink>
-                  </Nav.Link>
-                </>
-              )}
+                    </Nav.Link>
+                  </>
+                )}
               <Nav.Link as="span">
                 <NavLink to="/profile">
                   Hola,
@@ -107,8 +121,8 @@ class Navigation extends Component {
           {this.state.about ? (
             <ModalLogin {...this.modalInfo.about} />
           ) : (
-            <ModalLogin {...this.modalInfo.contact} />
-          )}
+              <ModalLogin {...this.modalInfo.contact} />
+            )}
         </Modal>
       </>
     );

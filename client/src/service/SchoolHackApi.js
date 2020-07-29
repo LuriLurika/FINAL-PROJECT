@@ -8,7 +8,6 @@ class SchoolHackApi {
       baseURL: `${process.env.REACT_APP_API_URL}`,
       withCredentials: true,
     });
-    console.log(token);
     this.config = {
       headers: {
         Authorization: `token ${token}`,
