@@ -69,7 +69,11 @@ class Navigation extends Component {
                     </NavLink>
                   </Nav.Link>
                   <Nav.Link as="span">
-                    <span onClick={this.logout}>Cerrar sesión</span>
+                         <NavLink
+                      to="/login"
+                      onClick={this.logout}>
+                      Cerrar sesión
+                    </NavLink>
                   </Nav.Link>
                 </>
               ) : (
