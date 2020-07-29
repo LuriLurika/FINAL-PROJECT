@@ -19,6 +19,7 @@ import Events from "./pages/Events";
 import Sidebar from "./ui/Sidebar";
 import Profile from "./pages/Profile/index";
 import UserDetails from "./pages/Users/User-details";
+import MessageDetail from "./pages/MessageDetail";
 
 import CustomToast from './ui/Toast'
 
@@ -29,28 +30,36 @@ class App extends Component {
       loggedInUser: null,
       toast: {
         visible: false,
-        text: '',
+        text: "",                
       },
+
+      
     };
     this.AuthService = new AuthService();
   }
 
-  setTheUser = user => this.setState({ loggedInUser: user }, () => console.log("El estado de App ha cambiado:", this.state))
+  setTheUser = (user) =>
+    this.setState({ loggedInUser: user }, () =>
+      console.log("El estado de App ha cambiado:", this.state)
+    );
 
   fetchUser = () => {
-    this.AuthService
-      .isLoggedIn()
-      .then(response => this.state.loggedInUser === null && this.setState({ loggedInUser: response.data }))
-      .catch(err => console.log({ err }))
-  }
+    this.AuthService.isLoggedIn()
+      .then(
+        (response) =>
+          this.state.loggedInUser === null &&
+          this.setState({ loggedInUser: response.data })
+      )
+      .catch((err) => console.log({ err }));
+  };
 
-  handleToast = (visible, text = '') => {
-    let toastCopy = { ...this.state.toast }
-    toastCopy = { visible, text }
-    console.log('TOSTADA', toastCopy)
-    this.setState({ toast: toastCopy })
-  }
+  handleToast = (visible, text = "") => {
+    let toastCopy = { ...this.state.toast };
+    toastCopy = { visible, text };
+    this.setState({ toast: toastCopy });
+  };
 
+  
   // handlerUserChange = (newUserInfor) => {
   //   this.userServive
   //     .updateUSer(newUserInfor)
@@ -69,8 +78,15 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={() => <Index />} />
 
-            <Route path="/profile" render={() =>
-              this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to='/login' />}
+            <Route
+              path="/profile"
+              render={() =>
+                this.state.loggedInUser ? (
+                  <Profile loggedInUser={this.state.loggedInUser} />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
             />
 
             <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
@@ -83,8 +99,7 @@ class App extends Component {
               render={(props) => <UserDetails {...props} />}
             />
 
-            {/* <Route
-              path="/profile"
+            {/* <Route path="/profile"
               render={() => (
                 <Profile
                   user={this.state.loggedInUser}

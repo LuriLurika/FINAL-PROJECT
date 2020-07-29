@@ -11,7 +11,8 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 
-import Container from "react-bootstrap/Container";
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
@@ -76,7 +77,7 @@ class Users extends Component {
 
     return (
       <>
-        <Container as="main">
+      
           <h3>Estudiantes</h3>
 
           {/*this.props.loggedInUser && */}
@@ -89,8 +90,9 @@ class Users extends Component {
             style={{ marginBottom: "20px" }}
           >
             <FontAwesomeIcon icon={faPlus} />
-          </Button>
-
+        </Button>
+         <Row>
+<Col md={6}>
           {!users ? (
             <h3>
               <Spinner />
@@ -102,10 +104,8 @@ class Users extends Component {
                 <>
                   <th>Nombre</th>
                   <th>Foto</th>
-                  <th>Usuario</th>
                   <th>Email</th>
-                  <th>tipo</th>
-                  <th>Madre/Padre</th>
+                  <th></th>
                 </>
               }
               rowMap={(elm) => (
@@ -116,10 +116,8 @@ class Users extends Component {
                   <td>
                     <img src={elm.profileImg} alt={elm.username} />
                   </td>
-                  <td>{elm.username}</td>
                   <td>{elm.email}</td>
-                  <td>{elm.type}</td>
-                  <td>{elm.parent}</td>
+                  
                   <td>
                     <Link to={`/users/${elm._id}`}>
                       <Button>
@@ -152,8 +150,8 @@ class Users extends Component {
               )}
             />
           )}
-        </Container>
-
+        
+</Col>
         <Modal
           size="lg"
           show={showModal}
@@ -173,7 +171,8 @@ class Users extends Component {
               onUserChanged={this.handleUsersSubmit}
             />
           </Modal.Body>
-        </Modal>
+          </Modal>
+          </Row>
       </>
     );
   }

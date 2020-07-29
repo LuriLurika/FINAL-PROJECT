@@ -1,19 +1,29 @@
 import React, { Component } from "react";
+
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Modal from "react-bootstrap/Modal";
+
 import ModalLogin from "./components/modal";
 import Logo from "./../../logoverde.png";
 import AuthService from "./../../../service/AuthService";
+
 import { Link, NavLink } from "react-router-dom";
+
 import "./index.css";
+
+
 class Navigation extends Component {
+
   constructor(props) {
+    
     super(props);
     this.state = {
       showModal: false,
       about: false,
     };
+
+
     this.AuthService = new AuthService();
 
     this.modalInfo = {
