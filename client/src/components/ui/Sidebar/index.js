@@ -35,10 +35,9 @@ class Side extends Component {
       return null
     }
 
-    console.log(this.props.loggedInUser)
+      // console.log(this.props.loggedInUser, 'abajo')
     return (
       <div className="left-sidebar">
-
         <Nav
           className=" d-none d-md-block bg-light sidebar"
           activeKey="/home"
@@ -47,54 +46,81 @@ class Side extends Component {
           <Nav.Item>
             <NavLink to="/messages">
               <FontAwesomeIcon className="myIcon" icon={faEnvelope} /> Mensajes
-          </NavLink>
+            </NavLink>
           </Nav.Item>
           <Nav.Item>
             <NavLink to="/events">
-              <FontAwesomeIcon className="myIcon" icon={faCalendarWeek} /> Eventos
-          </NavLink>
+              <FontAwesomeIcon className="myIcon" icon={faCalendarWeek} />{" "}
+              Eventos
+            </NavLink>
           </Nav.Item>
 
           <Nav.Item>
             <NavLink to="/profile">
               <FontAwesomeIcon className="myIcon" icon={faUser} /> Perfil
-          </NavLink>
+            </NavLink>
           </Nav.Item>
 
-          {/* {
-            this.props.loggedInUser !== null && this.props.loggedInUser.type === 'DIRECTOR' || this.props.loggedInUser.type === 'TEACHER' ? console.log(this.props.loggedInUser.type) : null
-          }
-             */}
+          {this.props.loggedInUser !== null &&
+          this.props.loggedInUser.type === "DIRECTOR" ? (
+            <>
+              {" "}
+              <Nav.Item>
+                <NavLink to="/courses">
+                  <FontAwesomeIcon className="myIcon" icon={faChalkboard} />{" "}
+                  Cursos
+                </NavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <NavLink to="/subjects">
+                  <FontAwesomeIcon className="myIcon" icon={faBook} />{" "}
+                  Asignaturas
+                </NavLink>
+              </Nav.Item>
+            </>
+          ) : null}
+          {this.props.loggedInUser !== null &&
+          this.props.loggedInUser.type === "TEACHER" ? (
+            <>
+              {" "}
+              <Nav.Item>
+                <NavLink to="/courses">
+                  <FontAwesomeIcon className="myIcon" icon={faChalkboard} />{" "}
+                  Cursos
+                </NavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <NavLink to="/subjects">
+                  <FontAwesomeIcon className="myIcon" icon={faBook} />{" "}
+                  Asignaturas
+                </NavLink>
+              </Nav.Item>
+            </>
+          ) : null}
 
-
-          <Nav.Item >
-            <NavLink to="/courses">
-              <FontAwesomeIcon className="myIcon" icon={faChalkboard} /> Cursos
-          </NavLink>
-          </Nav.Item>
-
-
-
-          <Nav.Item>
-            <NavLink to="/subjects">
-              <FontAwesomeIcon className="myIcon" icon={faBook} /> Asignaturas
-          </NavLink>
-          </Nav.Item>
-          <Nav.Item>
-            <NavLink to="/users">
-              <FontAwesomeIcon className="myIcon" icon={faUserGraduate} />
-            Estudiantes
-          </NavLink>
-          </Nav.Item>
-          <Nav.Item>
-            <NavLink to="/teachers">
-              <FontAwesomeIcon className="myIcon" icon={faChalkboardTeacher} />
-            Profesores
-          </NavLink>
-          </Nav.Item>
+          {this.props.loggedInUser !== null &&
+          this.props.loggedInUser.type === "DIRECTOR" ? (
+            <>
+              <Nav.Item>
+                <NavLink to="/users">
+                  <FontAwesomeIcon className="myIcon" icon={faUserGraduate} />
+                  Estudiantes
+                </NavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <NavLink to="/teachers">
+                  <FontAwesomeIcon
+                    className="myIcon"
+                    icon={faChalkboardTeacher}
+                  />
+                  Profesores
+                </NavLink>
+              </Nav.Item>
+            </>
+          ) : null}
         </Nav>
       </div>
-    )
+    );
   }
 }
 

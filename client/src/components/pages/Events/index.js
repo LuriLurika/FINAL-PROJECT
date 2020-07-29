@@ -19,14 +19,15 @@ const emptyEvent = {
   description: "",
   eventDate: "",
   eventTime: 0,
-  placeId: '',
-  placeDescription: '¿En qué lugar?'
+  placeId: "",
+  placeDescription: "¿En qué lugar?",
 };
 
 class Events extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      canEdit: props.loggedInUser && props.loggedInUser.type === "DIRECTOR",
       events: undefined,
       showModal: false,
       selected: emptyEvent,
@@ -49,6 +50,7 @@ class Events extends Component {
   handleModal = (status) => this.setState({ showModal: status });
 
   handleEventSubmit = (eventInfo) => {
+    console.log(eventInfo)
     const action = eventInfo.id
       ? this.schoolHackApi.updateEvent(eventInfo)
       : this.schoolHackApi.createEvents(eventInfo);
@@ -61,30 +63,33 @@ class Events extends Component {
   };
 
   handleDelete = (eventId) => {
-    this.schoolHackApi.deleteEvent(eventId)
+    this.schoolHackApi
+      .deleteEvent(eventId)
       .then(() => this.updatedEventsList())
       .catch((err) => console.log("error al eliminar Event", err));
   };
-  handleEdit = eventId => {
+  handleEdit = (eventId) => {
     this.setState({
-      selected: this.state.events.find(elm => elm._id === eventId),
-      showModal: true
-    })
-  }
+      selected: this.state.events.find((elm) => elm._id === eventId),
+      showModal: true,
+    });
+  };
   render() {
-    const { selected } = this.state;
+    const { selected, canEdit } = this.state;
     return (
       <>
         <Container as="main">
           <h3>Eventos:</h3>
 
-          <Button
-            onClick={() =>
-              this.setState({ selected: emptyEvent, showModal: true })
-            }
-          >
-            <FontAwesomeIcon icon={faPlus} />
-          </Button>
+          {canEdit && (
+            <Button
+              onClick={() =>
+                this.setState({ selected: emptyEvent, showModal: true })
+              }
+            >
+              <FontAwesomeIcon icon={faPlus} />
+            </Button>
+          )}
 
           {!this.state.events ? (
             <h3>
@@ -96,6 +101,7 @@ class Events extends Component {
                 <EventCard
                   key={elm._id}
                   {...elm}
+                  canEdit={canEdit}
                   onHandleDelete={this.handleDelete}
                   onHandleEdit={this.handleEdit}
                 />

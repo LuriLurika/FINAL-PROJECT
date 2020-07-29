@@ -27,7 +27,7 @@ class Profile extends Component {
     getPendingMessages = id => {
       this.schoolHackApi.getAllReceivedMessages(id)
         .then(response => {
-          console.log(response)
+       
           this.setState({ unreadMessages: response.data.filter(elm => !elm.readed).length })
         })
     }

@@ -21,6 +21,9 @@ class EventForm extends Component {
       participants: [],
       eventDate: props.eventDate,
       eventTime: props.eventTime,
+      placeId: props.placeId,
+      placeDescription: props.placeDescription,
+      id: props.id
     };
   }
 
@@ -94,14 +97,13 @@ class EventForm extends Component {
             >
               {this.state.time.map((elm, inx) => (
                 <option key={elm} value={inx}>
-                  {" "}
-                  {elm}{" "}
+                  {elm}
                 </option>
               ))}
             </Form.Control>
           </Form.Group>
           <Form.Group>
-            <Maps />
+            <Maps placeDescription={this.state.placeDescription} placeId={this.state.placeId} onPlaceChanged={placeInfo => this.setState({placeId: placeInfo.placeId, placeDescription: placeInfo.placeDescription})} />
           </Form.Group>
           <Button variant="dark" type="submit">
             Submit

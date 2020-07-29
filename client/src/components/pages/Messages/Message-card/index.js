@@ -3,7 +3,8 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 
 import "./message-card.css";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckDouble } from "@fortawesome/free-solid-svg-icons";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
@@ -13,6 +14,7 @@ const MessageCard = ({
   title,
   body,
   sendedBy,
+  readed,
   receivedBy,
   onReplyMessage,
   _id,
@@ -21,7 +23,9 @@ const MessageCard = ({
     <Col md={3}>
       <Card>
         <Card.Body>
-          <Card.Title>{title}</Card.Title>
+          <Card.Title>
+            {title} {readed && <FontAwesomeIcon icon={faCheckDouble} />}
+          </Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             Enviado por: {sendedBy.name}
           </Card.Subtitle>
