@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 
 class MessageForm extends Component {
   constructor(props) {
+        console.log(props);
+
     super(props);
     this.state = {
       message: {
@@ -12,6 +14,8 @@ class MessageForm extends Component {
         title: props.title,
         body: props.body,
         receivedBy: props.receivedBy,
+        users: props.users,
+        parentMessage: props.parentMessage
       },
       validated: false,
     };
@@ -40,7 +44,7 @@ class MessageForm extends Component {
     const { message, validated } = this.state;
     return (
       <>
-        <h3>Nuevo Mensaje</h3>
+        <h3>{this.props.receivedBy ? 'Responder mensaje' : 'Nuevo Mensaje'}</h3>
         <hr></hr>
         <Form noValidate validated={validated} onSubmit={this.handleSubmit}>
           <Form.Group>
@@ -77,7 +81,11 @@ class MessageForm extends Component {
               name="receivedBy"
               type="text"
             >
-              <option>Hola</option>
+              {this.props.users.map((elm) => (
+                <option key={elm._id} value={elm._id}>
+                  {elm.name} {elm.lastname}
+                </option>
+              ))}
             </Form.Control>
           </Form.Group>
 

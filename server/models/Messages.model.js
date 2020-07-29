@@ -3,31 +3,42 @@ const Schema = mongoose.Schema
 
 
 const messageSchema = new Schema(
-    {
-        title: {
-            type: String,
-            required: true
-        },
+  {
+    title: {
+      type: String,
+      required: true,
+    },
 
-        body: {
-            type: String,
-            required: true
-        },
+    body: {
+      type: String,
+      required: true,
+    },
 
-        sendedBy: {
-            type: mongoose.ObjectId,
-            ref: "User"
-        },
+    sendedBy: {
+      type: mongoose.ObjectId,
+      ref: "User",
+    },
+    parentMessage: {
+      type: mongoose.ObjectId,
+      ref: "Message",
+    },
+    receivedBy: [
+      {
+        //array
+        type: mongoose.ObjectId,
+        ref: "User",
+      },
+    ],
 
-        receivedBy: [{ //array
-            type: mongoose.ObjectId,
-            ref: "User"
-        }],
-        
-    },{
-        timestamps: true,
-    }
-)
+    readed: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 const Message = mongoose.model("Message", messageSchema)
 
