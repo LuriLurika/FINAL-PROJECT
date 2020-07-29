@@ -70,6 +70,7 @@ class UserForm extends Component {
 
   render() {
     const { user, validated } = this.state;
+    const {fromDetail} = this.props
     return (
       <>
         <h3>{user.id ? "Editar Alumno" : "Nuevo Alumno"}</h3>
@@ -88,7 +89,6 @@ class UserForm extends Component {
               Campo requerido
             </Form.Control.Feedback>
           </Form.Group>
-
           <Form.Group>
             <Form.Label>Apellido</Form.Label>
             <Form.Control
@@ -102,17 +102,17 @@ class UserForm extends Component {
               Campo requerido
             </Form.Control.Feedback>
           </Form.Group>
-
           <Form.Group>
             <Form.Label>Imagen (URL)</Form.Label>
-            <Form.Control as="input"
+            <Form.Control
+              as="input"
               onChange={this.handleFileUpload}
-
               name="profileImg"
               type="file"
             />
           </Form.Group>
 
+          {!fromDetail &&(
           <Form.Group>
             <Form.Label>Tipo</Form.Label>
             <Form.Control
@@ -121,8 +121,7 @@ class UserForm extends Component {
               name="type"
               type="text"
             />
-          </Form.Group>
-
+          </Form.Group>)}
           <Form.Group>
             <Form.Label>Madre / Padre</Form.Label>
             <Form.Control
@@ -136,7 +135,6 @@ class UserForm extends Component {
               Campo requerido
             </Form.Control.Feedback>
           </Form.Group>
-
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email </Form.Label>
             <Form.Control
@@ -150,7 +148,6 @@ class UserForm extends Component {
               Campo requerido
             </Form.Control.Feedback>
           </Form.Group>
-
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Username</Form.Label>
             <Form.Control
@@ -164,23 +161,22 @@ class UserForm extends Component {
               Campo requerido
             </Form.Control.Feedback>
           </Form.Group>
-
-          {!user.id && (
-            <Form.Group>
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                required
-                onChange={(event) => this.handleInputChange(event)}
-                value={user.password}
-                name="password"
-                type="password"
-              />
-              <Form.Control.Feedback type="invalid">
-                Campo requerido
-              </Form.Control.Feedback>
-            </Form.Group>
-          )}
-
+          {!user.id &&
+            !fromDetail &&(
+              <Form.Group>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  required
+                  onChange={(event) => this.handleInputChange(event)}
+                  value={user.password}
+                  name="password"
+                  type="password"
+                />
+                <Form.Control.Feedback type="invalid">
+                  Campo requerido
+                </Form.Control.Feedback>
+              </Form.Group>
+            )}
           <Button variant="dark" type="submit">
             Enviar
           </Button>
@@ -190,10 +186,5 @@ class UserForm extends Component {
   }
 }
 
-UserForm.defaultProps = {
-  profileImg:
-    "https://res.cloudinary.com/dz0aow7wm/image/upload/v1595247178/School%20Hack/images_rtgo7j.jpg",
-  type: "STUDENT",
-};
-
+UserForm.defaultProps = { fromDetail: false };
 export default UserForm;

@@ -56,7 +56,7 @@ class Users extends Component {
 
   updatedUsersList = () => {
     this.schoolHackApi
-      .getAllUsers()
+      .getAllStudent()
       .then((response) => {
         this.setState({ users: response.data });
       })

@@ -12,7 +12,7 @@ const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.
 
 //ALL
 router.get("/", (req, res, next) => {
-  User.find({ type: "STUDENT" })
+  User.find({ type: { $in: req.query.type.split(',') } })
     .then((response) => res.json(response))
     .catch((err) => next(err))
 })
