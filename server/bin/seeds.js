@@ -205,4 +205,4 @@ User.create(users)
     console.log("Se han creado los cursos");
     mongoose.connection.close();
   })
-  .catch((err) => next(err));
+  .catch((err) => console.log(err));

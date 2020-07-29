@@ -5,6 +5,9 @@ const User = require("../models/User.model")
 const Course = require("../models/Course.model")
 const Subject = require("../models/Subject.model")
 
+const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.user.type) ? next() : res.json({
+  message: "Area Restringida!"
+})
 
 
 //ALL
@@ -87,7 +90,7 @@ router.put("/:id", (req, res, next) => {
 })
 
 //DELETE
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", checkRole(['DIRECTOR']), (req, res, next) => {
 
   User.findByIdAndDelete(req.params.id)
 

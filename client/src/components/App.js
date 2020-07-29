@@ -27,8 +27,10 @@ class App extends Component {
       loggedInUser: null,
       toast: {
         visible: false,
-        text: "",
+        text: "",                
       },
+
+      
     };
     this.AuthService = new AuthService();
   }
@@ -48,6 +50,7 @@ class App extends Component {
     this.setState({ toast: toastCopy })
   }
 
+  
   // handlerUserChange = (newUserInfor) => {
   //   this.userServive
   //     .updateUSer(newUserInfor)
@@ -60,7 +63,7 @@ class App extends Component {
     return (
       <>
         <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} handleToast={this.handleToast} />
-        <Sidebar />
+        <Sidebar loggedInUser={this.state.loggedInUser}  />
         <main>
           <Switch>
             <Route exact path="/" render={() => <Index />} />
@@ -74,13 +77,9 @@ class App extends Component {
             <Route path="/subjects" render={props => <Subjects {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
             <Route path="/teachers" render={props => <Teachers {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
             <Route exact path="/users" render={props => <Users {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
-            <Route
-              path="/users/:id"
-              render={(props) => <UserDetails {...props} />}
-            />
+            <Route path="/users/:id"  render={(props) => <UserDetails {...props} />} />
 
-            {/* <Route
-              path="/profile"
+            {/* <Route path="/profile"
               render={() => (
                 <Profile
                   user={this.state.loggedInUser}
