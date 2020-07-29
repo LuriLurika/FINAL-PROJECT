@@ -77,7 +77,7 @@ class App extends Component {
         <Sidebar />
         <main>
           <Switch>
-            <Route exact path="/" render={() => <Index />} />
+            <Route exact path="/" render={() => <Redirect to="/login" />} />
 
             <Route
               path="/profile"
