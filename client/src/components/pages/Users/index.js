@@ -164,7 +164,7 @@ class Users extends Component {
                               type: "STUDENT",
                               parent: elm.parent,
                             },
-                            showModal: true,
+                            showModal: true
                           });
                         }}
                       >

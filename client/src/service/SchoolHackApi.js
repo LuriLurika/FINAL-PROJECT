@@ -16,6 +16,7 @@ class SchoolHackApi {
   }
 
   getAllCourses = () => this.service.get("/courses");
+  updatedCourse = (course) => this.service.put(`/courses/${course._id}`, course)
 
   getAllUsers = () => this.service.get("/users");
   getOneUser = (id) => this.service.get(`/users/${id}`);

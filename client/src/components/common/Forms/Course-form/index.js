@@ -9,56 +9,45 @@ class CourseForm extends Component {
 
     super(props);
     this.state = {
-      course: {
-        id: props.id,
-        title: props.title,
-        subjects: props.body,
-        users: props.users,
-       },
+      selectedSubjects:undefined,
       validated: false,
     };
   }
 
   handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     this.setState({
-      course: { ...this.state.course, [name]: value },
-    });
-  };
+      selectedSubjects: value
+    })
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
-    const { course } = this.state;
+    const { selectedSubjects } = this.state;
     if (form.checkValidity() === false) {
       e.stopPropagation();
     } else {
-      this.props.onCourseChanged(course);
+      this.props.onSubjectChanged(selectedSubjects);
     }
     this.setState({ validated: true });
   };
 
   render() {
-    const { course, validated } = this.state;
+    const { selectedSubjects, validated } = this.state;
     return (
       <>
         
         <hr></hr>
         <Form noValidate validated={validated} onSubmit={this.handleSubmit}>
-          <Form.Group>
-            <Form.Label>Curso</Form.Label>
-                    <Form.Control
-                        required onChange={(event) => this.handleInputChange(event)} value={course.title} name="title" type="text"/>
-          </Form.Group>
-
+         
        <Form.Group>
             <Form.Label>Materias</Form.Label>
             <Form.Control
               as="select"
               required
               onChange={(event) => this.handleInputChange(event)}
-              value={course.subjects}
-              name="subjects"
+              value={selectedSubjects}
               type="text"
             >
               {this.props.subjects.map((elm) => (
@@ -70,7 +59,7 @@ class CourseForm extends Component {
           </Form.Group>
         
           <Button variant="dark" type="submit">
-            Modificar
+            Agregar
           </Button>
         </Form>
       </>

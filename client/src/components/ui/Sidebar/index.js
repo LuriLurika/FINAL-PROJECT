@@ -77,30 +77,6 @@ class Side extends Component {
                   Asignaturas
                 </NavLink>
               </Nav.Item>
-            </>
-          ) : null}
-          {this.props.loggedInUser !== null &&
-          this.props.loggedInUser.type === "TEACHER" ? (
-            <>
-              {" "}
-              <Nav.Item>
-                <NavLink to="/courses">
-                  <FontAwesomeIcon className="myIcon" icon={faChalkboard} />{" "}
-                  Cursos
-                </NavLink>
-              </Nav.Item>
-              <Nav.Item>
-                <NavLink to="/subjects">
-                  <FontAwesomeIcon className="myIcon" icon={faBook} />{" "}
-                  Asignaturas
-                </NavLink>
-              </Nav.Item>
-            </>
-          ) : null}
-
-          {this.props.loggedInUser !== null &&
-          this.props.loggedInUser.type === "DIRECTOR" ? (
-            <>
               <Nav.Item>
                 <NavLink to="/users">
                   <FontAwesomeIcon className="myIcon" icon={faUserGraduate} />
