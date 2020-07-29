@@ -30,10 +30,10 @@ class App extends Component {
       loggedInUser: null,
       toast: {
         visible: false,
-        text: "",                
+        text: '',
       },
 
-      
+
     };
     this.AuthService = new AuthService();
   }
@@ -53,13 +53,14 @@ class App extends Component {
       .catch((err) => console.log({ err }));
   };
 
-  handleToast = (visible, text = "") => {
-    let toastCopy = { ...this.state.toast };
-    toastCopy = { visible, text };
-    this.setState({ toast: toastCopy });
-  };
+  handleToast = (visible, text = '') => {
+    let toastCopy = { ...this.state.toast }
+    toastCopy = { visible, text }
+    console.log('TOSTADA', toastCopy)
+    this.setState({ toast: toastCopy })
+  }
 
-  
+
   // handlerUserChange = (newUserInfor) => {
   //   this.userServive
   //     .updateUSer(newUserInfor)
@@ -84,8 +85,8 @@ class App extends Component {
                 this.state.loggedInUser ? (
                   <Profile loggedInUser={this.state.loggedInUser} />
                 ) : (
-                  <Redirect to="/login" />
-                )
+                    <Redirect to="/login" />
+                  )
               }
             />
 
@@ -112,8 +113,9 @@ class App extends Component {
             <Route path="/messages" render={props => <Messages {...props} setTheUser={this.setTheUser} />} />
             <Route path="/events" render={props => <Events {...props} setTheUser={this.setTheUser} />} />
           </Switch>
-          <CustomToast {...this.state.toast} handleToast={this.handleToast} />
         </main>
+        <CustomToast {...this.state.toast} handleToast={this.handleToast} />
+
       </>
     );
   }

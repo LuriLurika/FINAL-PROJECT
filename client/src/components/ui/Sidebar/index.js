@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import { withRouter } from 'react-router'
 import { Nav } from "react-bootstrap";
@@ -24,21 +24,21 @@ class Side extends Component {
     this.state = {}
 
     this.AuthService = new AuthService()
-    
+
   }
 
- 
+
   render() {
 
-     
+
     if (window.location.pathname.match(/login/)) {
       return null
     }
 
-      console.log(this.props.loggedInUser)
+    console.log(this.props.loggedInUser)
     return (
       <div className="left-sidebar">
-         
+
         <Nav
           className=" d-none d-md-block bg-light sidebar"
           activeKey="/home"
@@ -58,21 +58,21 @@ class Side extends Component {
           <Nav.Item>
             <NavLink to="/profile">
               <FontAwesomeIcon className="myIcon" icon={faUser} /> Perfil
-          </NavLink>            
-          </Nav.Item>   
-          
-          {
+          </NavLink>
+          </Nav.Item>
+
+          {/* {
             this.props.loggedInUser !== null && this.props.loggedInUser.type === 'DIRECTOR' || this.props.loggedInUser.type === 'TEACHER' ? console.log(this.props.loggedInUser.type) : null
           }
-            
-            
+             */}
 
-              <Nav.Item >
-                <NavLink to="/courses">
-                  <FontAwesomeIcon className="myIcon" icon={faChalkboard} /> Cursos
+
+          <Nav.Item >
+            <NavLink to="/courses">
+              <FontAwesomeIcon className="myIcon" icon={faChalkboard} /> Cursos
           </NavLink>
-              </Nav.Item>
-            
+          </Nav.Item>
+
 
 
           <Nav.Item>

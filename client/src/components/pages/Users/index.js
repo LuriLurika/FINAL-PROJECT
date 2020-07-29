@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SchoolHackApi from "../../../service/SchoolHackApi";
 
+
 import CustomTable from "../../common/Table";
 import UserForm from "../../common/Forms/User-form";
 import Spinner from "../../ui/Spinner";
@@ -26,6 +27,7 @@ const emptyForm = {
   password: "",
   type: "STUDENT",
   parent: "",
+  profileImg: "",
 };
 
 class Users extends Component {
@@ -72,107 +74,111 @@ class Users extends Component {
       .catch((err) => console.log("error en createUser", err));
   };
 
+
+
   render() {
     const { users, showModal, selected } = this.state;
 
     return (
       <>
-      
-          <h3>Estudiantes</h3>
 
-          {/*this.props.loggedInUser && */}
-          <Button
-            onClick={() =>
-              this.setState({ selected: emptyForm, showModal: true })
-            }
-            variant="dark"
-            size="sm"
-            style={{ marginBottom: "20px" }}
-          >
-            <FontAwesomeIcon icon={faPlus} />
-        </Button>
-         <Row>
-<Col md={6}>
-          {!users ? (
-            <h3>
-              <Spinner />
-            </h3>
-          ) : (
-            <CustomTable
-              data={users}
-              header={
-                <>
-                  <th>Nombre</th>
-                  <th>Foto</th>
-                  <th>Email</th>
-                  <th></th>
-                </>
-              }
-              rowMap={(elm) => (
-                <tr key={elm._id}>
-                  <td>
-                    {elm.lastname}, {elm.name}
-                  </td>
-                  <td>
-                    <img src={elm.profileImg} alt={elm.username} />
-                  </td>
-                  <td>{elm.email}</td>
-                  
-                  <td>
-                    <Link to={`/users/${elm._id}`}>
-                      <Button>
-                        <FontAwesomeIcon icon={faInfo} />
-                      </Button>
-                    </Link>
-                    <Button
-                      onClick={() => {
-                        this.setState({
-                          selected: {
-                            id: elm._id,
-                            lastname: elm.lastname,
-                            email: elm.email,
-                            name: elm.name,
-                            username: elm.username,
-                            type: "STUDENT",
-                            parent: elm.parent,
-                          },
-                          showModal: true,
-                        });
-                      }}
-                    >
-                      <FontAwesomeIcon icon={faEdit} />
-                    </Button>
-                    <Button onClick={() => this.handleUserDelete(elm._id)}>
-                      <FontAwesomeIcon icon={faTrashAlt} />
-                    </Button>
-                  </td>
-                </tr>
-              )}
-            />
-          )}
-        
-</Col>
-        <Modal
-          size="lg"
-          show={showModal}
-          onHide={() => this.setState({ showModal: false })}
+        <h3>Estudiantes</h3>
+
+        {/*this.props.loggedInUser && */}
+        <Button
+          onClick={() =>
+            this.setState({ selected: emptyForm, showModal: true })
+          }
+          variant="dark"
+          size="sm"
+          style={{ marginBottom: "20px" }}
         >
-          <Modal.Body>
-            <UserForm
-              role="DIRECTOR"
-              id={selected.id}
-              lastname={selected.lastname}
-              email={selected.email}
-              name={selected.name}
-              username={selected.username}
-              password={selected.password}
-              type={selected.type}
-              parent={selected.parent}
-              onUserChanged={this.handleUsersSubmit}
-            />
-          </Modal.Body>
+          <FontAwesomeIcon icon={faPlus} />
+        </Button>
+        <Row>
+          <Col md={6}>
+            {!users ? (
+              <h3>
+                <Spinner />
+              </h3>
+            ) : (
+                <CustomTable
+                  data={users}
+                  header={
+                    <>
+                      <th>Nombre</th>
+                      <th>Foto</th>
+                      <th>Email</th>
+                      <th></th>
+                    </>
+                  }
+                  rowMap={(elm) => (
+                    <tr key={elm._id}>
+                      <td>
+                        {elm.lastname}, {elm.name}
+                      </td>
+                      <td>
+                        <img src={elm.profileImg} alt={elm.username} />
+                      </td>
+                      <td>{elm.email}</td>
+
+                      <td>
+                        <Link to={`/users/${elm._id}`}>
+                          <Button>
+                            <FontAwesomeIcon icon={faInfo} />
+                          </Button>
+                        </Link>
+                        <Button
+                          onClick={() => {
+                            this.setState({
+                              selected: {
+                                id: elm._id,
+                                lastname: elm.lastname,
+                                email: elm.email,
+                                name: elm.name,
+                                username: elm.username,
+                                type: "STUDENT",
+                                parent: elm.parent,
+                                profileImg: elm.profileImg
+                              },
+                              showModal: true,
+                            });
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faEdit} />
+                        </Button>
+                        <Button onClick={() => this.handleUserDelete(elm._id)}>
+                          <FontAwesomeIcon icon={faTrashAlt} />
+                        </Button>
+                      </td>
+                    </tr>
+                  )}
+                />
+              )}
+
+          </Col>
+          <Modal
+            size="lg"
+            show={showModal}
+            onHide={() => this.setState({ showModal: false })}
+          >
+            <Modal.Body>
+              <UserForm
+                role="DIRECTOR"
+                id={selected.id}
+                lastname={selected.lastname}
+                email={selected.email}
+                name={selected.name}
+                username={selected.username}
+                password={selected.password}
+                type={selected.type}
+                parent={selected.parent}
+                profileImg={selected.profileImg}
+                onUserChanged={this.handleUsersSubmit}
+              />
+            </Modal.Body>
           </Modal>
-          </Row>
+        </Row>
       </>
     );
   }

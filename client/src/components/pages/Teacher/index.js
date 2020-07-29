@@ -3,6 +3,7 @@ import CustomTable from "../../common/Table";
 import TeacherForm from "./edit-teachers/";
 
 import SchoolHackApi from "../../../service/SchoolHackApi";
+
 import Button from "react-bootstrap/Button";
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -26,6 +27,7 @@ const emptyTeacher = {
   username: "",
   password: "",
   type: "TEACHER",
+  profileImg: "",
 };
 
 class Teacher extends Component {
@@ -37,13 +39,13 @@ class Teacher extends Component {
       selected: emptyTeacher,
       courses: undefined,
       students: null,
-
     };
     this.schoolHackApi = new SchoolHackApi();
   }
 
   componentDidMount = () => {
     this.updatedTeachersList();
+
   };
 
   updatedTeachersList = () => {
@@ -79,18 +81,16 @@ class Teacher extends Component {
     this.schoolHackApi.getCoursesTeacher(id)
       .then((response) => {
         this.setState({ courses: response.data })
+        console.log(response.data)
       })
       .catch((err) => console.log("error en get c Teacher", err));
-
   }
 
   getUsers = (id) => {
     this.schoolHackApi.getUsersTeacher(id)
-
-        .then((response) => {
-          this.setState({ students: response.data })
-        })
-      
+      .then((response) => {
+        this.setState({ students: response.data })
+      })
       .catch((err) => console.log("error en get u Teacher", err));
   }
 
@@ -151,6 +151,8 @@ class Teacher extends Component {
                                 username: elm.username,
                                 password: elm.password,
                                 type: "TEACHER",
+                                profileImg: elm.password,
+
                               },
                               showModal: true,
                             })
@@ -175,13 +177,14 @@ class Teacher extends Component {
             show={this.state.showModal}
             onHide={() => this.setState({ showModal: false })}
           >
-            {console.log('studiantes', students)}
-            {!students ? (
-              <Spinner /> 
+
+
+            {!courses ? (
+              <Spinner />
             ) : (
                 <>
-                  <p>Actualmente el profesor !!!sacar name!!  {teachers.name} da clase a {students.length} alumnos en {courses.length} cursos de las siguientes asignaturas:</p>
-                  
+                  <p>Actualmente el profesor !!!sacar name!! da clase a {students.length} alumnos en {courses.length} cursos de las siguientes asignaturas:</p>,
+
                   {
                     courses.map(element => acum = [...acum, ...element.subjects]),
                     acum.map(subject => <p key={subject._id}>{subject.title}</p>)
@@ -208,6 +211,7 @@ class Teacher extends Component {
                 username={selected.username}
                 password={selected.password}
                 type="TEACHER"
+                profileImg={selected.profileImg}
                 onTeacherChanged={this.handleTeachersSubmit}
               />
             </Modal.Body>
