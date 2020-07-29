@@ -69,7 +69,7 @@ class App extends Component {
         <Sidebar loggedInUser={this.state.loggedInUser} />
         <main>
           <Switch>
-            <Route exact path="/" render={() => <Index />} />
+            <Route exact path="/" render={() => <Redirect to="/login" />} />
             <Route path="/profile" render={() => this.state.loggedInUser ? ( <Profile loggedInUser={this.state.loggedInUser} />) : ( <Redirect to="/login" /> )} />
             <Route path="/login" render={(props) => ( <Login {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} /> )} />
             <Route path="/courses" render={(props) => (  <Courses {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />  )}/>
