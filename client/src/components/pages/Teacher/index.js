@@ -3,6 +3,7 @@ import CustomTable from "../../common/Table";
 import TeacherForm from "./edit-teachers/";
 
 import SchoolHackApi from "../../../service/SchoolHackApi";
+
 import Button from "react-bootstrap/Button";
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -26,6 +27,7 @@ const emptyTeacher = {
   username: "",
   password: "",
   type: "TEACHER",
+  profileImg: "",
 };
 
 class Teacher extends Component {
@@ -35,12 +37,15 @@ class Teacher extends Component {
       teachers: undefined,
       showModal: false,
       selected: emptyTeacher,
+      courses: undefined,
+      students: null,
     };
     this.schoolHackApi = new SchoolHackApi();
   }
 
   componentDidMount = () => {
     this.updatedTeachersList();
+
   };
 
   updatedTeachersList = () => {
@@ -72,13 +77,34 @@ class Teacher extends Component {
       .catch((err) => console.log("error en modal Teacher", err));
   };
 
+  getCourses = (id) => {
+    this.schoolHackApi.getCoursesTeacher(id)
+      .then((response) => {
+        this.setState({ courses: response.data })
+        console.log(response.data)
+      })
+      .catch((err) => console.log("error en get c Teacher", err));
+  }
+
+  getUsers = (id) => {
+    this.schoolHackApi.getUsersTeacher(id)
+      .then((response) => {
+        this.setState({ students: response.data })
+      })
+      .catch((err) => console.log("error en get u Teacher", err));
+  }
+
   handleInfo = (id) => {
     console.log("id", id);
-    this.schoolHackApi.getCoursesTeacher(id).then((data) => console.log(data));
+    this.getCourses(id);
+    this.getUsers(id);
   };
 
+
   render() {
-    const { teachers, selected } = this.state;
+    const { teachers, selected, courses, students } = this.state;
+    let acum = []
+
     return (
       <>
         <h1>Profesores</h1>
@@ -90,7 +116,7 @@ class Teacher extends Component {
           <FontAwesomeIcon icon={faPlus} />
         </Button>
         <Row>
-          <Col md={6}>
+          <Col md={8}>
             {!teachers ? (
               <Spinner />
             ) : (
@@ -107,7 +133,7 @@ class Teacher extends Component {
                   rowMap={(elm) => (
                     <tr key={elm._id}>
                       <td>
-                        {elm.lastname}, {elm.name}
+                        {elm.name} {elm.lastname}
                       </td>
                       <td>
                         <img src={elm.profileImg} alt={elm.username} />
@@ -125,6 +151,8 @@ class Teacher extends Component {
                                 username: elm.username,
                                 password: elm.password,
                                 type: "TEACHER",
+                                profileImg: elm.password,
+
                               },
                               showModal: true,
                             })
@@ -145,11 +173,27 @@ class Teacher extends Component {
               )}
           </Col>
 
-          <Col md={6}
+          <Col md={4}
             show={this.state.showModal}
             onHide={() => this.setState({ showModal: false })}
           >
-            <p>Datos de profe (name) y de curso, alummo</p>
+
+
+            {!courses ? (
+              <Spinner />
+            ) : (
+                <>
+                  <p>Actualmente el profesor !!!sacar name!! da clase a {students.length} alumnos en {courses.length} cursos de las siguientes asignaturas:</p>,
+
+                  {
+                    courses.map(element => acum = [...acum, ...element.subjects]),
+                    acum.map(subject => <p key={subject._id}>{subject.title}</p>)
+                  }
+
+
+                </>
+              )}
+
           </Col>
 
           <Modal
@@ -167,6 +211,7 @@ class Teacher extends Component {
                 username={selected.username}
                 password={selected.password}
                 type="TEACHER"
+                profileImg={selected.profileImg}
                 onTeacherChanged={this.handleTeachersSubmit}
               />
             </Modal.Body>

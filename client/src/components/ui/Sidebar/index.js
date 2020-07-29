@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import { withRouter } from 'react-router'
 import { Nav } from "react-bootstrap";
@@ -24,13 +24,13 @@ class Side extends Component {
     this.state = {}
 
     this.AuthService = new AuthService()
-    
+
   }
 
- 
+
   render() {
-// console.log(this.props.loggedInUser, "arriba");
-     
+
+
     if (window.location.pathname.match(/login/)) {
       return null
     }

@@ -21,6 +21,8 @@ import Profile from "./pages/Profile/index";
 
 import MessageDetail from "./pages/MessageDetail";
 
+import CustomToast from './ui/Toast'
+
 class App extends Component {
   constructor() {
     super();
@@ -28,10 +30,10 @@ class App extends Component {
       loggedInUser: null,
       toast: {
         visible: false,
-        text: "",                
+        text: '',
       },
 
-      
+
     };
     this.AuthService = new AuthService();
   }
@@ -59,7 +61,8 @@ class App extends Component {
   
  
   render() {
-    this.fetchUser();
+    this.fetchUser()
+
     return (
       <>
         <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} handleToast={this.handleToast} />
@@ -79,6 +82,8 @@ class App extends Component {
             <Route path="/events" render={(props) => ( <Events {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} /> )}/>
           </Switch>
         </main>
+        <CustomToast {...this.state.toast} handleToast={this.handleToast} />
+
       </>
     );
   }

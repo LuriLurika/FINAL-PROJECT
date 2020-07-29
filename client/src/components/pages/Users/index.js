@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SchoolHackApi from "../../../service/SchoolHackApi";
 
+
 import CustomTable from "../../common/Table";
 import UserForm from "../../common/Forms/User-form";
 import Spinner from "../../ui/Spinner";
@@ -31,6 +32,7 @@ const emptyForm = {
   password: "",
   type: "STUDENT",
   parent: "",
+  profileImg: "",
 };
 
 class Users extends Component {
@@ -81,6 +83,8 @@ class Users extends Component {
       })
       .catch((err) => console.log("error en createUser", err));
   };
+
+
 
   render() {
     const { users, showModal, selected } = this.state;

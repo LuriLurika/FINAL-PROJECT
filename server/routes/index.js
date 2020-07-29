@@ -1,6 +1,6 @@
 module.exports = app => {
 
-    const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.user.type) ? next() : res.json({message: "Area Restringida!"})
+    const checkRole = rolesToCheck => (req, res, next) => rolesToCheck.includes(req.user.type) ? next() : res.json({ message: "Area Restringida!" })
 
     // Base URLS
 
@@ -11,6 +11,8 @@ module.exports = app => {
     app.use("/api/subjects", checkRole(['DIRECTOR']), require("./subjects.routes"))
     app.use("/api/messages", require("./message.routes"))
     app.use("/api/events", require("./event.routes"))
+    app.use("/api/files", require("./files.routes"))
+
 
     app.use((req, res) => {
         res.sendFile(__dirname + "/public/index.html");
