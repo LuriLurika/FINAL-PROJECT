@@ -179,7 +179,7 @@ class App extends Component {
               render={(props) => (
                 <Events
                   {...props}
-                  setTheUser={this.setTheUser}
+                  loggedInUser={this.state.loggedInUser}
                   handleToast={this.handleToast}
                 />
               )}

@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 const Messages = ({ title, body, sendedBy, unreadMessages }) => {
   return (
     <Col className="green">
-      <h3>Tienes {unreadMessages} sin leer</h3>
+      <h3>Tienes {unreadMessages} mensajes sin leer</h3>
     </Col>
   );
 };

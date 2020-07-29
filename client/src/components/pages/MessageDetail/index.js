@@ -21,9 +21,11 @@ class MessageDetail extends Component {
     this.schoolHackApi = new SchoolHackApi();
   }
   componentDidMount = () => {
-    this.schoolHackApi
-      .getMessage(this.state.messageId)
-      .then((response) => this.setState({ message: response.data }))
+    Promise.all([
+      this.schoolHackApi.getMessage(this.state.messageId),
+      this.schoolHackApi.readMessage(this.state.messageId),
+    ])
+      .then((response) => this.setState({ message: response[0].data }))
       .catch((err) => console.log(err));
   };
   render() {
