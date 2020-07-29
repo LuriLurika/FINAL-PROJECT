@@ -20,6 +20,8 @@ import Sidebar from "./ui/Sidebar";
 import Profile from "./pages/Profile/index";
 import UserDetails from "./pages/Users/User-details";
 
+import CustomToast from './ui/Toast'
+
 class App extends Component {
   constructor() {
     super();
@@ -27,7 +29,7 @@ class App extends Component {
       loggedInUser: null,
       toast: {
         visible: false,
-        text: "",
+        text: '',
       },
     };
     this.AuthService = new AuthService();
@@ -45,6 +47,7 @@ class App extends Component {
   handleToast = (visible, text = '') => {
     let toastCopy = { ...this.state.toast }
     toastCopy = { visible, text }
+    console.log('TOSTADA', toastCopy)
     this.setState({ toast: toastCopy })
   }
 
@@ -57,9 +60,10 @@ class App extends Component {
   // };
   render() {
     this.fetchUser()
+
     return (
       <>
-        <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} handleToast={this.handleToast} />
+        <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
         <Sidebar />
         <main>
           <Switch>
@@ -70,10 +74,10 @@ class App extends Component {
             />
 
             <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
-            <Route path="/courses" render={props => <Courses {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
-            <Route path="/subjects" render={props => <Subjects {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
-            <Route path="/teachers" render={props => <Teachers {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
-            <Route exact path="/users" render={props => <Users {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
+            <Route path="/courses" render={props => <Courses {...props} setTheUser={this.setTheUser} />} />
+            <Route path="/subjects" render={props => <Subjects {...props} setTheUser={this.setTheUser} />} />
+            <Route path="/teachers" render={props => <Teachers {...props} setTheUser={this.setTheUser} />} />
+            <Route exact path="/users" render={props => <Users {...props} setTheUser={this.setTheUser} />} />
             <Route
               path="/users/:id"
               render={(props) => <UserDetails {...props} />}
@@ -90,9 +94,10 @@ class App extends Component {
                 />
               )}
             /> */}
-            <Route path="/messages" render={props => <Messages {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />}/>
-            <Route path="/events" render={props => <Events {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
+            <Route path="/messages" render={props => <Messages {...props} setTheUser={this.setTheUser} />} />
+            <Route path="/events" render={props => <Events {...props} setTheUser={this.setTheUser} />} />
           </Switch>
+          <CustomToast {...this.state.toast} handleToast={this.handleToast} />
         </main>
       </>
     );

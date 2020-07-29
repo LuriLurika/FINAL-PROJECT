@@ -59,33 +59,37 @@ class Navigation extends Component {
                     </NavLink>
                   </Nav.Link>
                   <Nav.Link as="span">
-                    <span onClick={this.logout}>Cerrar sesión</span>
+                    <NavLink
+                      to="/login"
+                      onClick={this.logout}>
+                      Cerrar sesión
+                    </NavLink>
                   </Nav.Link>
                 </>
               ) : (
-                <>
-                  <Nav.Link as="span">
-                    <NavLink
-                      to="#"
-                      onClick={() => {
-                        this.handleModal(true, "about");
-                      }}
-                    >
-                      ¿Quiénes somos?
+                  <>
+                    <Nav.Link as="span">
+                      <NavLink
+                        to="#"
+                        onClick={() => {
+                          this.handleModal(true, "about");
+                        }}
+                      >
+                        ¿Quiénes somos?
                     </NavLink>
-                  </Nav.Link>
-                  <Nav.Link as="span">
-                    <NavLink
-                      to="#"
-                      onClick={() => {
-                        this.handleModal(true, "contact");
-                      }}
-                    >
-                      Contacta con nosotros
+                    </Nav.Link>
+                    <Nav.Link as="span">
+                      <NavLink
+                        to="#"
+                        onClick={() => {
+                          this.handleModal(true, "contact");
+                        }}
+                      >
+                        Contacta con nosotros
                     </NavLink>
-                  </Nav.Link>
-                </>
-              )}
+                    </Nav.Link>
+                  </>
+                )}
               <Nav.Link as="span">
                 <NavLink to="/profile">
                   Hola,
@@ -107,8 +111,8 @@ class Navigation extends Component {
           {this.state.about ? (
             <ModalLogin {...this.modalInfo.about} />
           ) : (
-            <ModalLogin {...this.modalInfo.contact} />
-          )}
+              <ModalLogin {...this.modalInfo.contact} />
+            )}
         </Modal>
       </>
     );
