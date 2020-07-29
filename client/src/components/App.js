@@ -58,8 +58,8 @@ class App extends Component {
     toastCopy = { visible, text };
     this.setState({ toast: toastCopy });
   };
-  
- 
+
+
   render() {
     this.fetchUser()
 

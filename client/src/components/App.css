@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Oswald:wght@300;400;700&display=swap');
 /* font-family: 'Amatic SC', cursive;
 font-family: 'Oswald', sans-serif;*/
-h3{
+
+h3 {
   color: #008921;
 }
 
@@ -87,19 +88,3 @@ footer {
   border: 1px solid green;
 }
 
-/***************sidebar**********************/
-
-a {
-    color: #10bb4f;
-    text-decoration: none;
-    font-size: 20px;
-    padding: 40px;
-}
-
-.nav-item{
-  margin-bottom: 50px;
-}
-
-.myIcon{
-  margin-right: 10px;
-}

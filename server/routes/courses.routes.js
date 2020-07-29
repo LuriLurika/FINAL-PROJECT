@@ -66,8 +66,6 @@ router.put("/:id", checkRole(['DIRECTOR']),(req, res, next) => {
 })
 
 //DELETE
-
-
 router.delete("/:id", checkRole(['DIRECTOR']),(req, res, next) => {
 
   Course.findByIdAndRemove(req.params.id)
