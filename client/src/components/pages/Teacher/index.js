@@ -38,7 +38,7 @@ class Teacher extends Component {
       showModal: false,
       selected: emptyTeacher,
       courses: undefined,
-      students: null,
+      students: [],
     };
     this.schoolHackApi = new SchoolHackApi();
   }
@@ -94,10 +94,11 @@ class Teacher extends Component {
       .catch((err) => console.log("error en get u Teacher", err));
   }
 
-  handleInfo = (id) => {
-    console.log("id", id);
-    this.getCourses(id);
-    this.getUsers(id);
+  handleInfo = (teacher) => {
+    this.setState ({selected: teacher})
+  
+    this.getCourses(teacher._id);
+    this.getUsers(teacher._id);
   };
 
 
@@ -120,80 +121,95 @@ class Teacher extends Component {
             {!teachers ? (
               <Spinner />
             ) : (
-                <CustomTable
-                  data={teachers}
-                  header={
-                    <>
-                      <th>Nombre</th>
-                      <th>Foto</th>
-                      <th>Email</th>
-                      <th>Acciones</th>
-                    </>
-                  }
-                  rowMap={(elm) => (
-                    <tr key={elm._id}>
-                      <td>
-                        {elm.name} {elm.lastname}
-                      </td>
-                      <td>
-                        <img src={elm.profileImg} alt={elm.username} />
-                      </td>
-                      <td>{elm.email}</td>
-                      <td>
-                        <Button
-                          onClick={() =>
-                            this.setState({
-                              selected: {
-                                id: elm._id,
-                                name: elm.name,
-                                lastname: elm.lastname,
-                                email: elm.email,
-                                username: elm.username,
-                                password: elm.password,
-                                type: "TEACHER",
-                                profileImg: elm.password,
-
-                              },
-                              showModal: true,
-                            })
-                          }
-                        >
-                          <FontAwesomeIcon icon={faEdit} />
-                        </Button>
-                        <Button onClick={() => this.handleDelete(elm._id)}>
-                          <FontAwesomeIcon icon={faTrashAlt} />
-                        </Button>
-                        <Button onClick={() => this.handleInfo(elm._id)}>
-                          <FontAwesomeIcon icon={faInfo} />
-                        </Button>
-                      </td>
-                    </tr>
-                  )}
-                />
-              )}
+              <CustomTable
+                data={teachers}
+                header={
+                  <>
+                    <th>Nombre</th>
+                    <th>Foto</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                  </>
+                }
+                rowMap={(elm) => (
+                  <tr key={elm._id}>
+                    <td>
+                      {elm.name} {elm.lastname}
+                    </td>
+                    <td>
+                      <img src={elm.profileImg} alt={elm.username} />
+                    </td>
+                    <td>{elm.email}</td>
+                    <td>
+                      <Button
+                        onClick={() =>
+                          this.setState({
+                            selected: {
+                              id: elm._id,
+                              name: elm.name,
+                              lastname: elm.lastname,
+                              email: elm.email,
+                              username: elm.username,
+                              password: elm.password,
+                              type: "TEACHER",
+                              profileImg: elm.password,
+                            },
+                            showModal: true,
+                          })
+                        }
+                      >
+                        <FontAwesomeIcon icon={faEdit} />
+                      </Button>
+                      <Button onClick={() => this.handleDelete(elm._id)}>
+                        <FontAwesomeIcon icon={faTrashAlt} />
+                      </Button>
+                      <Button onClick={() => this.handleInfo(elm)}>
+                        <FontAwesomeIcon icon={faInfo} />
+                      </Button>
+                    </td>
+                  </tr>
+                )}
+              />
+            )}
           </Col>
 
-          <Col md={4}
+          <Col
+            md={4}
             show={this.state.showModal}
             onHide={() => this.setState({ showModal: false })}
           >
-
-
             {!courses ? (
               <Spinner />
             ) : (
-                <>
-                  <p>Actualmente el profesor !!!sacar name!! da clase a {students.length} alumnos en {courses.length} cursos de las siguientes asignaturas:</p>,
-
-                  {
-                    courses.map(element => acum = [...acum, ...element.subjects]),
-                    acum.map(subject => <p key={subject._id}>{subject.title}</p>)
-                  }
-
-
-                </>
-              )}
-
+              <>
+                <p>
+                  Actualmente el profesor {this.state.selected.name} da clase a
+                  {students.length} alumnos en {courses.length} cursos de las
+                  siguientes asignaturas:
+                </p>
+                
+                {
+                  (courses.map(
+                    (element) =>
+                      (acum = [
+                        ...acum,
+                        ...element.subjects.filter(
+                          (elm) => elm.teacher === this.state.selected._id
+                        ).map(elm => ({...elm, course: element})),
+                      ])
+                  ),
+                  acum
+                    .filter((v, i) => acum.indexOf(v) === i)
+                      .map((subject) => {
+                        return (
+                          <p key={subject._id}>
+                            {subject.title} {subject.course.title}
+                          </p>
+                        )
+                      }))
+                }
+              </>
+            )}
           </Col>
 
           <Modal

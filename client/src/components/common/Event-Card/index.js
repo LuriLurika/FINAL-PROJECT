@@ -9,10 +9,9 @@ import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrashAlt, faCheck } from "@fortawesome/free-solid-svg-icons";
 
-import Map from "../../../common/Maps";
-import { propTypes } from "react-bootstrap/esm/Image";
+import Map from "../Maps";
 
 const EventCard = ({
   placeId,
@@ -24,6 +23,9 @@ const EventCard = ({
   description,
   participants,
   eventDate,
+  currentUserLoggedId,
+  onAcceptEvent,
+  onDismissEvent,
 }) => {
   return (
     <Col md={3}>
@@ -36,10 +38,21 @@ const EventCard = ({
           <Card.Subtitle className="mb-2 text-muted">
             Fecha {eventDate.substring(0, 10)}
           </Card.Subtitle>
-          <Card.Subtitle className="mb-2 text-muted">Invitados: </Card.Subtitle>
-          <ListGroup className="list-group-flush">
-            <ListGroupItem>{participants.name}</ListGroupItem>
-          </ListGroup>
+          <Card.Subtitle className="mb-2 text-muted">
+            <div>
+              <span>Participantes: {participants.length}</span>
+              {!participants.some((elm) => elm._id === currentUserLoggedId) && (
+                <Button onClick={onAcceptEvent}>
+                  <FontAwesomeIcon icon={faCheck} />
+                </Button>
+              )}
+              {participants.some((elm) => elm._id === currentUserLoggedId) && (
+                <Button onClick={onDismissEvent}>
+                  <FontAwesomeIcon icon={faEdit} />
+                </Button>
+              )}
+            </div>
+          </Card.Subtitle>
           <Card.Text>{description}</Card.Text>
 
           {canEdit && (

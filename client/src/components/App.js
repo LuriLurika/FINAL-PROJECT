@@ -79,7 +79,7 @@ class App extends Component {
             
             <Route path="/messages/:id" render={(props) => ( <MessageDetail {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />)}/>
             <Route path="/messages" render={(props) => ( <Messages {...props} loggedInUser={this.state.loggedInUser} handleToast={this.handleToast}  />)}/>
-            <Route path="/events" render={(props) => ( <Events {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} /> )}/>
+            <Route path="/events" render={(props) => ( <Events {...props} loggedInUser={this.state.loggedInUser} setTheUser={this.setTheUser} handleToast={this.handleToast} /> )}/>
           </Switch>
         </main>
         <CustomToast {...this.state.toast} handleToast={this.handleToast} />
