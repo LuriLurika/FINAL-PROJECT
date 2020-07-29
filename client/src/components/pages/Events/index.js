@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import SchoolHackApi from "../../../service/SchoolHackApi";
 
-import EventCard from "./Event-Card/index.js";
-import EventForm from "../../common/Forms/Event-form";
+import EventCard from "../../common/Event-Card/index.js";
+import EventForm from "./Event-form";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -50,7 +50,7 @@ class Events extends Component {
   handleModal = (status) => this.setState({ showModal: status });
 
   handleEventSubmit = (eventInfo) => {
-    console.log(eventInfo)
+    console.log(eventInfo);
     const action = eventInfo.id
       ? this.schoolHackApi.updateEvent(eventInfo)
       : this.schoolHackApi.createEvents(eventInfo);
@@ -62,6 +62,30 @@ class Events extends Component {
       .catch((err) => console.log("error en create Event", err));
   };
 
+  handleAcceptEvent = (event) => {
+    const eventToSave = {
+      ...event,
+      id: event._id,
+      participants: [...event.participants.map(elm=> elm._id), this.props.loggedInUser._id],
+    };
+    this.schoolHackApi
+      .updateEvent(eventToSave)
+      .then(() => this.updatedEventsList())
+      .catch((err) => console.log(err));
+  };
+  handleDismissEvent = (event) => {
+    const eventToSave = {
+      ...event,
+      id: event._id,
+      participants: event.participants.filter(
+        (elm) => elm._id !== this.props.loggedInUser._id
+      ).map(elm => elm._id),
+    };
+    this.schoolHackApi
+      .updateEvent(eventToSave)
+      .then(() => this.updatedEventsList())
+      .catch((err) => console.log(err));
+  };
   handleDelete = (eventId) => {
     this.schoolHackApi
       .deleteEvent(eventId)
@@ -102,8 +126,11 @@ class Events extends Component {
                   key={elm._id}
                   {...elm}
                   canEdit={canEdit}
+                  currentUserLoggedId={this.props.loggedInUser._id}
                   onHandleDelete={this.handleDelete}
                   onHandleEdit={this.handleEdit}
+                  onAcceptEvent={() => this.handleAcceptEvent(elm)}
+                  onDismissEvent={() => this.handleDismissEvent(elm)}
                 />
               ))}
             </Row>

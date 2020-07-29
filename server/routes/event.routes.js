@@ -41,7 +41,7 @@ router.get('/:id',(req, res) => {
 })
 
 //UPDATE
-router.put("/:id", checkRole(['DIRECTOR', 'TEACHER']), (req, res, next) => {
+router.put("/:id", (req, res, next) => {
     Event
         .findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((response) => res.json(response), req.body)
