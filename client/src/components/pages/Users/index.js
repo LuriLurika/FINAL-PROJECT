@@ -92,7 +92,7 @@ class Users extends Component {
 
 
     return (
-      <>
+      <div className='overfl'>
         <h3>Estudiantes</h3>
 
         <Button
@@ -112,7 +112,7 @@ class Users extends Component {
                 <Spinner />
               </h3>
             ) : (
-              <CustomTable
+              <CustomTable 
                 data={users}
                 header={
                   <>
@@ -213,7 +213,7 @@ class Users extends Component {
             </Modal.Body>
           </Modal>
         </Row>
-      </>
+      </div>
     );
   }
 }

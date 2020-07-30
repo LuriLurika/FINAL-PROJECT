@@ -3,8 +3,8 @@
     justify-content: center;
     align-items: center;
     background-color: white;
-    margin-top: -129px;
     width: 97%;
+    height: 100%;
 }
 
 .lft-box {
@@ -14,7 +14,7 @@
 }
 
 .lft-box img {
-    width: 50%;
+    width: 250px;
 }
 
 .lft-box-text {
