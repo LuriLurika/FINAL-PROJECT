@@ -9,7 +9,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrashAlt, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrashAlt, faCalendarCheck, faCalendarTimes } from "@fortawesome/free-solid-svg-icons";
 
 import Map from "../Maps";
 
@@ -43,12 +43,12 @@ const EventCard = ({
               <span>Participantes: {participants.length}</span>
               {!participants.some((elm) => elm._id === currentUserLoggedId) && (
                 <Button onClick={onAcceptEvent}>
-                  <FontAwesomeIcon icon={faCheck} />
+                  <FontAwesomeIcon icon={faCalendarCheck} />
                 </Button>
               )}
               {participants.some((elm) => elm._id === currentUserLoggedId) && (
                 <Button onClick={onDismissEvent}>
-                  <FontAwesomeIcon icon={faEdit} />
+                  <FontAwesomeIcon icon={faCalendarTimes} />
                 </Button>
               )}
             </div>

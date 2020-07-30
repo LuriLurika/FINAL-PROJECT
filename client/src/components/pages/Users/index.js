@@ -44,7 +44,7 @@ class Users extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      popoverOpen: false,
+      
       users: undefined,
       showModal: false,
       selected: emptyForm,
@@ -95,17 +95,17 @@ class Users extends Component {
 
   render() {
     const { users, showModal, selected } = this.state;
-    const { popoverOpen } = this.state;
+    
 
-    const popover = (
-      <Popover id="popover-basic">
-        <Popover.Title as="h3">{selected.name} {selected.lastname}</Popover.Title>
-        <Popover.Content>
-          Username: {selected.username}, email:{selected.email},
-      Madre/Padre: {selected.parent}
-        </Popover.Content>
-      </Popover>
-    );
+const popover = (
+  <Popover id="popover-basic">
+    <Popover.Title as="h3">{selected.name} {selected.lastname}</Popover.Title>
+    <Popover.Content>
+      <strong>Username:</strong> {selected.username}<br></br> <strong>email: </strong>{selected.email}<br></br> 
+      <strong>Madre/Padre:</strong> {selected.parent}
+    </Popover.Content>
+  </Popover>
+);
     return (
       <>
         <Row>
@@ -148,7 +148,9 @@ class Users extends Component {
                         {elm.lastname}, {elm.name}
                       </td>
                       <td>
-                        <img src={elm.profileImg} alt={elm.username} />
+                        <img src={
+                          elm.profileImg === undefined ? "https://res.cloudinary.com/dz0aow7wm/image/upload/v1595247178/School%20Hack/images_rtgo7j.jpg" : elm.profileImg
+                        } alt={elm.username} />
                       </td>
                       <td>{elm.email}</td>
 

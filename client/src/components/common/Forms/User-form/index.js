@@ -19,7 +19,7 @@ class UserForm extends Component {
         profileImg: props.profileImg,
         type: props.type,
         parent: props.parent,
-        profileImg: props.profileImg,
+        // profileImg: props.profileImg,
 
       },
       validated: false,
@@ -73,7 +73,7 @@ class UserForm extends Component {
     const {fromDetail} = this.props
     return (
       <>
-        <h3>{user.id ? "Editar Alumno" : "Nuevo Alumno"}</h3>
+        <h3>{user.id ? "Editar Información" : "Nuevo Alumno"}</h3>
         <hr></hr>
         <Form noValidate validated={validated} onSubmit={this.handleSubmit}>
           <Form.Group>
@@ -103,7 +103,7 @@ class UserForm extends Component {
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Imagen (URL)</Form.Label>
+            <Form.Label>Imagen</Form.Label>
             <Form.Control
               as="input"
               onChange={this.handleFileUpload}
@@ -112,8 +112,8 @@ class UserForm extends Component {
             />
           </Form.Group>
 
-          {!fromDetail &&(
-          <Form.Group>
+          {!fromDetail && (
+            <Form.Group>
             <Form.Label>Tipo</Form.Label>
             <Form.Control
               onChange={(event) => this.handleInputChange(event)}
@@ -121,20 +121,27 @@ class UserForm extends Component {
               name="type"
               type="text"
             />
-          </Form.Group>)}
-          <Form.Group>
-            <Form.Label>Madre / Padre</Form.Label>
-            <Form.Control
-              required
-              onChange={(event) => this.handleInputChange(event)}
-              value={user.parent}
-              name="parent"
-              type="text"
-            />
-            <Form.Control.Feedback type="invalid">
-              Campo requerido
+            </Form.Group>)}
+          
+          {/* {
+            user !== null && user.type === "STUDENT" ?
+          (<> */}
+            <Form.Group>
+              <Form.Label>Madre / Padre</Form.Label>
+              <Form.Control
+                required
+                onChange={(event) => this.handleInputChange(event)}
+                value={user.parent}
+                name="parent"
+                type="text"
+              />
+              <Form.Control.Feedback type="invalid">
+                Campo requerido
             </Form.Control.Feedback>
-          </Form.Group>
+            </Form.Group>
+          {/* </>
+          ) : null}       */}
+          
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email </Form.Label>
             <Form.Control

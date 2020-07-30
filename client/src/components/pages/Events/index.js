@@ -58,8 +58,12 @@ class Events extends Component {
       .then(() => {
         this.updatedEventsList();
         this.setState({ showModal: false });
+        this.props.handleToast(true, "¡Cambios guardados!")
       })
-      .catch((err) => console.log("error en create Event", err));
+      .catch((err) => {
+        console.log("error en create Event", err)
+        this.props.handleToast(true, "¡Algo salió mal!")
+      });
   };
 
   handleAcceptEvent = (event) => {
@@ -89,7 +93,10 @@ class Events extends Component {
   handleDelete = (eventId) => {
     this.schoolHackApi
       .deleteEvent(eventId)
-      .then(() => this.updatedEventsList())
+      .then(() => {
+        this.updatedEventsList()
+        this.props.handleToast(true, "¡Evento eliminado!")
+      })
       .catch((err) => console.log("error al eliminar Event", err));
   };
   handleEdit = (eventId) => {

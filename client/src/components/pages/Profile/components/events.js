@@ -10,7 +10,7 @@ const Events = ({
 }) => {
   return (
       <Col className="pink">
-          <h3> Mis eventos</h3>
+          <h3> Tus eventos</h3>
       {events.map((elm) => (
         <EventCard
           key={elm._id}

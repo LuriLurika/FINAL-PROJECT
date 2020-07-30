@@ -49,10 +49,8 @@ class Subjects extends Component {
   updatedSubjectList = () => {
     this.schoolHackApi
       .getAllSubjects()
-      .then((response) => {
-        this.setState({ subjects: response.data });
-        this.props.handleToast(true, "LISTA DE USUARIOS!");
-      })
+      .then((response) => 
+        this.setState({ subjects: response.data }))
       .catch((err) => console.log(err));
   };
 
@@ -66,7 +64,8 @@ class Subjects extends Component {
     this.schoolHackApi.deleteSubject(id).then(() => {
       this.setState({
         subjects: this.state.subjects.filter((elm) => elm._id !== id),
-      });
+      })
+      this.props.handleToast(true, "¡Asignatura eliminada!")
     });
   };
 
@@ -77,9 +76,13 @@ class Subjects extends Component {
     action
       .then(() => {
         this.updatedSubjectList();
-        this.setState({ showModal: false });
+        this.setState({ showModal: false })
+        this.props.handleToast(true, "¡Cambios guardados!")
       })
-      .catch((err) => console.log("error en create Subject", err));
+      .catch((err) => {
+        console.log("error en create Subject", err)
+        this.props.handleToast(true, "¡Algo salió mal!")
+      });
   };
 
   render() {

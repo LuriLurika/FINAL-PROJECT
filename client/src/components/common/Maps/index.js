@@ -1,14 +1,6 @@
 import React, { Component } from "react";
-import {
-  withGoogleMap,
-  withScriptjs,
-  GoogleMap,
-  Marker,
-} from "react-google-maps";
-import GooglePlacesAutocomplete, {
-  geocodeByPlaceId,
-  getLatLng,
-} from "react-google-places-autocomplete";
+import {  withGoogleMap,  withScriptjs,  GoogleMap,  Marker,} from "react-google-maps";
+import GooglePlacesAutocomplete, {   geocodeByPlaceId,  getLatLng,} from "react-google-places-autocomplete";
 import "react-google-places-autocomplete/dist/index.min.css";
 
 const CustomMap = withScriptjs(
