@@ -35,12 +35,12 @@ class Login extends Component {
         this.props.handleToast(true, 'Sesión inciada');
         this.props.history.push('/profile')
       })
-      .catch((err) => console.log(err.response.data.message))
+      .catch((err) => console.log(err))
   };
 
   render() {
     return (
-      <Container className="center-grid login-page vh-100">
+      <Container className="login-page">
         <Row className="row">
           <Col md={7} className="lft-box">
             <Row className="d-flex flex-end">

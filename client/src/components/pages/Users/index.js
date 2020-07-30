@@ -62,7 +62,7 @@ class Users extends Component {
 
   updatedUsersList = () => {
     this.schoolHackApi
-      .getAllUsers()
+      .getAllStudent()
       .then((response) => {
         this.setState({ users: response.data });
       })
@@ -104,7 +104,7 @@ const popover = (
   </Popover>
 );
     return (
-      <>
+      <div className='overfl'>
         <h3>Estudiantes</h3>
 
         <Button
@@ -124,7 +124,7 @@ const popover = (
                 <Spinner />
               </h3>
             ) : (
-              <CustomTable
+              <CustomTable 
                 data={users}
                 header={
                   <>
@@ -216,7 +216,7 @@ const popover = (
             </Modal.Body>
           </Modal>
         </Row>
-      </>
+      </div>
     );
   }
 }

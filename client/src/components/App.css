@@ -46,12 +46,13 @@ img {
 .left-sidebar {
   grid-column: 1 / 2;
   padding: 1rem;
-  background-color: lightgreen;
 }
 
 main {
   grid-column: 2 / 3;
   padding: 20px;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 footer {
@@ -87,4 +88,3 @@ footer {
   width: 120%;
   border: 1px solid green;
 }
-

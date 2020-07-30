@@ -38,32 +38,33 @@ class Side extends Component {
     // console.log(this.props.loggedInUser, 'abajo')
     return (
       <div className="left-sidebar">
-        <Nav
-          className=" d-none d-md-block bg-light sidebar"
+        <Nav as="ul"
+          className="  d-md-block sidebar"
           activeKey="/home"
           onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
         >
-          <Nav.Item>
+          <Nav.Item as="li">
             <NavLink to="/messages">
-              Mensajes
-               <span className="myIcon">
-              <FontAwesomeIcon icon={faEnvelope} fixedWidth />
+              <span className="hide"> Mensajes </span>
+              <span className="myIcon">
+                <FontAwesomeIcon icon={faEnvelope} fixedWidth />
               </span>
             </NavLink>
           </Nav.Item>
-          <Nav.Item>
+
+          <Nav.Item as="li">
             <NavLink to="/events">
-              Eventos
-               <span className="myIcon">
+              <span className="hide"> Eventos </span>
+              <span className="myIcon">
                 <FontAwesomeIcon icon={faCalendarWeek} fixedWidth />
               </span>
             </NavLink>
           </Nav.Item>
 
-          <Nav.Item>
+          <Nav.Item as="li">
             <NavLink to="/profile">
-              Perfil
-                 <span className="myIcon">
+              <span className="hide"> Perfil </span>
+              <span className="myIcon">
                 <FontAwesomeIcon icon={faUser} fixedWidth />
               </span>
             </NavLink>
@@ -73,19 +74,20 @@ class Side extends Component {
             this.props.loggedInUser.type === "DIRECTOR" ? (
               <>
 
-                <Nav.Item>
+                <Nav.Item as="li">
                   <NavLink to="/courses">
-                    Cursos
-                       <span className="myIcon">
-                  <FontAwesomeIcon  icon={faChalkboard} fixedWidth />
+                    <span className="hide"> Cursos </span>
+                    <span className="myIcon">
+                      <FontAwesomeIcon icon={faChalkboard} fixedWidth />
                     </span>
                   </NavLink>
                 </Nav.Item>
-                <Nav.Item>
+
+                <Nav.Item as="li">
                   <NavLink to="/subjects">
-                    Asignaturas
-                       <span className="myIcon">
-                  <FontAwesomeIcon  icon={faBook} fixedWidth />
+                    <span className="hide"> Asignaturas </span>
+                    <span className="myIcon">
+                      <FontAwesomeIcon icon={faBook} fixedWidth />
                     </span>
                   </NavLink>
                 </Nav.Item>
@@ -95,17 +97,18 @@ class Side extends Component {
             this.props.loggedInUser.type === "TEACHER" ? (
               <>
 
-                <Nav.Item>
+                <Nav.Item as="li">
                   <NavLink to="/courses">
-                    Cursos
+                    <span className="hide"> Cursos </span>
                     <span className="myIcon">
                       <FontAwesomeIcon icon={faChalkboard} fixedWidth />
                     </span>
                   </NavLink>
                 </Nav.Item>
-                <Nav.Item>
+
+                <Nav.Item as="li">
                   <NavLink to="/subjects">
-                    Asignaturas
+                    <span className="hide"> Asignaturas </span>
                     <span className="myIcon">
                       <FontAwesomeIcon icon={faBook} fixedWidth />
                     </span>
@@ -117,16 +120,21 @@ class Side extends Component {
           {this.props.loggedInUser !== null &&
             this.props.loggedInUser.type === "DIRECTOR" ? (
               <>
-                <Nav.Item>
+                <Nav.Item as="li">
                   <NavLink to="/users">
-                    Estudiantes
-                  <FontAwesomeIcon className="myIcon" icon={faUserGraduate} fixedWidth />
+                    <span className="hide"> Estudiantes </span>
+                    <span className="myIcon">
+                      <FontAwesomeIcon className="myIcon" icon={faUserGraduate} fixedWidth />
+                    </span>
                   </NavLink>
                 </Nav.Item>
-                <Nav.Item>
+
+                <Nav.Item as="li">
                   <NavLink to="/teachers">
-                    Profesores
-                  <FontAwesomeIcon className="myIcon" icon={faChalkboardTeacher} fixedWidth />
+                    <span className="hide"> Profesores </span>
+                    <span className="myIcon">
+                      <FontAwesomeIcon className="myIcon" icon={faChalkboardTeacher} fixedWidth />
+                    </span>
                   </NavLink>
                 </Nav.Item>
               </>

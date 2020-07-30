@@ -6,7 +6,7 @@ import AuthService from "./../service/AuthService";
 
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import Index from "./pages/Index";
+import SchoolHackApi from "../service/SchoolHackApi"
 import Navigation from "./ui/Navbar";
 import Login from "./pages/Login";
 
@@ -30,18 +30,24 @@ class App extends Component {
       loggedInUser: null,
       toast: {
         visible: false,
-        text: '',
+        text: "",
       },
-
-
     };
+    this.schoolHackApi = new SchoolHackApi();
     this.AuthService = new AuthService();
   }
 
-  setTheUser = (user) =>
-    this.setState({ loggedInUser: user }, () =>
-      console.log("El estado de App ha cambiado:", this.state)
-    );
+  componentDidMount = () => this.fetchUser();
+
+  updateUser = (user) => {
+    this.schoolHackApi
+      .updateUser(user)
+      .then((response) => this.setState({ loggedInUser: response.data }))
+      .catch((err) => console.log({ err }));
+  };
+  setTheUser = (user) => {
+    this.setState({loggedInUser: user})
+  };
 
   fetchUser = () => {
     this.AuthService.isLoggedIn()
@@ -59,31 +65,117 @@ class App extends Component {
     this.setState({ toast: toastCopy });
   };
 
-
   render() {
-    this.fetchUser()
-
     return (
       <>
-        <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} handleToast={this.handleToast} />
+        <Navigation
+          setTheUser={this.setTheUser}
+          loggedInUser={this.state.loggedInUser}
+          handleToast={this.handleToast}
+        />
         <Sidebar loggedInUser={this.state.loggedInUser} />
         <main>
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/login" />} />
-            <Route path="/profile" render={() => this.state.loggedInUser ? ( <Profile loggedInUser={this.state.loggedInUser} />) : ( <Redirect to="/login" /> )} />
-            <Route path="/login" render={(props) => ( <Login {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} /> )} />
-            <Route path="/courses" render={(props) => (  <Courses {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />  )}/>
-            <Route path="/subjects"  render={(props) => ( <Subjects  {...props}  setTheUser={this.setTheUser}  handleToast={this.handleToast}  /> )}  />
-            <Route path="/teachers"  render={(props) => (  <Teachers  {...props}  setTheUser={this.setTheUser}  handleToast={this.handleToast}   />  )} />
-            <Route exact path="/users" render={(props) => ( <Users  {...props}  setTheUser={this.setTheUser}  handleToast={this.handleToast}  />  )}  />
-            
-            <Route path="/messages/:id" render={(props) => ( <MessageDetail {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />)}/>
-            <Route path="/messages" render={(props) => ( <Messages {...props} loggedInUser={this.state.loggedInUser} handleToast={this.handleToast}  />)}/>
-            <Route path="/events" render={(props) => ( <Events {...props} loggedInUser={this.state.loggedInUser} setTheUser={this.setTheUser} handleToast={this.handleToast} /> )}/>
+            <Route
+              path="/profile"
+              render={() =>
+                this.state.loggedInUser ? (
+                  <Profile
+                    setTheUser={this.updateUser}
+                    loggedInUser={this.state.loggedInUser}
+                  />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/login"
+              render={(props) => (
+                <Login
+                  {...props}
+                  setTheUser={this.setTheUser}
+                  handleToast={this.handleToast}
+                />
+              )}
+            />
+            <Route
+              path="/courses"
+              render={(props) => (
+                <Courses
+                  {...props}
+                  setTheUser={this.setTheUser}
+                  handleToast={this.handleToast}
+                />
+              )}
+            />
+            <Route
+              path="/subjects"
+              render={(props) => (
+                <Subjects
+                  {...props}
+                  setTheUser={this.setTheUser}
+                  handleToast={this.handleToast}
+                />
+              )}
+            />
+            <Route
+              path="/teachers"
+              render={(props) => (
+                <Teachers
+                  {...props}
+                  setTheUser={this.setTheUser}
+                  handleToast={this.handleToast}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/users"
+              render={(props) => (
+                <Users
+                  {...props}
+                  setTheUser={this.setTheUser}
+                  handleToast={this.handleToast}
+                />
+              )}
+            />
+
+            <Route
+              path="/messages/:id"
+              render={(props) => (
+                <MessageDetail
+                  {...props}
+                  setTheUser={this.setTheUser}
+                  handleToast={this.handleToast}
+                />
+              )}
+            />
+            <Route
+              path="/messages"
+              render={(props) => (
+                <Messages
+                  {...props}
+                  loggedInUser={this.state.loggedInUser}
+                  handleToast={this.handleToast}
+                />
+              )}
+            />
+            <Route
+              path="/events"
+              render={(props) => (
+                <Events
+                  {...props}
+                  loggedInUser={this.state.loggedInUser}
+                  setTheUser={this.setTheUser}
+                  handleToast={this.handleToast}
+                />
+              )}
+            />
           </Switch>
         </main>
         <CustomToast {...this.state.toast} handleToast={this.handleToast} />
-
       </>
     );
   }
