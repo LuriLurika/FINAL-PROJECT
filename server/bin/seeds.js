@@ -12,6 +12,11 @@ const User = require('../models/User.model')
 
 mongoose.connect(`mongodb+srv://EFdez:1234@cluster0.umhf5.mongodb.net/SchoolHack?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
 
+User.collection.drop()
+Course.collection.drop()
+Subject.collection.drop()
+
+
 
 const users1 = [
   { username: "mbednall0", parent: "Mischa Bednall", name: "Man", lastname: "Bottom", email: "mbottom1@sfgate.com", profileImg: "https://robohash.org/quisquiaquo.jpg?size=50x50&set=set1", type: "STUDENT" },
