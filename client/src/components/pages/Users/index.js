@@ -21,6 +21,9 @@ import Modal from "react-bootstrap/Modal";
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
+import { Link } from "react-router-dom";
+
+
 
 import "./users.css";
 
@@ -94,15 +97,15 @@ class Users extends Component {
     const { users, showModal, selected } = this.state;
     const { popoverOpen } = this.state;
 
-const popover = (
-  <Popover id="popover-basic">
-    <Popover.Title as="h3">{selected.name} {selected.lastname}</Popover.Title>
-    <Popover.Content>
-      Username: {selected.username}, email:{selected.email}, 
+    const popover = (
+      <Popover id="popover-basic">
+        <Popover.Title as="h3">{selected.name} {selected.lastname}</Popover.Title>
+        <Popover.Content>
+          Username: {selected.username}, email:{selected.email},
       Madre/Padre: {selected.parent}
-    </Popover.Content>
-  </Popover>
-);
+        </Popover.Content>
+      </Popover>
+    );
     return (
       <>
         <Row>
@@ -121,84 +124,86 @@ const popover = (
         </Row>
 
 
-       
+
         <Row>
-          <Col md={8}>
+          <Col md={9}>
             {!users ? (
               <h3>
                 <Spinner />
               </h3>
             ) : (
-              <CustomTable 
-                data={users}
-                header={
-                  <>
-                    <th>Nombre</th>
-                    <th>Foto</th>
-                    <th>Email</th>
-                    <th></th>
-                  </>
-                }
-                rowMap={(elm) => (
-                  <tr key={elm._id}>
-                    <td>
-                      {elm.lastname}, {elm.name}
-                    </td>
-                    <td>
-                      <img src={elm.profileImg} alt={elm.username} />
-                    </td>
-                    <td>{elm.email}</td>
+                <CustomTable
+                  data={users}
+                  header={
+                    <>
+                      <th>Nombre</th>
+                      <th>Foto</th>
+                      <th>Email</th>
+                      <th></th>
+                    </>
+                  }
+                  rowMap={(elm) => (
+                    <tr key={elm._id}>
+                      <td>
+                        {elm.lastname}, {elm.name}
+                      </td>
+                      <td>
+                        <img src={elm.profileImg} alt={elm.username} />
+                      </td>
+                      <td>{elm.email}</td>
 
-                    <td>
-                      <Button
-                        onClick={() => {
-                          this.setState({
-                            selected: {
-                              id: elm._id,
-                              lastname: elm.lastname,
-                              email: elm.email,
-                              name: elm.name,
-                              username: elm.username,
-                              type: "STUDENT",
-                              parent: elm.parent,
-                            },
-                            showModal: true,
-                          });
-                        }}
-                      >
-                        <FontAwesomeIcon icon={faEdit} />
-                      </Button>
-                      <Button onClick={() => this.handleUserDelete(elm._id)}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                      </Button>
+                      <td>
+                        <Col className="link-td">
 
-                       <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-                      <Button id="popover-basic" type="button"
-                        onClick={() =>
-                          this.setState({
-                            selected: {
-                              id: elm._id,
-                              profileImg: elm.profileImg,
-                              lastname: elm.lastname,
-                              email: elm.email,
-                              name: elm.name,
-                              username: elm.username,
-                              parent: elm.parent,
-                            },
-                          })
-                        }
-                      >
-                          <FontAwesomeIcon icon={faInfo} />
-                      </Button>
-                      </OverlayTrigger>            
-                    </td>
-                  </tr>
-                )}
-              />
-            )}
+                          <Link as='button' className="btn-link-table" onClick={() => {
+                            this.setState({
+                              selected: {
+                                id: elm._id,
+                                lastname: elm.lastname,
+                                email: elm.email,
+                                name: elm.name,
+                                username: elm.username,
+                                type: "STUDENT",
+                                parent: elm.parent,
+                              },
+                              showModal: true,
+                            });
+                          }}>
+                            <FontAwesomeIcon icon={faEdit} />
+                          </Link>
+
+                          <Link as='button' className="btn-link-table" onClick={() => this.handleUserDelete(elm._id)}>
+                            <FontAwesomeIcon icon={faTrashAlt} />
+                          </Link>
+
+                          <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                            <Link as='button' className="btn-link-table" id="popover-basic" type="button"
+                              onClick={() =>
+                                this.setState({
+                                  selected: {
+                                    id: elm._id,
+                                    profileImg: elm.profileImg,
+                                    lastname: elm.lastname,
+                                    email: elm.email,
+                                    name: elm.name,
+                                    username: elm.username,
+                                    parent: elm.parent,
+                                  },
+                                })
+                              }>
+                              <FontAwesomeIcon icon={faInfo} />
+                            </Link>
+                          </OverlayTrigger>
+                        </Col>
+
+                      </td>
+                    </tr>
+                  )}
+                />
+              )}
           </Col>
-          <Col md={4} className="studentCard">
-            
+          <Col md={2} className="studentCard">
+
           </Col>
           <Modal
             size="lg"

@@ -7,6 +7,9 @@ import SchoolHackApi from "../../../service/SchoolHackApi";
 import Button from "react-bootstrap/Button";
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { Link } from "react-router-dom";
+
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -149,8 +152,10 @@ class Teacher extends Component {
                     </td>
                     <td>{elm.email}</td>
                     <td>
-                      <Button
-                        onClick={() =>
+
+                      <Col className="link-td">
+
+                        <Link as='button' className="btn-link-table" onClick={() =>
                           this.setState({
                             selected: {
                               id: elm._id,
@@ -164,16 +169,18 @@ class Teacher extends Component {
                             },
                             showModal: true,
                           })
-                        }
-                      >
-                        <FontAwesomeIcon icon={faEdit} />
-                      </Button>
-                      <Button onClick={() => this.handleDelete(elm._id)}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                      </Button>
-                      <Button onClick={() => this.handleInfo(elm)}>
-                        <FontAwesomeIcon icon={faInfo} />
-                      </Button>
+                        }>
+                          <FontAwesomeIcon icon={faEdit} />
+                        </Link>
+
+                        <Link as='button' className="btn-link-table" onClick={() => this.handleDelete(elm._id)}>
+                          <FontAwesomeIcon icon={faTrashAlt} />
+                        </Link>
+
+                        <Link as='button' className="btn-link-table" onClick={() => this.handleInfo(elm)}>
+                          <FontAwesomeIcon icon={faInfo} />
+                        </Link>
+                      </Col>
                     </td>
                   </tr>
                 )}

@@ -2,10 +2,11 @@ import React from 'react'
 
 import Table from 'react-bootstrap/Table'
 
+import './index.css'
 
 const CustomTable = ({ data, header, rowMap }) => {
     return (
-        <Table striped bordered hover>
+        <Table className="data-table" hover>
             <thead>
                 <tr>
                    {header}

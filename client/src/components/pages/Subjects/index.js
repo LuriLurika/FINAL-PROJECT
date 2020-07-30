@@ -7,6 +7,8 @@ import Button from "react-bootstrap/Button";
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Spinner from "../../ui/Spinner";
+import { Link } from "react-router-dom";
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookMedical } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +16,8 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from "react-bootstrap";
+
+import './index.css'
 
 const emptySubject = {
   id: "",
@@ -91,8 +95,7 @@ class Subjects extends Component {
             <Button variant="outline-success"
               onClick={() =>
                 this.setState({ selected: emptySubject, showModal: true })
-              }
-            >
+              }>
               <FontAwesomeIcon icon={faBookMedical} />
             </Button>
           </Col>
@@ -100,7 +103,7 @@ class Subjects extends Component {
 
 
         <Row>
-          <Col md={6}>
+          <Col md={9}>
             {!subjects ? (
               <Spinner />
             ) : (
@@ -124,15 +127,14 @@ class Subjects extends Component {
                         {elm.teacher.name} {elm.teacher.lastname}
                       </td>
                       <td>
-                        <Button
-                          onClick={() =>
-                            this.setState({ description: elm.description })
-                          }
-                        >
-                          <FontAwesomeIcon icon={faInfo} />
-                        </Button>
-                        <Button
-                          onClick={() =>
+                        <Col className="link-td">
+
+                          <Link as='button' className="btn-link-table" onClick={() =>
+                            this.setState({ description: elm.description })}>
+                            <FontAwesomeIcon icon={faInfo} />
+                          </Link>
+
+                          <Link as='button' className="btn-link-table" onClick={() =>
                             this.setState({
                               selected: {
                                 id: elm._id,
@@ -141,21 +143,21 @@ class Subjects extends Component {
                                 teacher: elm.teacher,
                               },
                               showModal: true,
-                            })
-                          }
-                        >
-                          <FontAwesomeIcon icon={faEdit} />
-                        </Button>
-                        <Button onClick={() => this.handleDelete(elm._id)}>
-                          <FontAwesomeIcon icon={faTrashAlt} />
-                        </Button>
+                            })}>
+                            <FontAwesomeIcon icon={faEdit} />
+                          </Link>
+
+                          <Link as='button' className="btn-link-table" onClick={() => this.handleDelete(elm._id)}>
+                            <FontAwesomeIcon icon={faTrashAlt} />
+                          </Link>
+                        </Col>
                       </td>
                     </tr>
                   )}
                 />
               )}
           </Col>
-          <Col md={6}>
+          <Col md={3}>
             <p>{description}</p>
           </Col>
           <Modal

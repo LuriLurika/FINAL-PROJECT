@@ -152,7 +152,7 @@ class Courses extends Component {
         ) : (
             <Row>
               <Col md={8}>
-                <CustomTable className="data-table"
+                <CustomTable
                   data={courses}
                   header={
                     <>
