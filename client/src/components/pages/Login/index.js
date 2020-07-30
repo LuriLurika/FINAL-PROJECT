@@ -40,7 +40,7 @@ class Login extends Component {
 
   render() {
     return (
-      <Container className="center-grid login-page vh-100">
+      <Container className="login-page">
         <Row className="row">
           <Col md={7} className="lft-box">
             <Row className="d-flex flex-end">

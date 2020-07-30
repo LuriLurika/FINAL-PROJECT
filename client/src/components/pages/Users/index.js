@@ -13,12 +13,14 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 
+
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Card from "react-bootstrap/Card";
-import Image from "react-bootstrap/Image";
+import Popover from 'react-bootstrap/Popover'
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+
 
 import "./users.css";
 
@@ -39,20 +41,24 @@ class Users extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      popoverOpen: false,
       users: undefined,
       showModal: false,
       selected: emptyForm,
-         }
-    
+    };
 
     this.schoolHackApi = new SchoolHackApi();
+    this.togglePopover = this.togglePopover.bind(this);
   }
 
-  componentDidMount = () => {
-    this.updatedUsersList()
-    
+  togglePopover() {
+    this.setState({ popoverOpen: !this.state.popoverOpen });
   }
- 
+
+
+  componentDidMount = () => {
+    this.updatedUsersList();
+  };
 
   updatedUsersList = () => {
     this.schoolHackApi
@@ -84,15 +90,21 @@ class Users extends Component {
       .catch((err) => console.log("error en createUser", err));
   };
 
-
-
   render() {
     const { users, showModal, selected } = this.state;
-    
+    const { popoverOpen } = this.state;
 
-
+const popover = (
+  <Popover id="popover-basic">
+    <Popover.Title as="h3">{selected.name} {selected.lastname}</Popover.Title>
+    <Popover.Content>
+      Username: {selected.username}, email:{selected.email}, 
+      Madre/Padre: {selected.parent}
+    </Popover.Content>
+  </Popover>
+);
     return (
-      <>
+      <div className='overfl'>
         <h3>Estudiantes</h3>
 
         <Button
@@ -112,7 +124,7 @@ class Users extends Component {
                 <Spinner />
               </h3>
             ) : (
-              <CustomTable
+              <CustomTable 
                 data={users}
                 header={
                   <>
@@ -134,6 +146,29 @@ class Users extends Component {
 
                     <td>
                       <Button
+                        onClick={() => {
+                          this.setState({
+                            selected: {
+                              id: elm._id,
+                              lastname: elm.lastname,
+                              email: elm.email,
+                              name: elm.name,
+                              username: elm.username,
+                              type: "STUDENT",
+                              parent: elm.parent,
+                            },
+                            showModal: true,
+                          });
+                        }}
+                      >
+                        <FontAwesomeIcon icon={faEdit} />
+                      </Button>
+                      <Button onClick={() => this.handleUserDelete(elm._id)}>
+                        <FontAwesomeIcon icon={faTrashAlt} />
+                      </Button>
+
+                       <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                      <Button id="popover-basic" type="button"
                         onClick={() =>
                           this.setState({
                             selected: {
@@ -148,49 +183,17 @@ class Users extends Component {
                           })
                         }
                       >
-                        {/* Overlay */}
-                        <FontAwesomeIcon icon={faInfo} />
+                          <FontAwesomeIcon icon={faInfo} />
                       </Button>
-
-                      <Button
-                        onClick={() => {
-                          this.setState({
-                            selected: {
-                              id: elm._id,
-                              lastname: elm.lastname,
-                              email: elm.email,
-                              name: elm.name,
-                              username: elm.username,
-                              type: "STUDENT",
-                              parent: elm.parent,
-                            },
-                            showModal: true
-                          });
-                        }}
-                      >
-                        <FontAwesomeIcon icon={faEdit} />
-                      </Button>
-                      <Button onClick={() => this.handleUserDelete(elm._id)}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                      </Button>
+                      </OverlayTrigger>            
                     </td>
                   </tr>
                 )}
               />
             )}
           </Col>
-          <Col md={4} className= 'studentCard'>
-            <Image rounded src={selected.profileImg} alt={selected.username} />
-            <Card.Body>
-              <p>
-                {selected.name} {selected.lastname}
-              </p>
-              <br></br>
-{/* Popover */}
-              <p>{selected.username}</p>
-              <p>{selected.email}</p>
-              <p>{selected.parent}</p>
-            </Card.Body>
+          <Col md={4} className="studentCard">
+            
           </Col>
           <Modal
             size="lg"
@@ -213,7 +216,7 @@ class Users extends Component {
             </Modal.Body>
           </Modal>
         </Row>
-      </>
+      </div>
     );
   }
 }
