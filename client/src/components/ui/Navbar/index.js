@@ -29,11 +29,11 @@ class Navigation extends Component {
     this.modalInfo = {
       about: {
         title: "¿Quiénes somos?",
-        body: "Somos tal y tal y tal",
+        body: "Somos tres jóvenes y bellas programadoras",
       },
       contact: {
         title: "Contacta con nosotros",
-        body: "A través de la dire...",
+        body: "A través de nuesto emai info.lelschool@gmail.com",
       },
     };
   }

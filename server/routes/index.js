@@ -8,7 +8,7 @@ module.exports = app => {
     app.use("/api/courses", require("./courses.routes"))
     app.use("/api/users", require("./users.routes"))
     app.use("/api/teachers", require("./teachers.routes"))
-    app.use("/api/subjects", checkRole(['DIRECTOR', 'TEACHER']), require("./subjects.routes"))
+    app.use("/api/subjects", checkRole(['DIRECTOR','TEACHER']), require("./subjects.routes"))
     app.use("/api/messages", require("./message.routes"))
     app.use("/api/events", require("./event.routes"))
     app.use("/api/files", require("./files.routes"))

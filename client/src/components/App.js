@@ -84,6 +84,7 @@ class App extends Component {
                   <Profile
                     setTheUser={this.updateUser}
                     loggedInUser={this.state.loggedInUser}
+                    handleToast={this.handleToast}
                   />
                 ) : (
                   <Redirect to="/login" />
@@ -115,7 +116,12 @@ class App extends Component {
               render={(props) => (
                 <Subjects
                   {...props}
-                  setTheUser={this.setTheUser}
+                  setTheUser = {
+                    this.setTheUser
+                  }
+                  loggedInUser = {
+                    this.state.loggedInUser
+                  }
                   handleToast={this.handleToast}
                 />
               )}
@@ -125,7 +131,8 @@ class App extends Component {
               render={(props) => (
                 <Teachers
                   {...props}
-                  setTheUser={this.setTheUser}
+                  setTheUser = {this.setTheUser}
+                  loggedInUser = {this.state.loggedInUser}
                   handleToast={this.handleToast}
                 />
               )}
@@ -137,6 +144,7 @@ class App extends Component {
                 <Users
                   {...props}
                   setTheUser={this.setTheUser}
+                  loggedInUser={this.state.loggedInUser}
                   handleToast={this.handleToast}
                 />
               )}

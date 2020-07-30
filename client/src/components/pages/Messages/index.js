@@ -67,8 +67,12 @@ class Messages extends Component {
   deleteMessage = (id) => {
     this.schoolHackApi
       .deleteMessage(id)
-      .then(() => this.updatedMessagesList())
+      .then(() => {
+        this.updatedMessagesList()
+        this.props.handleToast(true, "¡Mensaje eliminado!")
+      })
       .catch((err) => console.log(err));
+    
   };
 
   handleModal = (status) => this.setState({ showModal: status });
@@ -79,6 +83,7 @@ class Messages extends Component {
       .then(() => {
         this.updatedMessagesList();
         this.handleModal(false);
+        this.props.handleToast(true, "¡Mensaje enviado!")
       })
       .catch((err) => console.log("error en createMessages", err));
   };
@@ -92,6 +97,7 @@ class Messages extends Component {
         title: `RE: ${title}`,
       },
       showModal: true,
+      
     });
   };
 

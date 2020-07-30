@@ -35,7 +35,10 @@ class Login extends Component {
         this.props.handleToast(true, 'Sesión inciada');
         this.props.history.push('/profile')
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+        this.props.handleToast(true, "¡Usuario o contraseña incorrectas!")
+      })
   };
 
   render() {

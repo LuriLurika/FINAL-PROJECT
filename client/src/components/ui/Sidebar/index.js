@@ -35,7 +35,7 @@ class Side extends Component {
       return null
     }
 
-    // console.log(this.props.loggedInUser, 'abajo')
+    
     return (
       <div className="left-sidebar">
         <Nav as="ul"
@@ -96,15 +96,6 @@ class Side extends Component {
           {this.props.loggedInUser !== null &&
             this.props.loggedInUser.type === "TEACHER" ? (
               <>
-
-                <Nav.Item as="li">
-                  <NavLink to="/courses">
-                    <span className="hide"> Cursos </span>
-                    <span className="myIcon">
-                      <FontAwesomeIcon icon={faChalkboard} fixedWidth />
-                    </span>
-                  </NavLink>
-                </Nav.Item>
 
                 <Nav.Item as="li">
                   <NavLink to="/subjects">

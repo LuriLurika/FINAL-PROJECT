@@ -144,7 +144,7 @@ class Courses extends Component {
           </p>
         ) : (
           <Row>
-            <Col md={8}>
+            <Col md={{span: 4, offset: 1 }}>
               <CustomTable
                 data={courses}
                 header={

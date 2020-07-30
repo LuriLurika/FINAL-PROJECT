@@ -61,7 +61,8 @@ class Teacher extends Component {
     this.schoolHackApi.deleteTeacher(id).then(() => {
       this.setState({
         teachers: this.state.teachers.filter((elm) => elm._id !== id),
-      });
+      })
+      this.props.handleToast(true, "¡Profesor eliminado!");
     });
   };
 
@@ -72,9 +73,14 @@ class Teacher extends Component {
     action
       .then(() => {
         this.updatedTeachersList();
-        this.setState({ showModal: false });
+        this.setState({ showModal: false })
+        this.props.handleToast(true, "¡Cambios guardados!");
       })
-      .catch((err) => console.log("error en modal Teacher", err));
+      .catch((err) => {
+               console.log("error en modal Teacher", err);
+               this.props.handleToast(true, "¡Algo salió mal!");
+             })
+  
   };
 
   getCourses = (id) => {
@@ -137,7 +143,13 @@ class Teacher extends Component {
                       {elm.name} {elm.lastname}
                     </td>
                     <td>
-                      <img src={elm.profileImg} alt={elm.username} />
+                      <img src = {
+                        elm.profileImg === undefined ? "https://res.cloudinary.com/dz0aow7wm/image/upload/v1595247178/School%20Hack/images_rtgo7j.jpg" : elm.profileImg
+                      }
+                      alt = {
+                        elm.username
+                      }
+                      />
                     </td>
                     <td>{elm.email}</td>
                     <td>
