@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import SchoolHackApi from "../../../service/SchoolHackApi";
 import { Container, Col, Button, Row } from "react-bootstrap";
 
+import './index.css'
+
 class MessageDetail extends Component {
   constructor(props) {
     super(props);
@@ -32,24 +34,28 @@ class MessageDetail extends Component {
     const { title, receivedBy, sendedBy, body } = this.state.message;
     return (
       <Container>
-        <Row>
-          <Col md="8">Asunto: {title}</Col>
-          <Col md="2">
-            <Button onClick={() => this.props.history.push("/messages")}>
+        <Row className='header-page'>
+          <Col md={12} className='btn-right'>
+            <Button variant="outline-success" onClick={() => this.props.history.push("/messages")}>
               Atras
             </Button>
           </Col>
         </Row>
+          <Row className='header-page'>
+          <Col md={8} className="title-mail"><span className="text-muted">Asunto: </span>  {title}</Col>
+        </Row>
         <Row>
-          <Col md="12">
-            Enviado por: {sendedBy.name} {sendedBy.lastname}
+          <Col md={8} className="send-by-mail">
+            <span className="text-muted">Enviado por: </span>  {sendedBy.name} {sendedBy.lastname}
           </Col>
         </Row>
         <Row>
-          <Col md="12">
-            <p>Mensaje:</p>
-            <p>{body}</p>
+          <Col className="body-mail" md={8}>
+            <span className="text-muted">Mensaje:</span>
           </Col>
+        </Row>
+        <Row>
+          <Col md={8}> <p className="body-mail-text">{body}</p></Col>
         </Row>
       </Container>
     );

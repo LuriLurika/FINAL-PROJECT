@@ -104,19 +104,24 @@ const popover = (
   </Popover>
 );
     return (
-      <div className='overfl'>
-        <h3>Estudiantes</h3>
+      <>
+        <Row>
+          <Col sm={12} className='header-page'>
 
-        <Button
-          onClick={() =>
-            this.setState({ selected: emptyForm, showModal: true })
-          }
-          variant="dark"
-          size="sm"
-          style={{ marginBottom: "20px" }}
-        >
-          <FontAwesomeIcon icon={faPlus} />
-        </Button>
+            <h1>Estudiantes:</h1>
+
+            <Button variant="outline-success"
+              onClick={() =>
+                this.setState({ selected: emptyForm, showModal: true })
+              }
+            >
+              <FontAwesomeIcon icon={faPlus} />
+            </Button>
+          </Col>
+        </Row>
+
+
+       
         <Row>
           <Col md={8}>
             {!users ? (
@@ -216,7 +221,7 @@ const popover = (
             </Modal.Body>
           </Modal>
         </Row>
-      </div>
+      </>
     );
   }
 }

@@ -43,6 +43,17 @@ class Side extends Component {
           activeKey="/home"
           onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
         >
+          
+          <Nav.Item as="li">
+            <NavLink to="/profile">
+              <span className="hide"> Perfil </span>
+              <span className="myIcon">
+                <FontAwesomeIcon icon={faUser} fixedWidth />
+              </span>
+            </NavLink>
+          </Nav.Item>
+
+          
           <Nav.Item as="li">
             <NavLink to="/messages">
               <span className="hide"> Mensajes </span>
@@ -61,14 +72,7 @@ class Side extends Component {
             </NavLink>
           </Nav.Item>
 
-          <Nav.Item as="li">
-            <NavLink to="/profile">
-              <span className="hide"> Perfil </span>
-              <span className="myIcon">
-                <FontAwesomeIcon icon={faUser} fixedWidth />
-              </span>
-            </NavLink>
-          </Nav.Item>
+          
 
           {this.props.loggedInUser !== null &&
             this.props.loggedInUser.type === "DIRECTOR" ? (

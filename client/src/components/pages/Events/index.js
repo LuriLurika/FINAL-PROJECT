@@ -7,7 +7,7 @@ import EventForm from "./Event-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -102,18 +102,28 @@ class Events extends Component {
     const { selected, canEdit } = this.state;
     return (
       <>
-        <Container as="main">
-          <h3>Eventos:</h3>
+        
 
-          {canEdit && (
-            <Button
-              onClick={() =>
-                this.setState({ selected: emptyEvent, showModal: true })
-              }
-            >
-              <FontAwesomeIcon icon={faPlus} />
-            </Button>
-          )}
+        <Row>
+          <Col sm={12} className='header-page'>
+
+            <h1>Eventos:</h1>
+
+            {canEdit && (
+              <Button variant="outline-success"
+                onClick={() =>
+                  this.setState({ selected: emptyEvent, showModal: true })
+                }
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </Button>
+            )}
+          </Col>
+        </Row>
+     
+          
+
+         
 
           {!this.state.events ? (
             <h3>
@@ -135,7 +145,7 @@ class Events extends Component {
               ))}
             </Row>
           )}
-        </Container>
+       
 
         <Modal
           size="lg"

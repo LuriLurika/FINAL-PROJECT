@@ -1,17 +1,22 @@
 import React, { Component } from "react";
 import SchoolHackApi from "../../../service/SchoolHackApi";
 
-import MessageCard from "./Message-card";
+import ListMail from "./Message-card/list-mail";
+
 import MessageForm from "../../common/Forms/Message-form";
 import Spinner from "../../ui/Spinner";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-import Container from "react-bootstrap/Container";
+
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+
+import './Message-card/index.css'
+
 
 const emptyMessage = {
   _id: "",
@@ -98,28 +103,34 @@ class Messages extends Component {
   render() {
     return (
       <>
-        <Container as="main">
-          <h3>Mensajes:</h3>
-          <Button
-            onClick={() =>
-              this.setState({
-                selected: emptyMessage,
-                showModal: true,
-              })
-            }
-            size="sm"
-          >
-            <FontAwesomeIcon icon={faEnvelope} />
-          </Button>
-          <h4>Mensajes Recibidos</h4>
-          {!this.state.messagesReceived ? (
-            <h3>
-              <Spinner />
-            </h3>
-          ) : (
+        <Row>
+          <Col sm={12} className='header-page'>
+
+            <h1>Mensajes:</h1>
+
+            <Button variant="outline-success"
+              onClick={() =>
+                this.setState({
+                  selected: emptyMessage,
+                  showModal: true,
+                })
+              }
+            >
+              <FontAwesomeIcon icon={faPlus} />
+            </Button>
+          </Col>
+        </Row>
+
+
+        <h4>Mensajes Recibidos</h4>
+        {!this.state.messagesReceived ? (
+          <h3>
+            <Spinner />
+          </h3>
+        ) : (
             <Row>
               {this.state.messagesReceived.map((elm) => (
-                <MessageCard
+                <ListMail
                   key={elm._id}
                   onDeleteMessage={this.deleteMessage}
                   onReplyMessage={this.handleReplyMessage}
@@ -128,15 +139,15 @@ class Messages extends Component {
               ))}
             </Row>
           )}
-          <h4>Mensajes Enviados</h4>
-          {!this.state.messagesSend ? (
-            <h3>
-              <Spinner />
-            </h3>
-          ) : (
+        <h4>Mensajes Enviados</h4>
+        {!this.state.messagesSend ? (
+          <h3>
+            <Spinner />
+          </h3>
+        ) : (
             <Row>
               {this.state.messagesSend.map((elm) => (
-                <MessageCard
+                <ListMail
                   key={elm._id}
                   {...elm}
                   onDeleteMessage={this.deleteMessage}
@@ -145,7 +156,7 @@ class Messages extends Component {
               ))}
             </Row>
           )}
-        </Container>
+
 
         <Modal
           size="lg"

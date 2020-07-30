@@ -59,8 +59,8 @@ class Navigation extends Component {
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto">
+          <Navbar.Collapse id="basic-navbar-nav nav-collapse">
+            <Nav className="ml-auto inside-nav-collapse">
               {this.props.loggedInUser ? (
                 <>
                   <Nav.Link as="span">

@@ -108,14 +108,22 @@ class Teacher extends Component {
 
     return (
       <>
-        <h1>Profesores</h1>
-        <Button
-          onClick={() =>
-            this.setState({ selected: emptyTeacher, showModal: true })
-          }
-        >
-          <FontAwesomeIcon icon={faPlus} />
-        </Button>
+        <Row>
+          <Col sm={12} className='header-page'>
+
+            <h1>Profesores:</h1>
+
+            <Button variant="outline-success"
+              onClick={() =>
+                this.setState({ selected: emptyTeacher, showModal: true })
+              }
+            >
+              <FontAwesomeIcon icon={faPlus} />
+            </Button>
+          </Col>
+        </Row>
+
+
         <Row>
           <Col md={8}>
             {!teachers ? (

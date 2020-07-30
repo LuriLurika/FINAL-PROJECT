@@ -3,6 +3,7 @@
     text-align: right;
     border-right: solid 3px var(--dark-color);
     margin-left: 25px;
+    margin-bottom: 25px;
 }
 
 .sidebar {
@@ -13,7 +14,7 @@
     color: var(--dark-color);
     text-decoration: none;
     font-size: 20px;
-    padding: 20px 0px 20px;
+    padding: 10px 0px 20px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -60,6 +61,9 @@
         display: flex;
         direction: column;
         margin-right: -20px;
-        transition: all .50s ease;
+        transition: all 1s ease;
+    }
+    .svg-inline--fa.fa-fw:hover {
+        transform: scale(1.3);
     }
 }

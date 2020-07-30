@@ -15,6 +15,7 @@ import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
+import { Link } from "react-router-dom";
 
 
 const emptyForm = {
@@ -62,7 +63,7 @@ class Courses extends Component {
       .then((response) => this.setState({ allSubjects: response.data }));
   };
   // updatedUsersList = () => {
-    
+
   //   this.schoolHackApi
   //     .getAllUsers()
   //     .then((response) => this.setState({ allUsers: response.data }));
@@ -136,101 +137,78 @@ class Courses extends Component {
 
     return (
       <>
-        <h1>Cursos</h1>
+
+        <Row>
+          <Col sm={12} className='header-page'>
+            <h1>Cursos:</h1>
+          </Col>
+        </Row>
+
 
         {!this.state.courses ? (
           <p>
             <Spinner />
           </p>
         ) : (
-          <Row>
-            <Col md={8}>
-              <CustomTable
-                data={courses}
-                header={
-                  <>
-                    <th>Nombre</th>
-                    <th>Asignaturas</th>
-                    {/* <th>Alumnos</th> */}
-                  </>
-                }
-                rowMap={(elm) => (
-                  <tr>
-                    <td>{elm.title}</td>
+            <Row>
+              <Col md={8}>
+                <CustomTable className="data-table"
+                  data={courses}
+                  header={
+                    <>
+                      <th>Curso</th>
+                      <th>Asignaturas</th>
 
-                    <td>
-                      <ul>
-                        {elm.subjects.map((Element) => (
-                          <li>
-                            {Element.title}
-                            <Button
-                              onClick={() =>
-                                this.handleDeleteSubjects(Element._id, elm)
-                              }
-                            >
-                              <FontAwesomeIcon icon={faTrashAlt} />
-                            </Button>
-                          </li>
-                        ))}
-                      </ul>
-                      <Button
-                        onClick={() =>
-                          this.setState({
-                            selected: elm,
-                            showModal: true,
-                          })
-                        }
-                      >
-                        <FontAwesomeIcon icon={faPlus} />
-                      </Button>
-                    </td>
-
-                    {/* <td>
-                      <ul>
-                        {elm.users.map((Elem) => (
-                          <li>
-                            {Elem.lastname}
-                            <Button
-                              onClick={() =>
-                                this.handleDeleteUsers(Elem._id, elm)
-                              }
-                            >
-                              <FontAwesomeIcon icon={faTrashAlt} />
-                            </Button>
-                          </li>
-                        ))}
-                      </ul>
-                      <Button
-                        onClick={() =>
-                          this.setState({
-                            selected: elm,
-                            showModal: true,
-                          })
-                        }
-                      >
-                        <FontAwesomeIcon icon={faPlus} />
-                      </Button>
-                    </td> */}
-                  </tr>
-                )}
-              />
-            </Col>
-            <Modal
-              size="lg"
-              show={showModal}
-              onHide={() => this.setState({ showModal: false })}
-            >
-              <Modal.Body>
-                <CourseForm
-                  subjects={allSubjects.filter(
-                    (subject) =>
-                      !selected.subjects.some((elm) => elm._id === subject._id)
-                  )}
-                  onSubjectChanged={(subjects) =>
-                    this.handleAddSubjects(subjects, selected)
+                    </>
                   }
+                  rowMap={(elm) => (
+                    <tr>
+                      <td>{elm.title}</td>
+
+                      <td>
+                        <ul className="courses-list">
+                          {elm.subjects.map((Element) => (
+                            <li>
+                              {Element.title}
+                              <Link onClick={() =>
+                                this.handleDeleteSubjects(Element._id, elm)
+                              }><FontAwesomeIcon as='button' icon={faTrashAlt} /></Link>
+                            </li>
+                          ))}
+                        </ul>
+                        <Row className="btn-left-margin">
+                          <Button variant='outline-success'
+                            onClick={() =>
+                              this.setState({
+                                selected: elm,
+                                showModal: true,
+                              })
+                            }
+                          >
+                            <FontAwesomeIcon icon={faPlus} />
+                          </Button>
+                        </Row>
+                      </td>
+                    </tr>
+                  )}
                 />
-                {/* <CourseForm
+              </Col>
+              <Modal
+                size="lg"
+                show={showModal}
+                onHide={() => this.setState({ showModal: false })}
+              >
+                <Modal.Body>
+                  <CourseForm
+                    subjects={allSubjects.filter(
+                      (subject) =>
+                        !selected.subjects.some((elm) => elm._id === subject._id)
+                    )}
+                    onSubjectChanged={(subjects) =>
+                      this.handleAddSubjects(subjects, selected)
+                    }
+                  />
+                  {/* <CourseForm
                   subjects={allStudents.filter(
                     (user) =>
                       !selected.users.some((elm) => elm._id === user._id)
@@ -239,10 +217,10 @@ class Courses extends Component {
                     this.handleAddUsers(users, selected)
                   }
                 /> */}
-              </Modal.Body>
-            </Modal>
-          </Row>
-        )}
+                </Modal.Body>
+              </Modal>
+            </Row>
+          )}
       </>
     );
   }

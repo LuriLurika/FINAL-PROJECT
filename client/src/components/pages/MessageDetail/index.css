@@ -1,0 +1,18 @@
+.title-mail, .send-by-mail, .body-mail {
+    border-bottom: solid 4px rgba(0, 137, 33, 0.3);
+    padding-top: 45px;
+    margin-bottom: 5px;
+}
+
+.title-mail {
+    padding-top: 100px;
+}
+
+.body-mail-text {
+    margin-top: 30px;
+}
+
+.btn-right {
+    display: flex;
+    justify-content: flex-end;
+}

@@ -82,69 +82,78 @@ class Subjects extends Component {
     const { subjects, description, showModal, selected, teachers } = this.state;
     return (
       <>
-        <h1>Subjects</h1>
-        <Button
-          onClick={() =>
-            this.setState({ selected: emptySubject, showModal: true })
-          }
-        >
-          <FontAwesomeIcon icon={faBookMedical} />
-        </Button>
+
+        <Row>
+          <Col sm={12} className='header-page'>
+
+            <h1>Asignaturas:</h1>
+
+            <Button variant="outline-success"
+              onClick={() =>
+                this.setState({ selected: emptySubject, showModal: true })
+              }
+            >
+              <FontAwesomeIcon icon={faBookMedical} />
+            </Button>
+          </Col>
+        </Row>
+
+
         <Row>
           <Col md={6}>
             {!subjects ? (
               <Spinner />
             ) : (
-              <CustomTable
-                data={subjects}
-                header={
-                  <>
-                    <th>Asignatura</th>
-                    <th>Profesor</th>
-                    <th>Acciones</th>
-                  </>
-                }
-                rowMap={(elm) => (
-                  <tr key={elm._id}>
-                    <td>{elm.title}</td>
-                    <td>
-                      <img
-                        src={elm.teacher.profileImg}
-                        alt={elm.teacher.name}
-                      />
-                      {elm.teacher.name} {elm.teacher.lastname}
-                    </td>
-                    <td>
-                      <Button
-                        onClick={() =>
-                          this.setState({ description: elm.description })
-                        }
-                      >
-                        <FontAwesomeIcon icon={faInfo} />
-                      </Button>
-                      <Button
-                        onClick={() =>
-                          this.setState({
-                            selected: {
-                              id: elm._id,
-                              title: elm.title,
-                              description: elm.description,
-                              teacher: elm.teacher,
-                            },
-                            showModal: true,
-                          })
-                        }
-                      >
-                        <FontAwesomeIcon icon={faEdit} />
-                      </Button>
-                      <Button onClick={() => this.handleDelete(elm._id)}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                      </Button>
-                    </td>
-                  </tr>
-                )}
-              />
-            )}
+                <CustomTable
+                  data={subjects}
+                  header={
+                    <>
+                      <th>Asignatura</th>
+                      <th>Profesor</th>
+                      <th>Acciones</th>
+                    </>
+                  }
+                  rowMap={(elm) => (
+                    <tr key={elm._id}>
+                      <td>{elm.title}</td>
+                      <td>
+                        <img
+                          src={elm.teacher.profileImg}
+                          alt={elm.teacher.name}
+                        />
+                        {elm.teacher.name} {elm.teacher.lastname}
+                      </td>
+                      <td>
+                        <Button
+                          onClick={() =>
+                            this.setState({ description: elm.description })
+                          }
+                        >
+                          <FontAwesomeIcon icon={faInfo} />
+                        </Button>
+                        <Button
+                          onClick={() =>
+                            this.setState({
+                              selected: {
+                                id: elm._id,
+                                title: elm.title,
+                                description: elm.description,
+                                teacher: elm.teacher,
+                              },
+                              showModal: true,
+                            })
+                          }
+                        >
+                          <FontAwesomeIcon icon={faEdit} />
+                        </Button>
+                        <Button onClick={() => this.handleDelete(elm._id)}>
+                          <FontAwesomeIcon icon={faTrashAlt} />
+                        </Button>
+                      </td>
+                    </tr>
+                  )}
+                />
+              )}
           </Col>
           <Col md={6}>
             <p>{description}</p>

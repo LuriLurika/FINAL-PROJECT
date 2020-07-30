@@ -16,8 +16,10 @@ import Teachers from "./pages/Teacher";
 import Users from "./pages/Users";
 import Messages from "./pages/Messages";
 import Events from "./pages/Events";
-import Sidebar from "./ui/Sidebar";
 import Profile from "./pages/Profile/index";
+import Sidebar from "./ui/Sidebar";
+import Footer from "./ui/Footer";
+
 
 import MessageDetail from "./pages/MessageDetail";
 
@@ -176,6 +178,7 @@ class App extends Component {
           </Switch>
         </main>
         <CustomToast {...this.state.toast} handleToast={this.handleToast} />
+        <Footer />
       </>
     );
   }

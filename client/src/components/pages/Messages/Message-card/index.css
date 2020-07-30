@@ -1,0 +1,42 @@
+.div-icon {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.box-mail {
+    border-top: solid 1px rgba(0, 0, 0, .4);
+    border-bottom: solid 1px rgba(0, 0, 0, .4);
+    ;
+    padding: 10px;
+    margin-left: 30px;
+}
+
+.box-mail:hover {
+    background-color: rgba(0, 0, 0, .05);
+    ;
+}
+
+.box-mail a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.box-mail svg {
+    color: green;
+}
+
+h3, h4 {
+    padding: 25px 0;
+}
+
+@media screen and (max-width: 768px) {
+    .box-mail span {
+        display: none;
+    }
+    .box-mail .div-icon {
+        justify-content: space-between;
+    }
+    .box-mail {
+        text-align: center;
+    }
+}
