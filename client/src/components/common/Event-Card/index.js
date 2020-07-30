@@ -28,7 +28,7 @@ const EventCard = ({
   onDismissEvent,
 }) => {
   return (
-    <Col md={3}>
+    <Col md={4}>
       <Card>
         <Card.Body>
           <Card.Title>{title}</Card.Title>

@@ -1,26 +1,51 @@
-.orange{
-    background-color: orange;
+.detail-prof img {
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
+    align-items: center;
 }
 
-.blue{
-    background-color: paleturquoise;
+.flex-data {
+    display: flex;
+    justify-content: space-between;
 }
 
-.blue a{
-    padding-bottom: 20px;
+.flex-data .btn {
+    align-self: baseline;
 }
 
-.green{
-    background-color: greenyellow;
+.pad {
+    padding-left: 30px
 }
 
-.pink{
-    background-color: hotpink;
+.center-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-img{
-    width: 50px;
+.profile-row {
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-rd {
+    display: flex;
+    align-items: flex-end;
+    padding: 15px;
+    margin-right: 20px;
+}
+
+.bc-green {
+    background-color: rgb(242, 249, 246);
+    box-shadow: -5px -5px 5px -5px #333;
+}
+
+.profile-page {
+    margin-left: 30px;
+}
+
+.flex-map {
+    display: flex;
 }

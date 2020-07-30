@@ -90,51 +90,64 @@ class Profile extends Component {
   render() {
     const { user, unreadMessages, events, showModal } = this.state;
     return (
-      <Container>
-        <HeaderProfile profileImg={user.profileImg} name={user.name} />
-        <Row as="section">
-          <Col md={6}>
-            <ProfileDetail
-              profileImg={user.profileImg}
-              name={user.name}
-              lastname={user.lastname}
-              email={user.email}
-              parents={user.parents}
-              onViewForm={this.onViewForm}
-            />
-          </Col>
-          <Col md={6}>
-            <Messages unreadMessages={unreadMessages} />
-            <Events
-              currentUserLoggedId={user._id}
-              events={events}
-              onAcceptEvent={this.handleAcceptEvent}
-              onDismissEvent={this.handleDismissEvent}
-            />
-          </Col>
-          <Modal
-            size="lg"
-            show={showModal}
-            onHide={() => this.setState({ showModal: false })}
-          >
-            <Modal.Body>
-              <UserForm
-                id={user._id}
+    
+        <Container className='profile-page'>
+        <HeaderProfile name={user.name} />
+        
+          <Row className='profile-row'>
+            <Col md={5} className='pad  bc-green'>
+              <ProfileDetail
+                profileImg={user.profileImg}
                 name={user.name}
                 lastname={user.lastname}
                 email={user.email}
-                username={user.username}
-                parent={user.parent}
-                onUserChanged={(user) => {
-                  this.setState({ user: user })
-                  this.props.setTheUser(user)
-                  this.setState({showModal:false})
-                }}
-                fromDetail={true}
+                parents={user.parents}
+                onViewForm={this.onViewForm}
               />
-            </Modal.Body>
-          </Modal>
-        </Row>
+            </Col>
+
+            <Col md={2}></Col>
+          <Col md={5} className='center-div bc-green'>
+              <Messages unreadMessages={unreadMessages} />
+
+            </Col>
+          </Row>
+          <Row className='profile-row'>
+            
+              <Events
+                currentUserLoggedId={user._id}
+                events={events}
+                onAcceptEvent={this.handleAcceptEvent}
+                onDismissEvent={this.handleDismissEvent}
+              />
+       
+            </Row>
+
+        <Modal
+          size="lg"
+          show={showModal}
+          onHide={() => this.setState({ showModal: false })}
+        >
+          <Modal.Body>
+            <UserForm
+              id={user._id}
+              name={user.name}
+              lastname={user.lastname}
+              email={user.email}
+              username={user.username}
+              parent={user.parent}
+              onUserChanged={(user) => {
+                this.setState({ user: user })
+                this.props.setTheUser(user)
+                this.setState({ showModal: false })
+              }}
+              fromDetail={true}
+            />
+          </Modal.Body>
+        </Modal>
+
+
+     
       </Container>
     );
   }

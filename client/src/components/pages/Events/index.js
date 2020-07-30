@@ -112,7 +112,7 @@ class Events extends Component {
         
 
         <Row>
-          <Col sm={12} className='header-page'>
+          <Col md={12} className='header-page'>
 
             <h1>Eventos:</h1>
 

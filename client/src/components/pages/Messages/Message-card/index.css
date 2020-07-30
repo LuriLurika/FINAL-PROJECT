@@ -29,6 +29,10 @@ h3, h4 {
     padding: 25px 0;
 }
 
+.sneaky-hide {
+    visibility: hidden;
+}
+
 @media screen and (max-width: 768px) {
     .box-mail span {
         display: none;

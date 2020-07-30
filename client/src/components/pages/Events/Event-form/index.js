@@ -103,10 +103,10 @@ class EventForm extends Component {
             </Form.Control>
           </Form.Group>
           <Form.Group>
-            <Maps placeDescription={this.state.placeDescription} placeId={this.state.placeId} onPlaceChanged={placeInfo => this.setState({placeId: placeInfo.placeId, placeDescription: placeInfo.placeDescription})} />
+            <Maps placeDescription={this.state.placeDescription} placeId={this.state.placeId} onPlaceChanged={placeInfo => this.setState({ placeId: placeInfo.placeId, placeDescription: placeInfo.placeDescription })} />
           </Form.Group>
           <Button variant="dark" type="submit">
-            Submit
+            Enviar
           </Button>
         </Form>
       </>

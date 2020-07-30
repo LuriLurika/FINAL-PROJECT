@@ -9,8 +9,9 @@ const Events = ({
   currentUserLoggedId,
 }) => {
   return (
-      <Col className="pink">
-          <h3> Tus eventos</h3>
+    <Col md={12}>
+      <h3> Tus eventos</h3>
+      <Col md={12} className='flex-map'>
       {events.map((elm) => (
         <EventCard
           key={elm._id}
@@ -21,6 +22,7 @@ const Events = ({
           onDismissEvent={() => onDismissEvent(elm)}
         />
       ))}
+      </Col>
     </Col>
   );
 };

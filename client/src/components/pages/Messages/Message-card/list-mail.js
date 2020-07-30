@@ -31,7 +31,7 @@ const ListMail = ({
                 <Row className='box-mail'>
                     <Col sm={3}><span className="text-muted">Asunto: </span> {title} </Col>
                     <Col sm={3} className="mb-2"><span className="text-muted">Enviado por: </span>{sendedBy.name}</Col> 
-                    <Col sm={3} className="mb-2"><span className="text-muted">Para: </span> {receivedBy.username}</Col>
+                    <Col sm={3} className="mb-2"><span className="text-muted sneaky-hide">Para: </span> {receivedBy.username}</Col>
                     {/* <Col>{body}</Col> */}
                     <Col sm={2}><Link to={`/messages/${_id}`}>{readed ? <FontAwesomeIcon icon={faEnvelopeOpen} /> : <FontAwesomeIcon icon={faEnvelope} />} Leer</Link></Col>
                     <Col sm={1} className='div-icon'>

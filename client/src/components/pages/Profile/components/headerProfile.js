@@ -2,17 +2,14 @@ import React from 'react'
 import Col from 'react-bootstrap/Col'
 
 
-const HeaderProfile = ({ name, profileImg }) => {
+const HeaderProfile = ({ name }) => {
 
-    return (
-        <Col className="orange">
-          <img src={profileImg} alt=""/>
-          <h3>Bienvenid@ {name}</h3>
+  return (
+    <Col md={12} className='header-page'>
+      <h1>Bienvenid@ {name}</h1>
+    </Col>
 
-
-        </Col>
-
-    )
+  )
 }
 
 export default HeaderProfile

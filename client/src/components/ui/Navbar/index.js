@@ -16,7 +16,7 @@ import "./index.css";
 class Navigation extends Component {
 
   constructor(props) {
-    
+
     super(props);
     this.state = {
       showModal: false,
@@ -29,7 +29,7 @@ class Navigation extends Component {
     this.modalInfo = {
       about: {
         title: "¿Quiénes somos?",
-        body: "Somos tres jóvenes y bellas programadoras",
+        body: "Somos tres jóvenes y bellas programadoras. Lorem fistrum benemeritaar no te digo trigo por no llamarte Rodrigor mamaar fistro sexuarl a peich. Sexuarl mamaar va usté muy cargadoo se calle ustée ese pedazo de se calle ustée qué dise usteer fistro ese hombree de la pradera llevame al sircoo. Te voy a borrar el cerito tiene musho peligro te voy a borrar el cerito fistro llevame al sircoo amatomaa torpedo por la gloria de mi madre ese hombree. A wan quietooor al ataquerl diodeno. Ese que llega a gramenawer a wan me cago en tus muelas se calle ustée la caidita a peich quietooor llevame al sircoo al ataquerl al ataquerl.",
       },
       contact: {
         title: "Contacta con nosotros",
@@ -69,7 +69,7 @@ class Navigation extends Component {
                     </NavLink>
                   </Nav.Link>
                   <Nav.Link as="span">
-                         <NavLink
+                    <NavLink
                       to="/login"
                       onClick={this.logout}>
                       Cerrar sesión
@@ -102,7 +102,7 @@ class Navigation extends Component {
                 )}
               <Nav.Link as="span">
                 <NavLink to="/profile">
-                  Hola,  
+                  Hola,
                   {this.props.loggedInUser
                     ? " " + this.props.loggedInUser.username
                     : " invitado"}
