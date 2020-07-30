@@ -10,7 +10,7 @@ import Index from "./pages/Index";
 import Navigation from "./ui/Navbar";
 import Login from "./pages/Login";
 
-import Courses from "./pages/Curses";
+import Courses from "./pages/Courses";
 import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teacher";
 import Users from "./pages/Users";
