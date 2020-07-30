@@ -28,7 +28,7 @@ module.exports = app => {
     passport.use(new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
         User.findOne({ username })
             .then(user => {
-                if (!user) {loggedin;
+                if (!user) {
                     return next(null, false, { message: "Nombre de usuario incorrecto" })
                 }
                 if (!bcrypt.compareSync(password, user.password)) {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ProfileDetail from "./components/profileDetail";
 import "./index.css";
+import UserForm from "../../common/Forms/User-form";
 import HeaderProfile from "./components/headerProfile";
 import Messages from "./components/messages";
 import Events from "./components/events";
@@ -8,6 +9,7 @@ import SchoolHackApi from "../../../service/SchoolHackApi";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Modal from "react-bootstrap/Modal";
 
 class Profile extends Component {
   constructor(prop) {
@@ -33,19 +35,26 @@ class Profile extends Component {
       });
     });
   };
-  getEvents = () => {
-    this.schoolHackApi
-      .getAllEvents()
-      .then((response) =>
-        this.setState({
-          events: response.data.filter((elm) =>
-            elm.participants.some(
-              (participant) => participant._id === this.state.user._id
-            )
-          ),
-        })
-      );
+
+  onViewForm = () => {
+    this.setState({ showModal: true });
   };
+
+  getEvents = () => {
+    this.schoolHackApi.getAllEvents().then((response) =>
+      this.setState({
+        events: response.data.filter((elm) =>
+          elm.participants.some(
+            (participant) => participant._id === this.state.user._id
+          )
+        ),
+      })
+    );
+  };
+
+  handleUsersSubmit = (user) => {
+
+  }
 
   handleAcceptEvent = (event) => {
     const eventToSave = {
@@ -77,7 +86,7 @@ class Profile extends Component {
   };
 
   render() {
-    const { user, unreadMessages, events } = this.state;
+    const { user, unreadMessages, events, showModal } = this.state;
     return (
       <Container>
         <HeaderProfile profileImg={user.profileImg} name={user.name} />
@@ -89,6 +98,7 @@ class Profile extends Component {
               lastname={user.lastname}
               email={user.email}
               parents={user.parents}
+              onViewForm={this.onViewForm}
             />
           </Col>
           <Col md={6}>
@@ -100,6 +110,27 @@ class Profile extends Component {
               onDismissEvent={this.handleDismissEvent}
             />
           </Col>
+          <Modal
+            size="lg"
+            show={showModal}
+            onHide={() => this.setState({ showModal: false })}
+          >
+            <Modal.Body>
+              <UserForm
+                id={user._id}
+                name={user.name}
+                lastname={user.lastname}
+                email={user.email}
+                username={user.username}
+                parent={user.parent}
+                onUserChanged={(user) => {
+                  this.props.setTheUser(user)
+                  this.setState({showModal:false})
+                }}
+                fromDetail={true}
+              />
+            </Modal.Body>
+          </Modal>
         </Row>
       </Container>
     );
