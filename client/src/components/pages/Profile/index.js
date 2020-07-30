@@ -26,6 +26,8 @@ class Profile extends Component {
     this.getEvents();
     this.getPendingMessages(this.state.user._id);
   };
+
+
   handleModal = (status) => this.setState({ showModal: status });
 
   getPendingMessages = (id) => {
@@ -124,6 +126,7 @@ class Profile extends Component {
                 username={user.username}
                 parent={user.parent}
                 onUserChanged={(user) => {
+                  this.setState({ user: user })
                   this.props.setTheUser(user)
                   this.setState({showModal:false})
                 }}

@@ -55,7 +55,7 @@ class UserForm extends Component {
     uploadData.append("profileImg", e.target.files[0])
     this.fileService.handleUpload(uploadData)
       .then(response => {
-        console.log('Subida de archivo finalizada! La URL de Cloudinray es: ', response.data.secure_url)
+        console.log('Subida de archivo finalizada! La URL de Cloudinary es: ', response.data.secure_url)
         this.setState({
           user: {
             ...this.state.user,
