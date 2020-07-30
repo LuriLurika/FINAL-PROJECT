@@ -1,18 +1,14 @@
 import axios from 'axios'
 
 
-const token = Buffer.from(`pikachu:1234`, "utf8").toString("base64");
+
 class SchoolHackApi {
   constructor() {
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}`,
       withCredentials: true,
     });
-    this.config = {
-      headers: {
-        Authorization: `token ${token}`,
-      },
-    };
+
   }
 
   getAllCourses = () => this.service.get("/courses");
