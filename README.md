@@ -1,7 +1,4 @@
-```mermaid
-graph LR
-A[Subjects] 
-```
+**Endpoint Subjects**
 |  ENDPOINT      |OPERACIÓN | PARÁMETROS DE ENTRADA |PARÁMETROS DE SALIDA|DESCRIPCIÓN|
 |----------------|----------|-----------------------|--------------------|-----------|
 |/subjects       |GET       |n/a            |[{name: String, id: String}] |Devuelve todas las asignaturas
