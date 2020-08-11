@@ -34,7 +34,7 @@ LEL School is a web application based on our very own REST API and created with 
 
 <p align="center">
 <a href="" rel="noopener">
- <img height=450px src='client/public/login.jpg' alt="Login page">
+ <img height=450px src='client/public/login.JPG' alt="Login page">
  </a>
 </p>
 
