@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src='client/public/logo512.png' alt="Project logo"></a>
+ <img width=400px height=400px src='client/public/logo512.png' alt="Project logo"></a>
 </p>
 
 
@@ -25,8 +25,6 @@
 - [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
