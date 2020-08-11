@@ -33,7 +33,9 @@
 LEL School is a web application based on our very own REST API and created with just one intend: to simplify managements within an academic environment. Wether you are a principal, a teacher or a student... the management of appointments, messages and courses is no longer a concern!
 
 <p align="center">
+  <a href="" rel="noopener">
  <img height=450px src='client/public/login.jpg' alt="Login page">
+  </a>
 </p>
 
 ### Features
