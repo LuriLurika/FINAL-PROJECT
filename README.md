@@ -23,6 +23,7 @@
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Deployment](#deployment)
+- [Endpoints](#endpoints)
 - [Launch](#launch)
 - [Built Using](#built_using)
 - [Authors](#authors)
