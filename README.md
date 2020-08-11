@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src='client/public/logo512.png' alt="Project logo"></a>
+ <img width=160px src='client/public/logo512.png' alt="Project logo"></a>
 </p>
 
 
@@ -23,96 +23,87 @@
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Deployment](#deployment)
-- [Usage](#usage)
+- [Launch](#launch)
 - [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
 ## 🧐 About <a name = "about"></a>
-Motivación por la que se creó el proyecto, utilidades que tiene...
+LEL School is a web application based on our very own REST API and created with just one intend: to simplify managements within an academic environment. Wether you are a principal, a teacher or a student... the management of appointments, messages and courses is no longer a concern!
+
+<p align="center">
+ <img height=450px src='client/public/login.jpg' alt="Login page"></a>
+</p>
+
+### Features
+LEL School has three different views depending on your role in the academic center:
+
+#### Principal:
+If you are the school's principal you can:
+ - Register new teachers and students
+ - Create, update and delete events
+ - Create, update and delete the subjects of each course
+ - Assign a teacher to each subject
+
+#### Teacher:
+If you are a teacher you can:
+ - Update the subjects info
+ - Sign up for events
+
+#### Student:
+If you are a student you can:
+ - Sign up for events
+
+#### Shared by all:
+Everyone can:
+ - Send and receive messages from the app (which are notified via email)
+ - Modify your own profile (upload a cool picture!)
+
+
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
 ### Prerequisites
-What things you need to install the software and how to install them.
+What things you need to install the software and how to install them:
 
-```
+
 - Create a `.env` file on the root directory to populate the database (`DB`) and port (`PORT`)
 
-```
+- Get yourself some free keys to Cloudinary and GoogleMaps and add them to the `.env` file
 
-## Run
+- Run `npm i` command on the root directory!
 
-- Run `npm run dev` command on the root directory
+## 🔧 Deployment  <a name = "deployment"></a>
 
-### Installing
-A step by step series of examples that tell you how to get a development env running.
+- Run `npm run dev` command on the server directory
+- Run `npm start` command on the client directory
 
-Say what the step will be
 
-```
-Run `npm i` on the root directory
-```
+## :collision: API documentation <a name = "endpoints"></a>
+See our API REST documentation through our beloved [Postman](https://documenter.getpostman.com/view/11893682/T1LLFTi5?version=latest#af61b941-31ff-477f-a99f-2f9995529e9f) Collection :love_letter:
 
-And repeat
 
-```
-until finished
-```
+## 🚀 Launch <a name = "launch"></a>
+Click [here](https://schoolhack.herokuapp.com/) to see the running app!!
 
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-### And coding style tests
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## 🎈 Usage <a name="usage"></a>
-Explicación sobre el logeo (director, teacher, student)
-
-## 🚀 Deployment <a name = "deployment"></a>
-Add additional notes about how to deploy this on a live system.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+- [MongoDB](https://www.mongodb.com/) 
+- [Express](https://expressjs.com/) 
+- [React](https://reactjs.org/)
+- [NodeJs](https://nodejs.org/en/) 
+- [Axios](https://github.com/axios/axios)
+- [GoogleMapsAPI](https://github.com/googlemaps/google-maps-services-js) 
+- [Nodemailer](https://nodemailer.com/) 
+- [Cloudinary](https://www.cloudinary.com/) 
+
 
 ## ✍️ Authors <a name = "authors"></a>
 - [@LuriLurika](https://github.com/LuriLurika) 
-- [@lucianasvina](https://github.com/lucianasvina) 
+- [@lucianavina](https://github.com/lucianavina) 
 - [@EFdez](https://github.com/EFdez) 
 
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-This project was developed under the lovely guidance of [@Dayanro](https://github.com/Dayanro) 
+This project was developed under the lovely guidance of [@Dayanro](https://github.com/Dayanro) at [Ironhack_Madrid](https://www.ironhack.com/es/madrid) :blue_heart:
